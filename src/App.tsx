@@ -1,5 +1,5 @@
-import { Button } from './shared/button';
 import Container from '@/shared/Container.tsx';
+import { Button } from '@/shared/button.tsx';
 
 function App() {
     return (
