@@ -7,8 +7,8 @@ following the same process
 
 Make sure you have the following installed:
 
-- Node.js
-- npm (Node Package Manager)
+-   Node.js
+-   npm (Node Package Manager)
 
 ## Setup Guide
 
@@ -117,7 +117,7 @@ module.exports = {
 
 ### 8. Create Mocks for Static Assets
 
-Create a folder named __mocks__ inside the src directory and add a file named fileMock.js with the following content:
+Create a folder named **mocks** inside the src directory and add a file named fileMock.js with the following content:
 
 ```
 module.exports = 'test-file-stub';
