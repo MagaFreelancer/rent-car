@@ -1,13 +1,11 @@
-import { useState } from 'react';
 import { Button } from './shared/button';
+import Container from '@/shared/Container.tsx';
 
 function App() {
-    const [test, setTest] = useState<string>('');
-
     return (
-        <div className="">
+        <Container>
             <Button variant="destructive">Test</Button>
-        </div>
+        </Container>
     );
 }
 
