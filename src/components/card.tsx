@@ -15,6 +15,7 @@ type CardProps = ICard & {
     children: React.ReactNode;
 };
 type CardContextType = ICard;
+
 const CardContext = createContext<CardContextType | undefined>(undefined);
 
 function useCardContext() {
@@ -26,8 +27,6 @@ function useCardContext() {
 }
 
 const CardProviderComponent = ({ children, ...props }: CardProps): JSX.Element => {
-    console.log(props);
-
     return (
         <CardContext.Provider value={props}>
             <a href="#" className="block w-full max-w-[238px]  relative">
