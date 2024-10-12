@@ -1,6 +1,6 @@
 import Container from '@/shared/Container.tsx';
 import { NavLink } from 'react-router-dom';
-import { Avatar, AvatarFallback } from '@/shared/avatar.tsx';
+import { Button } from '@/shared/button.tsx';
 
 const Header = () => {
     return (
@@ -29,9 +29,9 @@ const Header = () => {
                         </ul>
                     </nav>
 
-                    <Avatar>
-                        <AvatarFallback>CN</AvatarFallback>
-                    </Avatar>
+                    <Button className="ml-7">
+                        <NavLink to="/login">Войти</NavLink>
+                    </Button>
                 </div>
             </Container>
         </header>
