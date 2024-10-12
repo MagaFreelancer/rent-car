@@ -1,7 +1,8 @@
 import Header from '@/widgets/header/header.tsx';
-import { BrowserRouter, /*Route,*/ Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import TopNav from '@/widgets/topNav/top-nav.tsx';
 import Footer from '@/widgets/footer/footer.tsx';
+import Auth from '@/page/auth/auth.tsx';
 
 function App() {
     return (
@@ -11,7 +12,9 @@ function App() {
                 <Header />
 
                 <main className="flex-grow">
-                    <Routes>{/*<Route path="/" element={<App/>} />*/}</Routes>
+                    <Routes>
+                        <Route path="/login" element={<Auth type={'login'} />} />
+                    </Routes>
                 </main>
 
                 <Footer />
