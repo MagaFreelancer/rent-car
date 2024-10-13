@@ -39,8 +39,8 @@ function App() {
 
             <CardProvider {...obj}>
                 <CardFavorite />
-                <CardBrand />
                 <CardModel />
+                <CardBrand />
                 <CardSlider />
                 <CardInfo />
                 <CardGroup>

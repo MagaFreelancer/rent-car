@@ -54,11 +54,11 @@ const CardSliderComponent = () => {
 };
 const CardBrandComponent = () => {
     const { brand } = useCardContext();
-    return <div className="mb-1 font-bold text-xl">{brand}</div>;
+    return <div className=" font-medium text-sm text-[#90A3BF]">{brand}</div>;
 };
 const CardModelComponent = () => {
     const { model } = useCardContext();
-    return <div className=" font-medium text-sm text-[#90A3BF]">{model}</div>;
+    return <div className="mb-1 font-bold text-xl">{model}</div>;
 };
 
 const CardInfoComponent = () => {
