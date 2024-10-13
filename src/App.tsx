@@ -2,9 +2,9 @@ import Header from '@/widgets/header/header.tsx';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import TopNav from '@/widgets/topNav/top-nav.tsx';
 import Footer from '@/widgets/footer/footer.tsx';
-import Auth from '@/page/auth/auth.tsx';
+import Auth from '@/pages/auth/auth.tsx';
 
-function App() {
+const App = () => {
     return (
         <BrowserRouter>
             <div className="flex-col flex min-h-screen">
@@ -13,7 +13,7 @@ function App() {
 
                 <main className="flex-grow">
                     <Routes>
-                        <Route path="/login" element={<Auth type={'login'} />} />
+                        <Route path="/login" element={<Auth />} />
                     </Routes>
                 </main>
 
@@ -21,6 +21,6 @@ function App() {
             </div>
         </BrowserRouter>
     );
-}
+};
 
 export default App;

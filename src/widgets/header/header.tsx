@@ -1,4 +1,4 @@
-import Container from '@/shared/Container.tsx';
+import Container from '@/shared/container.tsx';
 import { NavLink } from 'react-router-dom';
 import { Button } from '@/shared/button.tsx';
 
@@ -30,7 +30,7 @@ const Header = () => {
                     </nav>
 
                     <Button className="ml-7">
-                        <NavLink to="/login">Войти</NavLink>
+                        <NavLink to="auth/login">Войти</NavLink>
                     </Button>
                 </div>
             </Container>

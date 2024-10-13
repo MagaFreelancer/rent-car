@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import Container from '@/shared/Container.tsx';
+import Container from '@/shared/container.tsx';
 
 const TopNav = () => {
     return (

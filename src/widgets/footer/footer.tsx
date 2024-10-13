@@ -1,4 +1,4 @@
-import Container from '@/shared/Container.tsx';
+import Container from '@/shared/container.tsx';
 
 const Footer = () => {
     return (
