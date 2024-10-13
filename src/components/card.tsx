@@ -106,7 +106,7 @@ const CardGroupComponent = ({ children }: { children: React.ReactNode }) => {
 const CardFavoriteComponent = () => {
     return (
         <div className="absolute right-4 top-4">
-            <Heart className="h-6 w-6 transition-all duration-200 ease-in-out text-[#90A3BF] hover:fill-[#ED3F3F] hover:text-[#ED3F3F] bg-transparent" />
+            <Heart className="h-6 w-6 transition-all duration-200 ease-in-out text-[#90A3BF] hover:fill-[#ED3F3F] hover:text-[#ED3F3F] bg-transparent  cursor-pointer" />
         </div>
     );
 };
