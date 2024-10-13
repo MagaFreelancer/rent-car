@@ -1,12 +1,16 @@
+import { Heart } from 'lucide-react';
+import { Rating, Collapse } from '@mui/material';
+import { useState } from 'react';
+import { Button } from '@/shared/button';
 import Slider from '@/components/slider';
 import Title from '@/shared/Title';
-import { Heart } from 'lucide-react';
-import Rating from '@/components/rating';
-
 const SinglePage = () => {
+    const [value, setValue] = useState<number | null>(2);
+    const [expanded, setExpanded] = useState(false);
+
     return (
         <>
-            <div className="grid grid-cols-2 gap-12 py-5">
+            <div className="grid grid-cols-2 gap-12 p-3">
                 <div className="relative">
                     <Slider />
                     <div className="absolute left-[15px] top-[15px] p-[10px] bg-darkOrange text-white text-xs uppercase">
@@ -18,12 +22,20 @@ const SinglePage = () => {
                 </div>
                 <div className="">
                     <Title className="mb-3">Заголовок</Title>
-                    <p>
-                        Кроссовки Nike Air VaporMax 2023 Flyknit с поддерживающей амортизацией,
-                        созданной для плавного бега, представляет собой совершенно новый взгляд на
-                        знакомую коллекцию.
-                    </p>
-                    <Rating />
+
+                    <div className="flex items-center mr-4">
+                        <Rating
+                            name="simple-controlled"
+                            value={value}
+                            onChange={(_, newValue) => {
+                                setValue(newValue);
+                            }}
+                        />
+                        <span className="inline-block text-sm font-medium ml-2 mb-[-1px]">
+                            {value}
+                        </span>
+                        <span className="inline-block text-[11px] mb-[-2px] ml-1">({21})</span>
+                    </div>
                 </div>
             </div>
         </>

@@ -6,6 +6,7 @@ export default {
         extend: {
             fontFamily: {
                 sans: ['Poppins', 'sans-serif'],
+                jakarta: ['"Plus Jakarta Sans"', 'sans-serif'], // Добавляем кастомный шрифт
             },
             borderRadius: {
                 lg: 'var(--radius)',
