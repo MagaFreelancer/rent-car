@@ -56,7 +56,7 @@ const App = () => {
 
                 <main className="flex-grow">
                     <Routes>
-                        <Route path="/login" element={<Auth />} />
+                        <Route path="auth/:type" element={<Auth />} />
                         {/*<Route path="/cars/:id" element={<SinglePage />} />*/}
                     </Routes>
                 </main>

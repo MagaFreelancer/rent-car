@@ -1,7 +1,8 @@
 import { cn } from '@/lib/utils.ts';
+import { ReactNode } from 'react';
 
 interface IContainerProps {
-    children: string;
+    children: ReactNode;
     className?: string;
 }
 
