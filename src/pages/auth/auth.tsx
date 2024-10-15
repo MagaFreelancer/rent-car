@@ -1,12 +1,13 @@
 import Container from '@/shared/container.tsx';
 import Title from '@/shared/Title.tsx';
-import { NavLink, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Login from '@/pages/auth/login/login.tsx';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button } from '@/shared/button.tsx';
 import Register from '@/pages/auth/register/register.tsx';
 import { loginSchema, registerSchema } from '@/utils/yup.ts';
+import { Checkbox } from '@/shared/checkbox.tsx';
 
 export type TypeForm = {
     name?: string;
@@ -31,7 +32,7 @@ const Auth = () => {
     });
 
     return (
-        <section>
+        <section className="max-w-[500px] mx-auto mb-[120px]">
             <Container>
                 <Title className="mt-6 mb-12">
                     {type === 'login' ? 'Авторизация' : 'Регистрация'}
@@ -44,11 +45,20 @@ const Auth = () => {
                         <Register register={formMethods.register} />
                     )}
 
-                    <Button className="p-6" variant="custom" type="submit">
+                    <Button className="w-full p-6 my-4" variant="custom" type="submit">
                         {isRegistered ? 'Войти в кабинет' : 'Создать аккаунт'}
                     </Button>
+
+                    <div className="flex items-center space-x-2">
+                        <Checkbox id="remember" />
+                        <label
+                            htmlFor="remember"
+                            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                        >
+                            Запомнить меня
+                        </label>
+                    </div>
                 </form>
-                {isRegistered && <NavLink to="/auth/register">Если у вас не аккаунта</NavLink>}
             </Container>
         </section>
     );
