@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { Fuel, Heart, LifeBuoy, Users } from 'lucide-react';
 import React, { createContext, memo, useContext } from 'react';
-
+import LocalGasStationIcon from '@mui/icons-material/LocalGasStation';
 interface ICard {
     id: number;
     transmission: string;
@@ -68,7 +68,8 @@ const CardInfoComponent = () => {
     return (
         <ul className="flex  justify-between items-center  mb-6">
             <li className={itemClasses}>
-                <Fuel className="h-5 w-5" />
+                <LocalGasStationIcon className="h-5 w-5" />
+                {/* <Fuel className="h-5 w-5" /> */}
                 <span className="font-medium text-sm">{fuel}L</span>
             </li>
             <li className={itemClasses}>

@@ -1,5 +1,5 @@
-import { ReactNode } from 'react';
 import { cn } from '@/lib/utils.ts';
+import { ReactNode } from 'react';
 
 interface IContainerProps {
     children: ReactNode;
@@ -7,7 +7,9 @@ interface IContainerProps {
 }
 
 const Container = ({ children, className }: IContainerProps) => {
-    return <div className={cn('max-w-[1390px] w-full px-[15px] ', className)}>{children}</div>;
+    return (
+        <div className={cn('max-w-[1390px] px-[15px] mx-auto w-full', className)}>{children}</div>
+    );
 };
 
 export default Container;
