@@ -9,7 +9,7 @@ import {
 } from '@/shared/dialog.tsx';
 
 import { Button } from '@/shared/button';
-import CarForm from './car-form';
+import CarForm from '../carForm/car-form';
 const CarRegistration = () => {
     return (
         <Dialog>

@@ -5,7 +5,7 @@ import LocalGasStationIcon from '@mui/icons-material/LocalGasStation';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import { EngineIcon } from '@/shared/icons';
-import CarItem from './car-item';
+import CarItem from '../carItem/car-item';
 const CarFeatures = ({ obj }: any) => {
     const featureItems = [
         {

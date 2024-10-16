@@ -1,10 +1,7 @@
 import Slider from '@/components/slider';
 
-import CarDetails from './car-details';
+import CarDetails from './components/carDetails/car-details';
 import Container from '@/shared/container';
-import { TextFieldInput, TextFieldProvider, TextFieldToggle } from '@/components/textField';
-import usePasswordInput from '@/utils/hooks/usePasswordInput';
-import useInput from '@/utils/hooks/useInput';
 
 const obj = {
     id: 1,
@@ -30,11 +27,9 @@ const obj = {
 const SinglePage = () => {
     return (
         <Container>
-            <div>
-                <div className="grid grid-cols-2 gap-12 p-3 mb-8">
-                    <Slider />
-                    <CarDetails obj={obj} />
-                </div>
+            <div className="grid grid-cols-2 gap-12 py-3 mb-8">
+                <Slider />
+                <CarDetails obj={obj} />
             </div>
         </Container>
     );

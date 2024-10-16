@@ -5,7 +5,7 @@ interface UsePasswordInputReturn {
 }
 const usePasswordInput = (): UsePasswordInputReturn => {
     const [show, setShow] = useState<boolean>(true);
-    const toggleInputType = () => setShow(prev => !prev);
+    const toggleInputType = () => setShow(show => !show);
 
     return {
         show,

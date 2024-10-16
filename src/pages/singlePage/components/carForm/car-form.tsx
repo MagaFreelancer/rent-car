@@ -16,19 +16,31 @@ import { DateRange } from 'react-day-picker';
 import { Button } from '@/shared/button';
 import { Calendar } from '@/shared/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/shared/popover';
-import { Label } from '@/shared/label';
-import { Input } from '@/shared/input';
+
+import useInput from '@/utils/hooks/useInput';
+import {
+    TextFieldError,
+    TextFieldInput,
+    TextFieldLabel,
+    TextFieldProvider,
+    TextFieldTextArea,
+} from '@/components/textField';
 
 const CarForm = () => {
     const [date, setDate] = React.useState<DateRange | undefined>({
         from: new Date(2022, 0, 20),
         to: addDays(new Date(2022, 0, 20), 20),
     });
-    const titleClsName = 'font-semiBold text-lg mb-2';
+    const titleClsName = 'font-semiBold text-lg mb-4';
+    const textFieldsClsName = 'mb-2';
+    const inputName = useInput();
+    const inputEmail = useInput();
+    const inputPhone = useInput();
+    const inputTextarea = useInput();
 
     return (
-        <form className="grid gap-4 py-4">
-            <div className="">
+        <form className="grid gap-4 py-4 ">
+            <div>
                 <div className={titleClsName}>Получение</div>
                 <Select>
                     <SelectTrigger className="w-full">
@@ -42,7 +54,7 @@ const CarForm = () => {
                     </SelectContent>
                 </Select>
             </div>
-            <div className="">
+            <div>
                 <div className={titleClsName}>Дата аренды</div>
                 <div className={cn('grid gap-2')}>
                     <Popover>
@@ -87,23 +99,61 @@ const CarForm = () => {
                     </Popover>
                 </div>
             </div>
-            <div className="">
+            <div>
                 <div className={titleClsName}>Данные основного водителя</div>
-                <div className="">
-                    <Label htmlFor="email">Email</Label>
-                    <Input type="tel" id="email" placeholder="tel" />
+                <div className={textFieldsClsName}>
+                    <TextFieldProvider
+                        type="text"
+                        label="Name"
+                        value={inputName.value}
+                        onChange={inputName.onChangeInputValue}
+                    >
+                        <TextFieldLabel />
+                        <TextFieldInput />
+                        <TextFieldError />
+                    </TextFieldProvider>
+                </div>
+                <div className={textFieldsClsName}>
+                    <TextFieldProvider type="date" label="Date">
+                        <TextFieldLabel />
+                        <TextFieldInput />
+                        <TextFieldError />
+                    </TextFieldProvider>
+                </div>
+                <div className={textFieldsClsName}>
+                    <TextFieldProvider
+                        type="email"
+                        label="Email"
+                        value={inputEmail.value}
+                        onChange={inputEmail.onChangeInputValue}
+                    >
+                        <TextFieldLabel />
+                        <TextFieldInput />
+                        <TextFieldError />
+                    </TextFieldProvider>
                 </div>
                 <div className="">
-                    <Label htmlFor="email">Email</Label>
-                    <Input type="email" id="email" placeholder="Email" />
+                    <TextFieldProvider
+                        type="phone"
+                        label="Phone"
+                        value={inputPhone.value}
+                        onChange={inputPhone.onChangeInputValue}
+                    >
+                        <TextFieldLabel />
+                        <TextFieldInput />
+                        <TextFieldError />
+                    </TextFieldProvider>
                 </div>
-                <div className="">
-                    <Label htmlFor="email">Email</Label>
-                    <Input type="email" id="email" placeholder="Email" />
-                </div>
-                <div className="">
-                    <Label htmlFor="email">Email</Label>
-                    <Input type="email" id="email" placeholder="Email" />
+                <div className={textFieldsClsName}>
+                    <TextFieldProvider
+                        label="Сообщение"
+                        value={inputTextarea.value}
+                        onChange={inputTextarea.onChangeInputValue}
+                    >
+                        <TextFieldLabel />
+                        <TextFieldTextArea />
+                        <TextFieldError />
+                    </TextFieldProvider>
                 </div>
             </div>
         </form>

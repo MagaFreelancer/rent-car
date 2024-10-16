@@ -1,9 +1,9 @@
 import { Heart } from 'lucide-react';
 
 import Title from '@/shared/Title';
-import CarRating from './car-rating';
-import CarFeatures from './car-features';
-import CarRegistration from './car-registration';
+import CarRating from '../carRating/car-rating';
+import CarFeatures from '../carFeatures/car-features';
+import CarRegistration from '../carRegistration/car-registration';
 
 const CarDetails = ({ obj }: any) => {
     return (
