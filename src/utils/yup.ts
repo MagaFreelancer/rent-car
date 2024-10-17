@@ -18,3 +18,10 @@ export const registerSchema = yup.object().shape({
             AppErrors.InvalidPassword
         ),
 });
+export const carRegistrationSchema = yup.object().shape({
+    name: yup.string().min(5, AppErrors.minLength).required(AppErrors.RequiredField),
+    email: yup.string().email(AppErrors.InvalidEmail).required(AppErrors.RequiredField),
+    phone: yup.string().min(10, AppErrors.minLength).required(AppErrors.RequiredField),
+    address: yup.string().min(5, AppErrors.minLength).required(AppErrors.RequiredField),
+    date: yup.string().required(AppErrors.RequiredField),
+});
