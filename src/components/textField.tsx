@@ -18,17 +18,17 @@ function useInputContext() {
 }
 
 // Провайдер для глобальных состояний, например, label, error, errorText
-const InputProviderComponent = ({ children, label, error, errorText }: any) => {
+const InputProviderComponent = ({ children, label, error, errorText, type }: any) => {
     return (
-        <InputContext.Provider value={{ label, error, errorText }}>
+        <InputContext.Provider value={{ label, error, errorText, type }}>
             <div className="relative">{children}</div>
         </InputContext.Provider>
     );
 };
 
 // Компонент для отображения текстового input (получает prop напрямую)
-const InputTextComponent = ({ type, value, onChange, placeholder, register, name }: any) => {
-    const { error } = useInputContext(); // Берем только error из контекста
+const InputTextComponent = ({ value, onChange, placeholder, register, name }: any) => {
+    const { error, type } = useInputContext(); // Берем только error из контекста
 
     return (
         <Input
@@ -37,7 +37,7 @@ const InputTextComponent = ({ type, value, onChange, placeholder, register, name
             value={value}
             onChange={onChange}
             placeholder={placeholder}
-            {...register(name)} // Привязываем register напрямую
+            {...(register ? register(name) : {})} // Привязываем register напрямую
         />
     );
 };
@@ -51,7 +51,7 @@ const InputTextAreaComponent = ({ value, onChange, register, name }: any) => {
             className={clsx(error ? 'border-red-500 ' : '', 'resize-none')}
             value={value}
             onChange={onChange}
-            {...register(name)} // Привязываем register напрямую
+            {...(register ? register(name) : {})} // Привязываем register напрямую
         />
     );
 };
@@ -71,10 +71,22 @@ const InputErrorComponent = () => {
 
     return error ? <span className="text-red-500">{errorText}</span> : null;
 };
-
+const InputToggleComponent = ({ onToggle }: { onToggle: () => void }) => {
+    const { type } = useInputContext();
+    return (
+        <button onClick={onToggle} type="button">
+            {type === 'password' ? (
+                <EyeClosed className="absolute top-2 right-2" />
+            ) : (
+                <Eye className="absolute top-2 right-2" />
+            )}
+        </button>
+    );
+};
 // Мемоизируем компоненты для оптимизации
-export const TextFieldProvider = memo(InputProviderComponent);
+export const TextFieldGroup = memo(InputProviderComponent);
 export const TextFieldInput = memo(InputTextComponent);
 export const TextFieldTextArea = memo(InputTextAreaComponent);
 export const TextFieldLabel = memo(InputLabelComponent);
 export const TextFieldError = memo(InputErrorComponent);
+export const TextFieldShow = memo(InputToggleComponent);

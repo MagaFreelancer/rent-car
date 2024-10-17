@@ -22,9 +22,11 @@ import {
     TextFieldError,
     TextFieldInput,
     TextFieldLabel,
-    TextFieldProvider,
+    TextFieldGroup,
     TextFieldTextArea,
+    TextFieldShow,
 } from '@/components/textField';
+import usePasswordInput from '@/utils/hooks/usePasswordInput';
 
 const CarForm = () => {
     const [date, setDate] = React.useState<DateRange | undefined>({
@@ -37,7 +39,8 @@ const CarForm = () => {
     const inputEmail = useInput();
     const inputPhone = useInput();
     const inputTextarea = useInput();
-
+    const { toggleInputType, show } = usePasswordInput();
+    const { value, onChangeInputValue } = useInput();
     return (
         <form className="grid gap-4 py-4 ">
             <div>
@@ -90,7 +93,6 @@ const CarForm = () => {
                                 defaultMonth={date?.from}
                                 selected={date}
                                 onSelect={newDate => {
-                                    console.log(newDate);
                                     setDate(newDate);
                                 }}
                                 numberOfMonths={2}
@@ -102,7 +104,7 @@ const CarForm = () => {
             <div>
                 <div className={titleClsName}>Данные основного водителя</div>
                 <div className={textFieldsClsName}>
-                    <TextFieldProvider label="Name">
+                    <TextFieldGroup label="Name">
                         <TextFieldLabel />
                         <TextFieldInput
                             type="text"
@@ -110,49 +112,52 @@ const CarForm = () => {
                             onChange={inputName.onChangeInputValue}
                         />
                         <TextFieldError />
-                    </TextFieldProvider>
+                    </TextFieldGroup>
                 </div>
                 <div className={textFieldsClsName}>
-                    <TextFieldProvider label="Date">
+                    <TextFieldGroup label="Date">
                         <TextFieldLabel />
                         <TextFieldInput type="date" />
                         <TextFieldError />
-                    </TextFieldProvider>
+                    </TextFieldGroup>
                 </div>
                 <div className={textFieldsClsName}>
-                    <TextFieldProvider
-                        type="email"
-                        label="Email"
-                        value={inputEmail.value}
-                        onChange={inputEmail.onChangeInputValue}
-                    >
+                    <TextFieldGroup label="Email">
                         <TextFieldLabel />
-                        <TextFieldInput />
+                        <TextFieldInput
+                            type="email"
+                            value={inputEmail.value}
+                            onChange={inputEmail.onChangeInputValue}
+                        />
                         <TextFieldError />
-                    </TextFieldProvider>
+                    </TextFieldGroup>
                 </div>
                 <div className="">
-                    <TextFieldProvider
-                        type="phone"
-                        label="Phone"
-                        value={inputPhone.value}
-                        onChange={inputPhone.onChangeInputValue}
-                    >
+                    <TextFieldGroup label="Phone">
                         <TextFieldLabel />
-                        <TextFieldInput />
+                        <TextFieldInput
+                            type="phone"
+                            value={inputPhone.value}
+                            onChange={inputPhone.onChangeInputValue}
+                        />
                         <TextFieldError />
-                    </TextFieldProvider>
+                    </TextFieldGroup>
                 </div>
                 <div className={textFieldsClsName}>
-                    <TextFieldProvider
-                        label="Сообщение"
-                        value={inputTextarea.value}
-                        onChange={inputTextarea.onChangeInputValue}
-                    >
+                    <TextFieldGroup label="Сообщение">
                         <TextFieldLabel />
-                        <TextFieldTextArea />
+                        <TextFieldTextArea
+                            value={inputTextarea.value}
+                            onChange={inputTextarea.onChangeInputValue}
+                        />
                         <TextFieldError />
-                    </TextFieldProvider>
+                    </TextFieldGroup>
+                </div>
+                <div className="">
+                    <TextFieldGroup type={show ? 'password' : 'text'}>
+                        <TextFieldInput value={value} onChange={onChangeInputValue} />
+                        <TextFieldShow onToggle={toggleInputType} />
+                    </TextFieldGroup>
                 </div>
             </div>
         </form>
