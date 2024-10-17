@@ -18,10 +18,10 @@ function useInputContext() {
 }
 
 // Провайдер для глобальных состояний, например, label, error, errorText
-const InputProviderComponent = ({ children, label, error, errorText, type }: any) => {
+const InputProviderComponent = ({ children, label, error, errorText, type, className }: any) => {
     return (
         <InputContext.Provider value={{ label, error, errorText, type }}>
-            <div className="relative">{children}</div>
+            <div className={clsx('relative', className)}>{children}</div>
         </InputContext.Provider>
     );
 };
