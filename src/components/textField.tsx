@@ -17,76 +17,64 @@ function useInputContext() {
     return context;
 }
 
-// Провайдер для управления состоянием компонента
-const InputProviderComponent = ({ children, ...props }: any) => {
+// Провайдер для глобальных состояний, например, label, error, errorText
+const InputProviderComponent = ({ children, label, error, errorText }: any) => {
     return (
-        <InputContext.Provider value={{ ...props }}>
+        <InputContext.Provider value={{ label, error, errorText }}>
             <div className="relative">{children}</div>
         </InputContext.Provider>
     );
 };
 
-// Компонент для отображения текстового input
-const InputTextComponent = () => {
-    const { type, value, onChange, error } = useInputContext();
+// Компонент для отображения текстового input (получает prop напрямую)
+const InputTextComponent = ({ type, value, onChange, placeholder, register, name }: any) => {
+    const { error } = useInputContext(); // Берем только error из контекста
 
     return (
-        <>
-            <Input
-                className={clsx(error ? 'border-red-500' : '')}
-                type={type}
-                value={value}
-                onChange={onChange}
-            />
-        </>
+        <Input
+            className={clsx(error ? 'border-red-500' : '')}
+            type={type}
+            value={value}
+            onChange={onChange}
+            placeholder={placeholder}
+            {...register(name)} // Привязываем register напрямую
+        />
     );
 };
-const InputTextAreaComponent = () => {
-    const { value, onChange, error } = useInputContext();
+
+// Компонент для отображения Textarea (получает prop напрямую)
+const InputTextAreaComponent = ({ value, onChange, register, name }: any) => {
+    const { error } = useInputContext(); // Берем только error из контекста
 
     return (
-        <>
-            <Textarea
-                className={clsx(error ? 'border-red-500 ' : '', 'resize-none')}
-                value={value}
-                onChange={onChange}
-            />
-        </>
+        <Textarea
+            className={clsx(error ? 'border-red-500 ' : '', 'resize-none')}
+            value={value}
+            onChange={onChange}
+            {...register(name)} // Привязываем register напрямую
+        />
     );
 };
-// Компонент для отображения кнопки переключения пароля
-const InputToggleComponent = () => {
-    const { type, handleChange } = useInputContext();
 
-    return (
-        <button onClick={handleChange} type="button">
-            {type === 'password' ? (
-                <EyeClosed className="absolute top-2 right-2" />
-            ) : (
-                <Eye className="absolute top-2 right-2" />
-            )}
-        </button>
-    );
-};
-// Компонент для лейбла
+// Компонент для лейбла (получает prop из контекста)
 const InputLabelComponent = () => {
-    const { label, error } = useInputContext();
+    const { label, error } = useInputContext(); // Берем label и error из контекста
 
     return label ? (
         <Label className={clsx(error ? 'text-red-500' : '', 'font-medium')}>{label}</Label>
     ) : null;
 };
 
-// Компонент для ошибки
+// Компонент для отображения ошибки (получает errorText из контекста)
 const InputErrorComponent = () => {
     const { errorText, error } = useInputContext();
 
     return error ? <span className="text-red-500">{errorText}</span> : null;
 };
+
 // Мемоизируем компоненты для оптимизации
 export const TextFieldProvider = memo(InputProviderComponent);
 export const TextFieldInput = memo(InputTextComponent);
-export const TextFieldToggle = memo(InputToggleComponent);
+export const TextFieldTextArea = memo(InputTextAreaComponent);
 export const TextFieldLabel = memo(InputLabelComponent);
 export const TextFieldError = memo(InputErrorComponent);
-export const TextFieldTextArea = memo(InputTextAreaComponent);

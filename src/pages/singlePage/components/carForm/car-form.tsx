@@ -102,21 +102,20 @@ const CarForm = () => {
             <div>
                 <div className={titleClsName}>Данные основного водителя</div>
                 <div className={textFieldsClsName}>
-                    <TextFieldProvider
-                        type="text"
-                        label="Name"
-                        value={inputName.value}
-                        onChange={inputName.onChangeInputValue}
-                    >
+                    <TextFieldProvider label="Name">
                         <TextFieldLabel />
-                        <TextFieldInput />
+                        <TextFieldInput
+                            type="text"
+                            value={inputName.value}
+                            onChange={inputName.onChangeInputValue}
+                        />
                         <TextFieldError />
                     </TextFieldProvider>
                 </div>
                 <div className={textFieldsClsName}>
-                    <TextFieldProvider type="date" label="Date">
+                    <TextFieldProvider label="Date">
                         <TextFieldLabel />
-                        <TextFieldInput />
+                        <TextFieldInput type="date" />
                         <TextFieldError />
                     </TextFieldProvider>
                 </div>
