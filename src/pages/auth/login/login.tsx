@@ -10,7 +10,9 @@ interface IPropsLogin {
 const Login = ({ register }: IPropsLogin) => {
     return (
         <>
-            <Input {...register('email')} text="Email" error="test" className="px-5 py-4" />
+            <p className="text-[15px] mb-1">Email</p>
+            <Input {...register('email')} className="px-5 py-4" />
+            <p className="text-[15px] mb-1">Пароль</p>
             <Input {...register('password')} className="px-5 py-4" />
             <p>
                 Еще нет аккаунта?{'\u00A0'}

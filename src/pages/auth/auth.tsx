@@ -19,17 +19,24 @@ const Auth = () => {
     const { type } = useParams();
     const isRegistered = type === 'login';
 
-    const onSubmit: SubmitHandler<TypeForm> = data => {
-        if (isRegistered) {
-            console.log('login', data);
-        } else {
-            console.log('register', data);
-        }
-    };
-
-    const formMethods = useForm<TypeForm>({
+    const {
+        handleSubmit,
+        register,
+        formState: { errors },
+    } = useForm<TypeForm>({
         resolver: yupResolver(isRegistered ? loginSchema : registerSchema),
     });
+
+    const onSubmit: SubmitHandler<TypeForm> = data => {
+        console.log('register', errors.email?.message);
+        if (isRegistered) {
+            console.log('login', data);
+            console.log('login', errors);
+        } else {
+            console.log('register', data);
+            console.log('register', errors);
+        }
+    };
 
     return (
         <section className="max-w-[500px] mx-auto mb-[120px]">
@@ -38,11 +45,11 @@ const Auth = () => {
                     {type === 'login' ? 'Авторизация' : 'Регистрация'}
                 </Title>
 
-                <form className="border-2 p-10" onSubmit={formMethods.handleSubmit(onSubmit)}>
+                <form className="border-2 p-10" onSubmit={handleSubmit(onSubmit)}>
                     {type === 'login' ? (
-                        <Login register={formMethods.register} />
+                        <Login register={register} />
                     ) : (
-                        <Register register={formMethods.register} />
+                        <Register register={register} />
                     )}
 
                     <Button className="w-full p-6 my-4" variant="custom" type="submit">
@@ -50,7 +57,10 @@ const Auth = () => {
                     </Button>
 
                     <div className="flex items-center space-x-2">
-                        <Checkbox id="remember" />
+                        <Checkbox
+                            className="w-6 h-6 border-[##D6D6D6] rounded-none"
+                            id="remember"
+                        />
                         <label
                             htmlFor="remember"
                             className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
