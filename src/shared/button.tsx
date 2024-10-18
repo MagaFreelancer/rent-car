@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
+import { LoaderCircle } from 'lucide-react';
 
 const buttonVariants = cva(
     'inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
@@ -15,7 +16,7 @@ const buttonVariants = cva(
                 secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
                 ghost: 'hover:bg-accent hover:text-accent-foreground',
                 link: 'text-primary underline-offset-4 hover:underline',
-                more: 'border-dotted border-b-2 border-[#4B4B4B] rounded-none text-[#4B4B4B] font-medium ',
+                more: 'border-dotted border-b-2 border-[#4B4B4B] rounded-none text-[#4B4B4B] font-medium',
                 custom: 'bg-lightBlack text-white rounded-none font-medium text-[16px]',
             },
             size: {
@@ -36,20 +37,36 @@ export interface ButtonProps
     extends React.ButtonHTMLAttributes<HTMLButtonElement>,
         VariantProps<typeof buttonVariants> {
     asChild?: boolean;
+    loading?: boolean;
 }
 
+const ButtonLoader: React.FC = () => (
+    <span className="flex items-center justify-center">
+        <LoaderCircle className="animate-spin text-lightBlack" />
+    </span>
+);
+
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-    ({ className, variant, size, asChild = false, ...props }, ref) => {
+    ({ className, variant, size, loading, asChild = false, children, ...props }, ref) => {
         const Comp = asChild ? Slot : 'button';
+
         return (
             <Comp
-                className={cn(buttonVariants({ variant, size, className }))}
+                className={cn(
+                    buttonVariants({ variant, size, className }),
+                    loading && 'bg-transparent border-lightBlack border-2'
+                )}
                 ref={ref}
+                disabled={loading}
                 {...props}
-            />
+            >
+                {loading && <ButtonLoader />}
+                {loading || children}
+            </Comp>
         );
     }
 );
+
 Button.displayName = 'Button';
 
 export { Button, buttonVariants };
