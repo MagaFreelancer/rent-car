@@ -1,33 +1,48 @@
 import useDateRange from '@/utils/hooks/useDateRange';
-import useInput from '@/utils/hooks/useInput';
 import { addDays } from 'date-fns';
-
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { carRegistrationSchema } from '@/utils/yup';
 const useFormFields = () => {
-    const inputName = useInput();
-    const inputEmail = useInput();
-    const inputPhone = useInput();
-    const inputTextarea = useInput();
+    const [showAddress, setShowAddress] = useState(false);
     const { dateRange, onDateChange } = useDateRange({
         from: new Date(2024, 0, 20),
         to: addDays(new Date(2024, 0, 20), 3),
     });
 
-    const sumbit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        console.log('Form Submitted', { inputName, inputEmail, inputPhone, inputTextarea });
+    const {
+        handleSubmit,
+        formState: { errors },
+        setValue,
+        register,
+    } = useForm({
+        resolver: yupResolver(carRegistrationSchema),
+        defaultValues: {
+            address: 'inOffice',
+        },
+    });
+
+    const onSumbit = (data: any) => {
+        console.log(data);
     };
-    const onChangeSelectValue = (value: string) => {
-        console.log(value);
+    const onChangeSelectValue = (state: string) => {
+        const checkState = state !== 'undefined' ? true : false;
+        setShowAddress(checkState);
+        if (showAddress) {
+            setValue('address', '');
+        }
     };
+
     return {
-        inputName,
-        inputEmail,
-        inputPhone,
-        inputTextarea,
         dateRange,
         onDateChange,
-        sumbit,
+        onSumbit,
+        showAddress,
         onChangeSelectValue,
+        errors,
+        register,
+        handleSubmit,
     };
 };
 export default useFormFields;

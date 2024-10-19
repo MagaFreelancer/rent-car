@@ -24,7 +24,7 @@ const CarRegistration = () => {
                 <div className="">
                     <CarForm />
                 </div>
-                <DialogFooter>3</DialogFooter>
+                <DialogFooter>320$</DialogFooter>
             </DialogContent>
         </Dialog>
     );

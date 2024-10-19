@@ -2,29 +2,34 @@ import CarVariants from '../car-variants';
 import CarDate from '../car-date';
 
 import useFormFields from './hooks/useFormFields';
-import DriverInfo from './components/driverInfo';
+import CarFormDriver from './components/car-form-drive';
+
+import CarDelivery from '../car-delivery';
 const CarForm = () => {
     const {
-        inputName,
-        inputEmail,
-        inputPhone,
-        inputTextarea,
         dateRange,
         onDateChange,
-        sumbit,
+        onSumbit,
         onChangeSelectValue,
+        showAddress,
+        errors,
+        register,
+        handleSubmit,
     } = useFormFields();
 
     return (
-        <form onSubmit={sumbit} className="grid gap-4 py-4 max-h-[500px] overflow-y-scroll">
-            <CarVariants onChange={onChangeSelectValue} />
-            <CarDate dateRange={dateRange} onDateChange={onDateChange} />
-            <DriverInfo
-                inputName={inputName}
-                inputEmail={inputEmail}
-                inputPhone={inputPhone}
-                inputTextarea={inputTextarea}
+        <form
+            onSubmit={handleSubmit(onSumbit)}
+            className="grid gap-4 py-4 max-h-[500px] overflow-y-scroll"
+        >
+            <CarDelivery
+                onChange={onChangeSelectValue}
+                register={register}
+                errors={errors}
+                showAddress={showAddress}
             />
+            <CarDate dateRange={dateRange} onDateChange={onDateChange} />
+            <CarFormDriver register={register} errors={errors} />
             <button type="submit">Submit</button>
         </form>
     );

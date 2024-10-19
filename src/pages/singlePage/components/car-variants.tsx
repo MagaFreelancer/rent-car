@@ -16,12 +16,12 @@ const CarVariants: React.FC<ICarVariants> = ({ onChange }: ICarVariants): JSX.El
             <div className="font-semiBold text-lg mb-4">Получение</div>
             <Select onValueChange={onChange}>
                 <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Взять из офиса" />
+                    <SelectValue defaultValue="undefined" placeholder="Взять из офиса" />
                 </SelectTrigger>
                 <SelectContent>
                     <SelectGroup>
-                        <SelectItem value="1">Взять из офиса</SelectItem>
-                        <SelectItem value="2">Доставка по городу 100$</SelectItem>
+                        <SelectItem value="undefined">Взять из офиса</SelectItem>
+                        <SelectItem value="delivery">Доставка по городу 100$</SelectItem>
                     </SelectGroup>
                 </SelectContent>
             </Select>
