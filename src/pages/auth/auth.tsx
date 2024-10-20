@@ -7,6 +7,7 @@ export type TypeForm = {
     name?: string;
     email: string;
     password: string;
+    repeat?: string;
 };
 
 const Auth = () => {

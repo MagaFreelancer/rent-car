@@ -5,12 +5,18 @@ import { Button } from '@/shared/button';
 import Login from '@/pages/auth/components/login/login.tsx';
 import Register from '@/pages/auth/components/register/register.tsx';
 import { loginSchema, registerSchema } from '@/utils/yup.ts';
-import { Checkbox } from '@/shared/checkbox.tsx';
+import {
+    CheckboxLabelCustom,
+    CheckboxLabelGroup,
+    CheckboxLabelValue,
+} from '@/components/checkbox-label.tsx';
 
 export type TypeForm = {
     name?: string;
     email: string;
     password: string;
+    repeat?: string;
+    remember?: boolean;
 };
 
 interface AuthFormProps {
@@ -21,15 +27,22 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
     const {
         handleSubmit,
         register,
-        formState: { errors },
         reset,
+        setError,
+        formState: { errors },
     } = useForm<TypeForm>({
         resolver: yupResolver(isLogin ? loginSchema : registerSchema),
     });
 
     const onSubmit: SubmitHandler<TypeForm> = data => {
+        const { password, repeat } = data;
+
+        //TODO fixed from
         if (isLogin) {
             console.log('login', data);
+        } else if (password !== repeat) {
+            setError('password', { type: 'custom', message: 'Пароли не совпадают' });
+            setError('repeat', { type: 'custom', message: 'Пароли не совпадают' });
         } else {
             console.log('register', data);
         }
@@ -47,15 +60,10 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
                 {isLogin ? 'Войти в кабинет' : 'Создать аккаунт'}
             </Button>
 
-            <div className="flex items-center space-x-2">
-                <Checkbox className="w-6 h-6 border-[##D6D6D6] rounded-none" id="remember" />
-                <label
-                    htmlFor="remember"
-                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                >
-                    Запомнить меня
-                </label>
-            </div>
+            <CheckboxLabelGroup name="remember">
+                <CheckboxLabelCustom register={register} registerName="remember" />
+                <CheckboxLabelValue label="Запомнить меня" />
+            </CheckboxLabelGroup>
         </form>
     );
 };

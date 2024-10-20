@@ -65,6 +65,22 @@ const Register = ({ register, errors, reset }: IPropsLogin) => {
                 <TextFieldError />
             </TextFieldGroup>
 
+            <TextFieldGroup
+                className="mb-3"
+                error={!!errors.repeat}
+                errorText={errors.repeat?.message}
+                label="Повторите пароль"
+            >
+                <TextFieldLabel />
+                <TextFieldInput
+                    className="rounded-none py-6 px-5"
+                    placeholder="Придумайте пароль"
+                    register={register}
+                    name="repeat"
+                />
+                <TextFieldError />
+            </TextFieldGroup>
+
             <p className="mt-3">
                 Уже есть аккаунт?{'\u00A0'}
                 <NavLink onClick={() => reset()} className="hover:underline" to="/auth/login">
