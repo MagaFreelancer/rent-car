@@ -18,6 +18,7 @@ export const registerSchema = yup.object().shape({
             /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[a-zA-Z!#$%&? "])[a-zA-Z0-9!@#$%&?]{6,20}$/,
             AppErrors.InvalidPassword
         ),
+    repeat: yup.string().required(AppErrors.RequiredField),
 });
 export const carRegistrationSchema = yup.object().shape({
     name: yup.string().min(5, AppErrors.minLength).required(AppErrors.RequiredField),

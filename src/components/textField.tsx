@@ -27,12 +27,12 @@ const InputProviderComponent = ({ children, label, error, errorText, type, class
 };
 
 // Компонент для отображения текстового input (получает prop напрямую)
-const InputTextComponent = ({ value, onChange, placeholder, register, name }: any) => {
+const InputTextComponent = ({ className, value, onChange, placeholder, register, name }: any) => {
     const { error, type } = useInputContext(); // Берем только error из контекста
 
     return (
         <Input
-            className={clsx(error ? 'border-red-500' : '')}
+            className={clsx(error ? 'border-red-500' : '', className)}
             type={type}
             value={value}
             onChange={onChange}
