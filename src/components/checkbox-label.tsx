@@ -50,19 +50,21 @@ const CheckboxLabelText = ({ className, label }: { className?: string; label: st
 const CheckBoxLabel = ({
     className,
     register,
-    registerName,
+    onChange,
 }: {
     className?: string;
     register?: UseFormRegister<TypeForm>;
-    registerName?: any;
+    registerName?: string;
+    onChange?: (checked: boolean) => void;
 }) => {
-    const { name } = useCheckboxContext();
+    const { name }: { name: string } = useCheckboxContext();
 
     return (
         <Checkbox
-            {...(register ? register(registerName) : {})}
-            className={cn('w-6 h-6 border-[##D6D6D6] rounded-none', className)}
             id={name}
+            className={cn('w-6 h-6 border-[##D6D6D6] rounded-none', className)}
+            {...(register ? register(name) : {})}
+            onCheckedChange={(checked: boolean) => onChange && onChange(checked)}
         />
     );
 };

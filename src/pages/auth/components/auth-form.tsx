@@ -29,6 +29,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
         register,
         reset,
         setError,
+        setValue,
         formState: { errors },
     } = useForm<TypeForm>({
         resolver: yupResolver(isLogin ? loginSchema : registerSchema),
@@ -37,7 +38,6 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
     const onSubmit: SubmitHandler<TypeForm> = data => {
         const { password, repeat } = data;
 
-        //TODO fixed from
         if (isLogin) {
             console.log('login', data);
         } else if (password !== repeat) {
@@ -61,7 +61,10 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
             </Button>
 
             <CheckboxLabelGroup name="remember">
-                <CheckboxLabelCustom register={register} registerName="remember" />
+                <CheckboxLabelCustom
+                    onChange={checked => setValue('remember', checked)}
+                    register={register}
+                />
                 <CheckboxLabelValue label="Запомнить меня" />
             </CheckboxLabelGroup>
         </form>
