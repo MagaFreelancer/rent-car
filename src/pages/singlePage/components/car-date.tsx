@@ -10,8 +10,9 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/shared/popover';
 interface ICarDateProps {
     dateRange: DateRange | undefined;
     onDateChange: (newDate: DateRange | undefined) => void;
+    errors?: any;
 }
-const CarDate: React.FC<ICarDateProps> = ({ dateRange, onDateChange }: ICarDateProps) => {
+const CarDate: React.FC<ICarDateProps> = ({ dateRange, errors, onDateChange }: ICarDateProps) => {
     const days = differenceInDays(dateRange?.to || new Date(), dateRange?.from || new Date());
 
     return (
@@ -56,6 +57,7 @@ const CarDate: React.FC<ICarDateProps> = ({ dateRange, onDateChange }: ICarDateP
                     />
                 </PopoverContent>
             </Popover>
+            {errors?.date && <div className="text-red-500">{errors?.date?.message}</div>}
         </div>
     );
 };

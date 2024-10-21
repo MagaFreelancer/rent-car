@@ -16,15 +16,12 @@ const CarRegistration = () => {
             <DialogTrigger asChild>
                 <Button>Перейти к оформлению</Button>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[555px]">
+            <DialogContent className="sm:max-w-[855px]">
                 <DialogHeader>
                     <DialogTitle>Оформление</DialogTitle>
                     <DialogDescription>Пожалуйста, введите данные для оформления</DialogDescription>
                 </DialogHeader>
-                <div className="">
-                    <CarForm />
-                </div>
-                <DialogFooter>320$</DialogFooter>
+                <CarForm />
             </DialogContent>
         </Dialog>
     );

@@ -24,12 +24,12 @@ const CarFormDriver = ({ register, errors }: any) => {
             </TextFieldGroup>
             <TextFieldGroup
                 className={textFieldsClsName}
-                label="Date"
-                error={!!errors.date}
-                errorText={errors.date?.message}
+                label="Date of Birth"
+                error={!!errors.dateOfBirth}
+                errorText={errors.dateOfBirth?.message}
             >
                 <TextFieldLabel />
-                <TextFieldInput type="date" register={register} name="date" />
+                <TextFieldInput type="dateOfBirth" register={register} name="dateOfBirth" />
                 <TextFieldError />
             </TextFieldGroup>
             <TextFieldGroup

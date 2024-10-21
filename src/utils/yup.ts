@@ -1,5 +1,6 @@
 import * as yup from 'yup';
 import { AppErrors } from '@/common/errors.ts';
+import { differenceInDays } from 'date-fns';
 
 export const loginSchema = yup.object().shape({
     email: yup.string().email(AppErrors.InvalidEmail).required(AppErrors.RequiredField),
@@ -23,5 +24,16 @@ export const carRegistrationSchema = yup.object().shape({
     email: yup.string().email(AppErrors.InvalidEmail).required(AppErrors.RequiredField),
     phone: yup.string().min(10, AppErrors.minLength).required(AppErrors.RequiredField),
     address: yup.string().min(5, AppErrors.minLength).required(AppErrors.RequiredField),
-    date: yup.string().required(AppErrors.RequiredField),
+    dateOfBirth: yup.string().required(AppErrors.RequiredField),
+    date: yup
+        .object()
+        .shape({
+            from: yup.date().required('Start date is required'),
+            to: yup.date().required('End date is required'),
+        })
+        .test('min-days', 'You must select at least 3 days', value => {
+            if (!value || !value.from || !value.to) return false;
+            const days = differenceInDays(value.to, value.from);
+            return days >= 3; // Проверяем, что минимум 3 дня
+        }),
 });

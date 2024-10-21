@@ -1,12 +1,13 @@
 import useDateRange from '@/utils/hooks/useDateRange';
-import { addDays } from 'date-fns';
+import { addDays, differenceInDays } from 'date-fns';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { carRegistrationSchema } from '@/utils/yup';
+import { DateRange } from 'react-day-picker';
 const useFormFields = () => {
     const [showAddress, setShowAddress] = useState(false);
-    const { dateRange, onDateChange } = useDateRange({
+    const { dateRange, setDateRange } = useDateRange({
         from: new Date(2024, 0, 20),
         to: addDays(new Date(2024, 0, 20), 3),
     });
@@ -31,6 +32,15 @@ const useFormFields = () => {
         setShowAddress(checkState);
         if (showAddress) {
             setValue('address', '');
+        }
+    };
+    const onDateChange = (newDate: DateRange | undefined) => {
+        if (newDate?.from && newDate?.to) {
+            setValue('date', {
+                from: newDate.from,
+                to: newDate.to,
+            });
+            setDateRange(newDate);
         }
     };
 
