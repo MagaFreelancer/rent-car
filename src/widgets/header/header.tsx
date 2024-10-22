@@ -29,9 +29,9 @@ const Header = () => {
                         </ul>
                     </nav>
 
-                    <Button className="ml-7">
-                        <NavLink to="auth/login">Войти</NavLink>
-                    </Button>
+                    <NavLink to="auth/login">
+                        <Button className="ml-7">Войти</Button>
+                    </NavLink>
                 </div>
             </Container>
         </header>
