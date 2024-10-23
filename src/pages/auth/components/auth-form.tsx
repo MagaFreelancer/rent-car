@@ -10,6 +10,8 @@ import {
     CheckboxLabelGroup,
     CheckboxLabelValue,
 } from '@/components/checkbox-label.tsx';
+import { fetchRegister } from '@/redux/thunk/auth-fetch.ts';
+import { useAppDispatch } from '@/redux/store.ts';
 
 export type TypeForm = {
     name?: string;
@@ -24,6 +26,8 @@ interface AuthFormProps {
 }
 
 const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
+    const dispatch = useAppDispatch();
+
     const {
         handleSubmit,
         register,
@@ -35,8 +39,23 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
         resolver: yupResolver(isLogin ? loginSchema : registerSchema),
     });
 
-    const onSubmit: SubmitHandler<TypeForm> = data => {
+    const onSubmit: SubmitHandler<TypeForm> = async data => {
         const { password, repeat } = data;
+
+        const registerData = {
+            name: data.name,
+            email: data.email,
+            password: data.password,
+            favorites: [],
+            rewievs: [],
+            moreInfo: {
+                address: '',
+                numberPhone: '',
+            },
+            createdProfile: '',
+        };
+
+        console.log(registerData);
 
         if (isLogin) {
             console.log('login', data);
@@ -44,6 +63,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
             setError('password', { type: 'custom', message: 'Пароли не совпадают' });
             setError('repeat', { type: 'custom', message: 'Пароли не совпадают' });
         } else {
+            await dispatch(fetchRegister(registerData));
             console.log('register', data);
         }
     };

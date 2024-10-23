@@ -1,11 +1,9 @@
-import CarVariants from '../car-variants';
 import CarDate from '../car-date';
-
 import useFormFields from './hooks/useFormFields';
 import CarFormDriver from './components/car-form-drive';
-
 import CarDelivery from '../car-delivery';
 import { Button } from '@/shared/button';
+
 const CarForm = () => {
     const {
         dateRange,

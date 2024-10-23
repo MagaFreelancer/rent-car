@@ -57,7 +57,7 @@ const CheckBoxLabel = ({
     registerName?: string;
     onChange?: (checked: boolean) => void;
 }) => {
-    const { name }: { name: string } = useCheckboxContext();
+    const { name }: { name: any } = useCheckboxContext();
 
     return (
         <Checkbox
