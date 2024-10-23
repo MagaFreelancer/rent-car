@@ -1,16 +1,16 @@
+import { useState } from 'react';
 import CarVariants from './car-variants';
 import { TextFieldGroup, TextFieldInput } from '@/components/textField';
 interface ICarVariants {
     onChange: (value: string) => void;
     register?: any;
     errors?: any;
-    showAddress?: boolean;
 }
-const CarDelivery = ({ onChange, register, errors, showAddress }: ICarVariants) => {
+const CarDelivery = ({ onChange, register, errors }: ICarVariants) => {
     return (
         <>
             <CarVariants onChange={onChange} />
-            {showAddress && (
+            {/* {showAddress && (
                 <TextFieldGroup
                     className="mb-2"
                     error={!!errors.address}
@@ -18,7 +18,7 @@ const CarDelivery = ({ onChange, register, errors, showAddress }: ICarVariants) 
                 >
                     <TextFieldInput register={register} type="text" name="address" />
                 </TextFieldGroup>
-            )}
+            )} */}
         </>
     );
 };

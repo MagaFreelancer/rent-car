@@ -35,6 +35,6 @@ export const carRegistrationSchema = yup.object().shape({
         .test('min-days', 'You must select at least 3 days', value => {
             if (!value || !value.from || !value.to) return false;
             const days = differenceInDays(value.to, value.from);
-            return days >= 3; // Проверяем, что минимум 3 дня
+            return days >= 1; // Проверяем, что минимум 3 дня
         }),
 });
