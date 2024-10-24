@@ -10,9 +10,8 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/shared/popover';
 interface ICarDateProps {
     dateRange: DateRange | undefined;
     onDateChange: (newDate: DateRange | undefined) => void;
-    errors?: any;
 }
-const CarDate: React.FC<ICarDateProps> = ({ dateRange, errors, onDateChange }: ICarDateProps) => {
+const CarDate: React.FC<ICarDateProps> = ({ dateRange, onDateChange }: ICarDateProps) => {
     const days = differenceInDays(dateRange?.to || new Date(), dateRange?.from || new Date());
 
     return (
@@ -25,8 +24,7 @@ const CarDate: React.FC<ICarDateProps> = ({ dateRange, errors, onDateChange }: I
                         variant={'outline'}
                         className={cn(
                             'w-full justify-start text-left font-normal',
-                            !dateRange && 'text-muted-foreground',
-                            errors.date ? 'border-red-500' : ''
+                            !dateRange && 'text-muted-foreground'
                         )}
                     >
                         <CalendarIcon className="mr-2 h-4 w-4" />
@@ -58,7 +56,6 @@ const CarDate: React.FC<ICarDateProps> = ({ dateRange, errors, onDateChange }: I
                     />
                 </PopoverContent>
             </Popover>
-            {errors?.date && <div className="text-red-500">{errors?.date?.message}</div>}
         </div>
     );
 };

@@ -20,7 +20,7 @@ const CarVariants: React.FC<ICarVariants> = ({ onChange }: ICarVariants): JSX.El
                 </SelectTrigger>
                 <SelectContent>
                     <SelectGroup>
-                        <SelectItem value="undefined">Взять из офиса</SelectItem>
+                        <SelectItem value="office">Взять из офиса</SelectItem>
                         <SelectItem value="delivery">Доставка по городу 100$</SelectItem>
                     </SelectGroup>
                 </SelectContent>
