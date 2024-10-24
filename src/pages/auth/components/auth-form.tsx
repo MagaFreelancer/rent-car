@@ -11,7 +11,9 @@ import {
     CheckboxLabelValue,
 } from '@/components/checkbox-label.tsx';
 import { fetchRegister } from '@/redux/thunk/auth-fetch.ts';
-import { useAppDispatch } from '@/redux/store.ts';
+import { useAppDispatch, useAppSelector } from '@/redux/store.ts';
+import { getAuthStatus } from '@/redux/slice/auth-selectors.ts';
+import { useNavigate } from 'react-router-dom';
 
 export type TypeForm = {
     name?: string;
@@ -26,7 +28,10 @@ interface AuthFormProps {
 }
 
 const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
+    const status = useAppSelector(getAuthStatus);
+    // const user = useAppSelector(getAuthData);
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
 
     const {
         handleSubmit,
@@ -55,16 +60,17 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
             createdProfile: '',
         };
 
-        console.log(registerData);
-
         if (isLogin) {
             console.log('login', data);
         } else if (password !== repeat) {
             setError('password', { type: 'custom', message: 'Пароли не совпадают' });
             setError('repeat', { type: 'custom', message: 'Пароли не совпадают' });
         } else {
-            await dispatch(fetchRegister(registerData));
-            console.log('register', data);
+            const newUser = await dispatch(fetchRegister(registerData));
+
+            if (newUser.meta.requestStatus === 'fulfilled') {
+                navigate('/');
+            }
         }
     };
 
@@ -76,7 +82,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
                 <Register register={register} errors={errors} reset={reset} />
             )}
 
-            <Button className="w-full p-6 my-4" variant="custom" type="submit">
+            <Button className="w-full p-6 my-4" loading={status} variant="custom" type="submit">
                 {isLogin ? 'Войти в кабинет' : 'Создать аккаунт'}
             </Button>
 

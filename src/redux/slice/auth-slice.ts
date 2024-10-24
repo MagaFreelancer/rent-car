@@ -2,8 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 import { fetchRegister } from '@/redux/thunk/auth-fetch.ts';
 
 const initialState = {
-    entities: [],
-    loading: false,
+    data: {},
+    status: false,
 };
 
 const usersSlice = createSlice({
@@ -11,14 +11,16 @@ const usersSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: builder => {
-        builder.addCase(fetchRegister.pending, () => {
-            console.log('pending');
+        builder.addCase(fetchRegister.pending, state => {
+            state.status = true;
         });
-        builder.addCase(fetchRegister.fulfilled, () => {
-            console.log('fulfilled');
+        builder.addCase(fetchRegister.fulfilled, (state, action) => {
+            state.status = false;
+            state.data = action.payload;
+            console.log(action.payload);
         });
-        builder.addCase(fetchRegister.rejected, () => {
-            console.log('rejected');
+        builder.addCase(fetchRegister.rejected, state => {
+            state.status = false;
         });
     },
 });
