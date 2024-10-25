@@ -4,6 +4,7 @@ import { fetchRegister } from '@/redux/thunk/auth-fetch.ts';
 const initialState = {
     data: {},
     status: false,
+    isLogged: false,
 };
 
 const usersSlice = createSlice({
@@ -13,14 +14,16 @@ const usersSlice = createSlice({
     extraReducers: builder => {
         builder.addCase(fetchRegister.pending, state => {
             state.status = true;
+            state.isLogged = false;
         });
         builder.addCase(fetchRegister.fulfilled, (state, action) => {
-            state.status = false;
             state.data = action.payload;
-            console.log(action.payload);
+            state.status = false;
+            state.isLogged = true;
         });
         builder.addCase(fetchRegister.rejected, state => {
             state.status = false;
+            state.isLogged = false;
         });
     },
 });

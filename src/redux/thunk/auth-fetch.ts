@@ -11,3 +11,19 @@ export const fetchRegister = createAsyncThunk('user/register', async (data: Type
         return error;
     }
 });
+
+export const userAuthMe = createAsyncThunk('auth/authMe', async () => {
+    try {
+        const token = sessionStorage.getItem('user');
+
+        const response = await instance.get('/auth_me', {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+
+        return response.data;
+    } catch (error) {
+        return error;
+    }
+});

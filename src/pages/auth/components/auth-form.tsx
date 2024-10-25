@@ -14,7 +14,7 @@ import { fetchRegister } from '@/redux/thunk/auth-fetch.ts';
 import { useAppDispatch, useAppSelector } from '@/redux/store.ts';
 import { getAuthStatus } from '@/redux/slice/auth-selectors.ts';
 import { useNavigate } from 'react-router-dom';
-// import { useLocalStorage } from 'usehooks-ts';
+import { useLocalStorage } from 'usehooks-ts';
 
 export type TypeForm = {
     name?: string;
@@ -29,7 +29,7 @@ interface AuthFormProps {
 }
 
 const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
-    // const [valueLocal, setValueLocal ] = useLocalStorage('test-key', null)
+    const [_, setValueLocal] = useLocalStorage('user', {});
     const status = useAppSelector(getAuthStatus);
     // const user = useAppSelector(getAuthData);
     const dispatch = useAppDispatch();
@@ -71,7 +71,10 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
             const newUser = await dispatch(fetchRegister(registerData));
 
             if (newUser.meta.requestStatus === 'fulfilled') {
-                // setValueLocal(newUser.payload.token)
+                setValueLocal({
+                    token: newUser.payload.token,
+                    name: newUser.payload.data.name,
+                });
 
                 navigate('/');
             }
