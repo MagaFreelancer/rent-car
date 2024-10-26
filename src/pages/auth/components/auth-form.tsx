@@ -14,7 +14,7 @@ import { fetchRegister } from '@/redux/thunk/auth-fetch.ts';
 import { useAppDispatch, useAppSelector } from '@/redux/store.ts';
 import { getAuthStatus } from '@/redux/slice/auth-selectors.ts';
 import { useNavigate } from 'react-router-dom';
-import { useLocalStorage } from 'usehooks-ts';
+import { useLocalStorage, useSessionStorage } from 'usehooks-ts';
 
 export type TypeForm = {
     name?: string;
@@ -29,7 +29,8 @@ interface AuthFormProps {
 }
 
 const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
-    const [_, setValueLocal] = useLocalStorage('user', {});
+    const [geggr, setValueLocal, removeLocal] = useLocalStorage('user', {});
+    const [testrh, setValueSession] = useSessionStorage('user', {});
     const status = useAppSelector(getAuthStatus);
     // const user = useAppSelector(getAuthData);
     const dispatch = useAppDispatch();
@@ -47,8 +48,6 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
     });
 
     const onSubmit: SubmitHandler<TypeForm> = async data => {
-        const { password, repeat } = data;
-
         const registerData = {
             name: data.name,
             email: data.email,
@@ -64,19 +63,28 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
 
         if (isLogin) {
             console.log('login', data);
-        } else if (password !== repeat) {
+        } else if (data.password !== data.repeat) {
             setError('password', { type: 'custom', message: 'Пароли не совпадают' });
             setError('repeat', { type: 'custom', message: 'Пароли не совпадают' });
         } else {
             const newUser = await dispatch(fetchRegister(registerData));
 
-            if (newUser.meta.requestStatus === 'fulfilled') {
+            console.log('register', data);
+
+            if (newUser.meta.requestStatus === 'fulfilled' && data.remember) {
                 setValueLocal({
                     token: newUser.payload.token,
                     name: newUser.payload.data.name,
                 });
 
                 navigate('/');
+            } else {
+                removeLocal();
+
+                setValueSession({
+                    token: newUser.payload.token,
+                    name: newUser.payload.data.name,
+                });
             }
         }
     };
@@ -94,10 +102,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
             </Button>
 
             <CheckboxLabelGroup name="remember">
-                <CheckboxLabelCustom
-                    onChange={checked => setValue('remember', checked)}
-                    register={register}
-                />
+                <CheckboxLabelCustom onChange={checked => setValue('remember', checked)} />
                 <CheckboxLabelValue label="Запомнить меня" />
             </CheckboxLabelGroup>
         </form>

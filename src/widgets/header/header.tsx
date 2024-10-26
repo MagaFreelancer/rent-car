@@ -1,8 +1,12 @@
 import Container from '@/shared/container.tsx';
 import { NavLink } from 'react-router-dom';
 import { Button } from '@/shared/button.tsx';
+import useAuth from '@/utils/hooks/useAuth.ts';
+import { Avatar } from '@/shared/avatar.tsx';
 
 const Header = () => {
+    const { status, storage } = useAuth();
+
     return (
         <header className="border-y-2">
             <Container>
@@ -29,9 +33,13 @@ const Header = () => {
                         </ul>
                     </nav>
 
-                    <NavLink to="auth/login">
-                        <Button className="ml-7">Войти</Button>
-                    </NavLink>
+                    {status ? (
+                        <Avatar className="p-4">{storage.name[0]}</Avatar>
+                    ) : (
+                        <NavLink to="auth/login">
+                            <Button className="ml-7">Войти</Button>
+                        </NavLink>
+                    )}
                 </div>
             </Container>
         </header>

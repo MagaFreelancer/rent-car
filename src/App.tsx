@@ -45,15 +45,15 @@ import { userAuthMe } from '@/redux/thunk/auth-fetch.ts';
 
 const App = () => {
     const dispatch = useAppDispatch();
-    const auth = useAuth();
+    const { status, storage } = useAuth();
 
-    console.log(auth);
+    console.log(status);
 
     useEffect(() => {
-        if (auth) {
-            dispatch(userAuthMe());
+        if (status) {
+            dispatch(userAuthMe(storage.token));
         }
-    }, [auth, dispatch]);
+    }, [status, dispatch, storage]);
 
     return (
         <BrowserRouter>
@@ -76,7 +76,9 @@ const App = () => {
                 <main className="flex-grow">
                     <Routes>
                         <Route path="/cars/:id" element={<SinglePage />} />
-                        <Route path="auth/:type" element={<Auth />} />
+                        <Route element={!(<PrivateRoute />)}>
+                            <Route path="auth/:type" element={<Auth />} />
+                        </Route>
                         <Route element={<PrivateRoute />}>
                             <Route path="/profile" element={<Profile />} />
                         </Route>

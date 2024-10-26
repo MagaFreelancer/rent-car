@@ -12,10 +12,8 @@ export const fetchRegister = createAsyncThunk('user/register', async (data: Type
     }
 });
 
-export const userAuthMe = createAsyncThunk('auth/authMe', async () => {
+export const userAuthMe = createAsyncThunk('auth/authMe', async (token: string) => {
     try {
-        const token = sessionStorage.getItem('user');
-
         const response = await instance.get('/auth_me', {
             headers: {
                 Authorization: `Bearer ${token}`,

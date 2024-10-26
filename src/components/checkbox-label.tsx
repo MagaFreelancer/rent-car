@@ -1,8 +1,6 @@
 import { createContext, memo, ReactNode, useContext } from 'react';
 import { cn } from '@/lib/utils.ts';
 import { Checkbox } from '@/shared/checkbox.tsx';
-import { UseFormRegister } from 'react-hook-form';
-import { TypeForm } from '@/pages/auth/components/auth-form.tsx';
 
 interface ICheckboxLabelProps {
     className?: string;
@@ -49,21 +47,19 @@ const CheckboxLabelText = ({ className, label }: { className?: string; label: st
 
 const CheckBoxLabel = ({
     className,
-    register,
     onChange,
 }: {
     className?: string;
-    register?: UseFormRegister<TypeForm>;
-    registerName?: string;
+    // register?: UseFormRegister<TypeForm>;
+    // registerName?: string;
     onChange?: (checked: boolean) => void;
 }) => {
-    const { name }: { name: any } = useCheckboxContext();
+    const { name }: { name: string } = useCheckboxContext();
 
     return (
         <Checkbox
             id={name}
             className={cn('w-6 h-6 border-[##D6D6D6] rounded-none', className)}
-            {...(register ? register(name) : {})}
             onCheckedChange={(checked: boolean) => onChange && onChange(checked)}
         />
     );
