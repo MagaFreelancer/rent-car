@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import CarVariants from './car-variants';
 import { TextFieldError, TextFieldGroup, TextFieldInput } from '@/components/textField';
 interface ICarVariants {

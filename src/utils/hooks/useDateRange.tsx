@@ -1,9 +1,12 @@
-import { differenceInDays } from 'date-fns';
+import { addDays, differenceInDays } from 'date-fns';
 import { useState } from 'react';
 import { DateRange } from 'react-day-picker';
 
-const useDateRange = (initialRange: DateRange) => {
-    const [dateRange, setDateRange] = useState<DateRange | undefined>(initialRange);
+const useDateRange = () => {
+    const [dateRange, setDateRange] = useState<DateRange | undefined>({
+        from: new Date(),
+        to: addDays(new Date(), 3),
+    });
 
     const onChangeDateRange = (newDate: DateRange | undefined) => {
         if (newDate?.from && newDate?.to) {

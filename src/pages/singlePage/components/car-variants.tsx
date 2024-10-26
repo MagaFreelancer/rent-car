@@ -16,7 +16,7 @@ const CarVariants: React.FC<ICarVariants> = ({ onChange }: ICarVariants): JSX.El
             <div className="font-semiBold text-lg mb-4">Получение</div>
             <Select onValueChange={onChange}>
                 <SelectTrigger className="w-full">
-                    <SelectValue defaultValue="undefined" placeholder="Взять из офиса" />
+                    <SelectValue defaultValue="office" placeholder="Взять из офиса" />
                 </SelectTrigger>
                 <SelectContent>
                     <SelectGroup>

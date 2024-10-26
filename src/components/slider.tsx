@@ -1,10 +1,18 @@
-const Slider = () => {
+import { FC } from 'react';
+import SliderBullets from './slider-bullets';
+import useSlider from '@/utils/hooks/useSlider';
+import SliderItems from './slider-items';
+interface IPropsSlider {
+    imgs: string[];
+}
+
+const Slider: FC<IPropsSlider> = ({ imgs }: IPropsSlider) => {
+    const { setApi, onClickBullets, current, count } = useSlider();
+
     return (
-        <div>
-            <img
-                src="https://img.gazeta.ru/files3/225/15619225/602fd8501fa16_img-pic_32ratio_900x600-900x600-32191.jpg"
-                alt=""
-            />
+        <div className="relative">
+            <SliderItems imgs={imgs} setApi={setApi} />
+            <SliderBullets count={count} current={current - 1} setCurrent={onClickBullets} />
         </div>
     );
 };
