@@ -4,13 +4,14 @@ const useAuth = () => {
         storage: null,
     };
 
-    if (localStorage.getItem('user')) {
-        const user = JSON.parse(localStorage.getItem('user'));
-        data.storage = user;
+    const localUser = localStorage.getItem('user');
+    const sessionUser = sessionStorage.getItem('user');
+
+    if (localUser !== null) {
+        data.storage = JSON.parse(localUser);
         data.status = true;
-    } else if (sessionStorage.getItem('user')) {
-        const user = JSON.parse(sessionStorage.getItem('user'));
-        data.storage = user;
+    } else if (sessionUser !== null) {
+        data.storage = JSON.parse(sessionUser);
         data.status = true;
     }
 

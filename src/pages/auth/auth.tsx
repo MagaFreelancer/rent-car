@@ -4,10 +4,11 @@ import { useParams } from 'react-router-dom';
 import AuthForm from '@/pages/auth/components/auth-form.tsx';
 
 export type TypeForm = {
-    name?: string;
+    name: string;
     email: string;
     password: string;
     repeat?: string;
+    remember?: boolean;
 };
 
 const Auth = () => {
