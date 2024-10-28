@@ -1,10 +1,15 @@
 import { useLocalStorage, useSessionStorage } from 'usehooks-ts';
 
+type IUserStorage = {
+    token: string;
+    name: string;
+};
+
 export const useAuthStorage = () => {
     const [localUser, setLocalUser, removeLocalUser] = useLocalStorage('user', {});
     const [sessionUser, setSessionUser, removeSessionUser] = useSessionStorage('user', {});
 
-    const saveUser = (user: any, remember: boolean) => {
+    const saveUser = (user: IUserStorage, remember: boolean) => {
         if (remember) {
             setLocalUser(user);
             removeSessionUser();

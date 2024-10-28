@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchRegister } from '@/redux/thunk/auth-fetch.ts';
+import { authUser, fetchRegister } from '@/redux/thunk/auth-fetch.ts';
 
 const initialState = {
     data: {},
@@ -22,6 +22,20 @@ const usersSlice = createSlice({
             state.isLogged = true;
         });
         builder.addCase(fetchRegister.rejected, state => {
+            state.status = false;
+            state.isLogged = false;
+        });
+
+        builder.addCase(authUser.pending, state => {
+            state.status = true;
+            state.isLogged = false;
+        });
+        builder.addCase(authUser.fulfilled, (state, action) => {
+            state.data = action.payload;
+            state.status = true;
+            state.isLogged = true;
+        });
+        builder.addCase(authUser.rejected, state => {
             state.status = false;
             state.isLogged = false;
         });

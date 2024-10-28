@@ -3,13 +3,15 @@ import Title from '@/shared/Title.tsx';
 import { useParams } from 'react-router-dom';
 import AuthForm from '@/pages/auth/components/auth-form.tsx';
 
-export type TypeForm = {
+export interface IUser {
     name: string;
     email: string;
     password: string;
-    repeat?: string;
-    remember?: boolean;
-};
+    favorites: string[];
+    rewievs: string[];
+    moreInfo: { address: string; numberPhone: string };
+    createdProfile: string;
+}
 
 const Auth = () => {
     const { type } = useParams();

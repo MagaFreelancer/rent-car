@@ -1,5 +1,4 @@
 import { FieldErrors, UseFormRegister } from 'react-hook-form';
-import { TypeForm } from '@/pages/auth/auth.tsx';
 import { NavLink } from 'react-router-dom';
 import {
     TextFieldError,
@@ -7,10 +6,11 @@ import {
     TextFieldInput,
     TextFieldLabel,
 } from '@/components/textField.tsx';
+import { TypeLogin } from '@/pages/auth/components/hook/useAuthForm.ts';
 
 interface IPropsLogin {
-    register: UseFormRegister<TypeForm>;
-    errors: FieldErrors<TypeForm>;
+    register: UseFormRegister<TypeLogin>;
+    errors: FieldErrors<TypeLogin>;
     reset: () => void;
 }
 

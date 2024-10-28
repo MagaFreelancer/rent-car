@@ -47,13 +47,11 @@ const App = () => {
     const dispatch = useAppDispatch();
     const { status, storage } = useAuth();
 
-    console.log(status);
-
     useEffect(() => {
         if (status) {
             dispatch(userAuthMe(storage.token));
         }
-    }, [status, dispatch, storage]);
+    }, [dispatch, status, storage]);
 
     return (
         <BrowserRouter>

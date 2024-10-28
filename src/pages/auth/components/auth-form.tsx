@@ -9,16 +9,8 @@ import {
 } from '@/components/checkbox-label.tsx';
 import { useAppSelector } from '@/redux/store.ts';
 import { getAuthStatus } from '@/redux/slice/auth-selectors.ts';
-import { useAuthForm } from '@/pages/auth/components/useAuthForm.ts';
-import { useAuthStorage } from '@/pages/auth/components/useAuthStorage.ts';
-
-export type TypeForm = {
-    name?: string;
-    email: string;
-    password: string;
-    repeat?: string;
-    remember?: boolean;
-};
+import { useAuthForm } from '@/pages/auth/components/hook/useAuthForm.ts';
+import { useAuthStorage } from '@/pages/auth/components/hook/useAuthStorage.ts';
 
 interface AuthFormProps {
     isLogin: boolean;
@@ -27,6 +19,7 @@ interface AuthFormProps {
 const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
     const status = useAppSelector(getAuthStatus);
     const { saveUser } = useAuthStorage();
+
     const { handleSubmit, register, reset, errors, onSubmit, setValue } = useAuthForm(
         isLogin,
         saveUser
