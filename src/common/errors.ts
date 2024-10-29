@@ -6,3 +6,9 @@ export enum AppErrors {
     InvalidPassword = 'Пароль должен содержать спецсимвол, одинь заглавный символ, одну цифру',
     minLengthName = 'Минимальная длина 4 символов',
 }
+
+export enum AppErrorsFetch {
+    Exists = 'Пользователь уже существует',
+    AuthLogin = 'Не верный логин или пароль',
+    Server = 'Проблемы с сервером',
+}

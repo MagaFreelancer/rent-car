@@ -20,8 +20,6 @@ const useRegister = () => {
 
         const newUser = await dispatch(fetchRegister(registerData));
 
-        console.log(newUser);
-
         saveUser({ token: newUser.payload.token, name: newUser.payload.data.name }, data.remember);
 
         navigate('/');

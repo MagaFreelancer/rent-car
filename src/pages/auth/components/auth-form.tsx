@@ -8,9 +8,10 @@ import {
     CheckboxLabelValue,
 } from '@/components/checkbox-label.tsx';
 import { useAppSelector } from '@/redux/store.ts';
-import { getAuthStatus } from '@/redux/slice/auth-selectors.ts';
+import { getAuthError, getAuthStatus } from '@/redux/slice/auth-selectors.ts';
 import { useAuthForm } from '@/pages/auth/components/hook/useAuthForm.ts';
 import { useAuthStorage } from '@/pages/auth/components/hook/useAuthStorage.ts';
+import ErrorText from '@/shared/error-text.tsx';
 
 interface AuthFormProps {
     isLogin: boolean;
@@ -18,6 +19,7 @@ interface AuthFormProps {
 
 const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
     const status = useAppSelector(getAuthStatus);
+    const error = useAppSelector(getAuthError);
     const { saveUser } = useAuthStorage();
 
     const { handleSubmit, register, reset, errors, onSubmit, setValue } = useAuthForm(
@@ -41,6 +43,8 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
                 <CheckboxLabelCustom onChange={checked => setValue('remember', checked)} />
                 <CheckboxLabelValue label="Запомнить меня" />
             </CheckboxLabelGroup>
+
+            {error && <ErrorText text={error} />}
         </form>
     );
 };
