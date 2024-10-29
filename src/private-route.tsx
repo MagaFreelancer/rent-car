@@ -1,10 +1,19 @@
-import { Navigate, Outlet } from 'react-router-dom';
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import useAuth from '@/utils/hooks/useAuth.ts';
 
-const PrivateRoute = () => {
+const PrivateRoute = ({ restrictedToAuth }: { restrictedToAuth: boolean }) => {
     const { status } = useAuth();
+    const location = useLocation();
 
-    return status ? <Outlet /> : <Navigate to="auth/login" />;
+    if (restrictedToAuth && !status) {
+        return <Navigate to="/" state={{ from: location }} replace />;
+    }
+
+    if (!restrictedToAuth && status) {
+        return <Navigate to="/" state={{ from: location }} replace />;
+    }
+
+    return <Outlet />;
 };
 
 export default PrivateRoute;

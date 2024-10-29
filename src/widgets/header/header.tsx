@@ -2,7 +2,7 @@ import Container from '@/shared/container.tsx';
 import { NavLink } from 'react-router-dom';
 import { Button } from '@/shared/button.tsx';
 import useAuth from '@/utils/hooks/useAuth.ts';
-import { Avatar } from '@/shared/avatar.tsx';
+import { Avatar, AvatarFallback } from '@/shared/avatar.tsx';
 
 const Header = () => {
     const { status, storage } = useAuth();
@@ -34,7 +34,11 @@ const Header = () => {
                     </nav>
 
                     {status ? (
-                        <Avatar className="p-4">{storage.name[0]}</Avatar>
+                        <Avatar className="ml-6 w-12 h-12">
+                            <AvatarFallback className="bg-[#e5e5e5]">
+                                {storage.name.slice(0, 2)}
+                            </AvatarFallback>
+                        </Avatar>
                     ) : (
                         <NavLink to="auth/login">
                             <Button className="ml-7">Войти</Button>

@@ -74,10 +74,10 @@ const App = () => {
                 <main className="flex-grow">
                     <Routes>
                         <Route path="/cars/:id" element={<SinglePage />} />
-                        <Route element={!(<PrivateRoute />)}>
+                        <Route element={<PrivateRoute restrictedToAuth={false} />}>
                             <Route path="auth/:type" element={<Auth />} />
                         </Route>
-                        <Route element={<PrivateRoute />}>
+                        <Route element={<PrivateRoute restrictedToAuth={true} />}>
                             <Route path="/profile" element={<Profile />} />
                         </Route>
                     </Routes>

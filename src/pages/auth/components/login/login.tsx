@@ -17,7 +17,12 @@ interface IPropsLogin {
 const Login = ({ register, errors, reset }: IPropsLogin) => {
     return (
         <>
-            <TextFieldGroup error={!!errors.email} errorText={errors.email?.message} label="Email">
+            <TextFieldGroup
+                className="mb-3"
+                error={!!errors.email}
+                errorText={errors.email?.message}
+                label="Email"
+            >
                 <TextFieldLabel />
                 <TextFieldInput
                     className="rounded-none py-6 px-5"
@@ -29,6 +34,7 @@ const Login = ({ register, errors, reset }: IPropsLogin) => {
             </TextFieldGroup>
 
             <TextFieldGroup
+                className="mb-3"
                 error={!!errors.password}
                 errorText={errors.password?.message}
                 label="Пароль"
