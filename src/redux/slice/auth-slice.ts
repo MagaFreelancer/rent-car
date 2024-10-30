@@ -37,7 +37,11 @@ const initialState: IInitialState = {
 const usersSlice = createSlice({
     name: 'users',
     initialState,
-    reducers: {},
+    reducers: {
+        resetError: state => {
+            state.error = '';
+        },
+    },
     extraReducers: builder => {
         builder.addCase(fetchRegister.pending, state => {
             state.status = true;
@@ -70,5 +74,7 @@ const usersSlice = createSlice({
         });
     },
 });
+
+export const { resetError } = usersSlice.actions;
 
 export default usersSlice.reducer;

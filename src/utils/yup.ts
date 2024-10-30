@@ -4,7 +4,7 @@ import { differenceInDays } from 'date-fns';
 
 export const loginSchema = yup.object().shape({
     email: yup.string().email(AppErrors.InvalidEmail).required(AppErrors.RequiredField),
-    password: yup.string().required(AppErrors.RequiredField),
+    password: yup.string().min(8, AppErrors.minLength).required(AppErrors.RequiredField),
 });
 
 export const registerSchema = yup.object().shape({

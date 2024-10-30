@@ -22,7 +22,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
     const error = useAppSelector(getAuthError);
     const { saveUser } = useAuthStorage();
 
-    const { handleSubmit, register, reset, errors, onSubmit, setValue } = useAuthForm(
+    const { handleSubmit, register, errors, onSubmit, setValue, resetUseFormRedux } = useAuthForm(
         isLogin,
         saveUser
     );
@@ -30,9 +30,9 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="border-2 p-10">
             {isLogin ? (
-                <Login register={register} errors={errors} reset={reset} />
+                <Login register={register} errors={errors} reset={resetUseFormRedux} />
             ) : (
-                <Register register={register} errors={errors} reset={reset} />
+                <Register register={register} errors={errors} reset={resetUseFormRedux} />
             )}
 
             <Button className="w-full p-6 my-4" loading={status} variant="custom" type="submit">
