@@ -16,7 +16,7 @@ const Header = () => {
                     <nav className="p-7 w-full border-x-2">
                         <ul className="flex text-[15px] justify-center font-medium gap-[57px]">
                             <li>
-                                <NavLink to="/">Каталог</NavLink>
+                                <NavLink to="/cars">Каталог</NavLink>
                             </li>
                             <li>
                                 <NavLink to="/">Мужские</NavLink>

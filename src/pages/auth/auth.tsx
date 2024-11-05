@@ -18,11 +18,9 @@ const Auth = () => {
     const isRegistered = type === 'login';
 
     return (
-        <section className="max-w-[500px] mx-auto mb-[120px]">
+        <section className="mt-20 max-w-[500px] mx-auto mb-[120px] bg-white p-10 rounded-2xl shadow-xl">
             <Container>
-                <Title className="mt-6 mb-12">
-                    {type === 'login' ? 'Авторизация' : 'Регистрация'}
-                </Title>
+                <Title className="mb-12">{type === 'login' ? 'Авторизация' : 'Регистрация'}</Title>
 
                 <AuthForm isLogin={isRegistered} />
             </Container>

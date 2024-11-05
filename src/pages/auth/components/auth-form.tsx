@@ -28,19 +28,27 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
     );
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className="border-2 p-10">
+        <form onSubmit={handleSubmit(onSubmit)}>
             {isLogin ? (
                 <Login register={register} errors={errors} reset={resetUseFormRedux} />
             ) : (
                 <Register register={register} errors={errors} reset={resetUseFormRedux} />
             )}
 
-            <Button className="w-full p-6 my-4" loading={status} variant="custom" type="submit">
+            <Button
+                className="transition w-full p-6 my-4"
+                loading={status}
+                variant="custom"
+                type="submit"
+            >
                 {isLogin ? 'Войти в кабинет' : 'Создать аккаунт'}
             </Button>
 
             <CheckboxLabelGroup name="remember">
-                <CheckboxLabelCustom onChange={checked => setValue('remember', checked)} />
+                <CheckboxLabelCustom
+                    className="transition"
+                    onChange={checked => setValue('remember', checked)}
+                />
                 <CheckboxLabelValue label="Запомнить меня" />
             </CheckboxLabelGroup>
 

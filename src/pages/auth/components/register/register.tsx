@@ -25,7 +25,7 @@ const Register = ({ register, errors, reset }: IPropsLogin) => {
             >
                 <TextFieldLabel />
                 <TextFieldInput
-                    className="rounded-none py-6 px-5"
+                    className="transition rounded py-6 px-5"
                     placeholder="Ваше имя"
                     register={register}
                     name="name"
@@ -41,7 +41,7 @@ const Register = ({ register, errors, reset }: IPropsLogin) => {
             >
                 <TextFieldLabel />
                 <TextFieldInput
-                    className="rounded-none py-6 px-5"
+                    className="transition rounded py-6 px-5"
                     placeholder="Введите email адрес"
                     register={register}
                     name="email"
@@ -57,7 +57,7 @@ const Register = ({ register, errors, reset }: IPropsLogin) => {
             >
                 <TextFieldLabel />
                 <TextFieldInput
-                    className="rounded-none py-6 px-5"
+                    className="transition rounded py-6 px-5"
                     placeholder="Придумайте пароль"
                     register={register}
                     name="password"
@@ -73,7 +73,7 @@ const Register = ({ register, errors, reset }: IPropsLogin) => {
             >
                 <TextFieldLabel />
                 <TextFieldInput
-                    className="rounded-none py-6 px-5"
+                    className="transition rounded py-6 px-5"
                     placeholder="Придумайте пароль"
                     register={register}
                     name="repeat"

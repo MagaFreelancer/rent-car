@@ -10,6 +10,7 @@ import Profile from '@/pages/profile/profile.tsx';
 import { useEffect } from 'react';
 import useAuth from '@/utils/hooks/useAuth.ts';
 import { userAuthMe } from '@/redux/thunk/auth-fetch.ts';
+import Cars from '@/pages/cars/cars.tsx';
 
 // import Container from '@/shared/container.tsx';
 // import {
@@ -73,6 +74,7 @@ const App = () => {
 
                 <main className="flex-grow">
                     <Routes>
+                        <Route path="/cars" element={<Cars />} />
                         <Route path="/cars/:id" element={<SinglePage />} />
                         <Route element={<PrivateRoute restrictedToAuth={false} />}>
                             <Route path="auth/:type" element={<Auth />} />
