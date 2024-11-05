@@ -1,28 +1,23 @@
 import { FieldErrors, UseFormRegister } from 'react-hook-form';
+import { TypeForm } from '@/pages/auth/auth.tsx';
 import { NavLink } from 'react-router-dom';
 import {
     TextFieldError,
     TextFieldGroup,
     TextFieldInput,
     TextFieldLabel,
-} from '@/components/textField.tsx';
-import { TypeLogin } from '@/pages/auth/components/hook/useAuthForm.ts';
+} from '@/components/text-field';
 
 interface IPropsLogin {
-    register: UseFormRegister<TypeLogin>;
-    errors: FieldErrors<TypeLogin>;
+    register: UseFormRegister<TypeForm>;
+    errors: FieldErrors<TypeForm>;
     reset: () => void;
 }
 
 const Login = ({ register, errors, reset }: IPropsLogin) => {
     return (
         <>
-            <TextFieldGroup
-                className="mb-3"
-                error={!!errors.email}
-                errorText={errors.email?.message}
-                label="Email"
-            >
+            <TextFieldGroup error={!!errors.email} errorText={errors.email?.message} label="Email">
                 <TextFieldLabel />
                 <TextFieldInput
                     className="transition rounded py-6 px-5"
@@ -34,14 +29,13 @@ const Login = ({ register, errors, reset }: IPropsLogin) => {
             </TextFieldGroup>
 
             <TextFieldGroup
-                className="mb-3"
                 error={!!errors.password}
                 errorText={errors.password?.message}
                 label="Пароль"
             >
                 <TextFieldLabel />
                 <TextFieldInput
-                    className="transition rounded py-6 px-5"
+                    className="rounded-none py-6 px-5"
                     placeholder="Введите пароль от аккаунта"
                     register={register}
                     name="password"

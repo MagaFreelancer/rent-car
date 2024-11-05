@@ -1,17 +1,12 @@
-import Header from '@/widgets/header/header.tsx';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import TopNav from '@/widgets/topNav/top-nav.tsx';
-import Footer from '@/widgets/footer/footer.tsx';
 import Auth from '@/pages/auth/auth.tsx';
-import SinglePage from './pages/singlePage/single-page';
 import { useAppDispatch } from '@/redux/store.ts';
-import PrivateRoute from '@/private-route.tsx';
-import Profile from '@/pages/profile/profile.tsx';
-import { useEffect } from 'react';
 import useAuth from '@/utils/hooks/useAuth.ts';
 import { userAuthMe } from '@/redux/thunk/auth-fetch.ts';
+import { useEffect } from 'react';
 import Cars from '@/pages/cars/cars.tsx';
-
+import PrivateRoute from '@/private-route.tsx';
+import Profile from '@/pages/profile/profile.tsx';
 // import Container from '@/shared/container.tsx';
 // import {
 //     CardBrand,
@@ -56,26 +51,13 @@ const App = () => {
 
     return (
         <BrowserRouter>
-            {/*<CardProvider {...obj}>*/}
-            {/*    <CardFavorite />*/}
-            {/*    <CardBrand />*/}
-            {/*    <CardModel />*/}
-            {/*    <CardSlider />*/}
-            {/*    <CardInfo />*/}
-            {/*    <CardGroup>*/}
-            {/*        <CardPrice />*/}
-            {/*        <CardButton />*/}
-            {/*    </CardGroup>*/}
-            {/*</CardProvider>*/}
-
             <div className="flex-col flex min-h-screen">
-                <TopNav />
-                <Header />
-
                 <main className="flex-grow">
                     <Routes>
+                        {/* <Route path="/cars/:id" element={<SinglePage />} /> */}
+                        <Route path="auth/:type" element={<Auth />} />
                         <Route path="/cars" element={<Cars />} />
-                        <Route path="/cars/:id" element={<SinglePage />} />
+                        {/*<Route path="/cars/:id" element={<SinglePage />} />*/}
                         <Route element={<PrivateRoute restrictedToAuth={false} />}>
                             <Route path="auth/:type" element={<Auth />} />
                         </Route>
@@ -84,8 +66,6 @@ const App = () => {
                         </Route>
                     </Routes>
                 </main>
-
-                <Footer />
             </div>
         </BrowserRouter>
     );

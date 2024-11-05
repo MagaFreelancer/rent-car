@@ -5,7 +5,7 @@ import {
     TextFieldGroup,
     TextFieldInput,
     TextFieldLabel,
-} from '@/components/textField.tsx';
+} from '@/components/text-field.tsx';
 import { TypeLogin, TypeRegister } from '@/pages/auth/components/hook/useAuthForm.ts';
 
 interface IPropsLogin {
