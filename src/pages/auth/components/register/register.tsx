@@ -6,7 +6,7 @@ import {
     TextFieldGroup,
     TextFieldInput,
     TextFieldLabel,
-} from '@/components/textField.tsx';
+} from '@/components/text-field';
 
 interface IPropsLogin {
     register: UseFormRegister<TypeForm>;
