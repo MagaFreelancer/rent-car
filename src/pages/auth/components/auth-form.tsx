@@ -8,7 +8,7 @@ import {
     CheckboxLabelValue,
 } from '@/components/checkbox-label.tsx';
 import { useAppSelector } from '@/redux/store.ts';
-import { getAuthError, getAuthStatus } from '@/redux/slice/auth-selectors.ts';
+import { getAuthError, getAuthStatus } from '@/redux/slice/auth/auth-selectors.ts';
 import { useAuthForm } from '@/pages/auth/components/hook/useAuthForm.ts';
 import { useAuthStorage } from '@/pages/auth/components/hook/useAuthStorage.ts';
 import ErrorText from '@/shared/error-text.tsx';

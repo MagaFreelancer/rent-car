@@ -4,7 +4,7 @@ import { loginSchema, registerSchema } from '@/utils/yup.ts';
 import useLogin from '@/pages/auth/components/hook/useLogin.ts';
 import useRegister from '@/pages/auth/components/hook/useRegister.ts';
 import { useDispatch } from 'react-redux';
-import { resetError } from '@/redux/slice/auth-slice.ts';
+import { resetError } from '@/redux/slice/auth/auth-slice.ts';
 
 export interface TypeLogin {
     email: string;

@@ -38,7 +38,7 @@ import Profile from '@/pages/profile/profile.tsx';
 //     fuel: 70, //бензин
 //     capacity: 4,
 // };
-import SinglePage from '@/pages/singlePage';
+
 const App = () => {
     const dispatch = useAppDispatch();
     const { status, storage } = useAuth();
@@ -56,7 +56,7 @@ const App = () => {
                     <Routes>
                         <Route path="auth/:type" element={<Auth />} />
                         <Route path="/cars" element={<Cars />} />
-                        <Route path="/cars/:id" element={<SinglePage />} />
+                        {/*<Route path="/cars/:id" element={<SinglePage />} />*/}
                         <Route element={<PrivateRoute restrictedToAuth={false} />}>
                             <Route path="auth/:type" element={<Auth />} />
                         </Route>
