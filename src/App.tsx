@@ -9,6 +9,7 @@ import PrivateRoute from '@/private-route.tsx';
 import Profile from '@/pages/profile/profile.tsx';
 import Header from '@/widgets/header';
 import Footer from '@/widgets/footer';
+import SinglePage from '@/pages/singlePage';
 // import Container from '@/shared/container.tsx';
 // import {
 //     CardBrand,
@@ -60,7 +61,7 @@ const App = () => {
                     <Routes>
                         <Route path="auth/:type" element={<Auth />} />
                         <Route path="/cars" element={<Cars />} />
-                        {/*<Route path="/cars/:id" element={<SinglePage />} />*/}
+                        <Route path="/cars/:id" element={<SinglePage />} />
                         <Route element={<PrivateRoute restrictedToAuth={false} />}>
                             <Route path="auth/:type" element={<Auth />} />
                         </Route>

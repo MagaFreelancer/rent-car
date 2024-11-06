@@ -7,7 +7,7 @@ interface ITitleProps {
 }
 
 const Title = ({ children, className }: ITitleProps) => {
-    return <h1 className={cn('font-medium text-5xl ', className)}>{children}</h1>;
+    return <h1 className={cn('font-medium text-5xl', className)}>{children}</h1>;
 };
 
 export default Title;

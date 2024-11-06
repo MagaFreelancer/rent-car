@@ -70,4 +70,7 @@
         display: none;
         -webkit-appearance: none;
     }
+    h2 {
+        @apply text-4xl font-bold;
+    }
 }

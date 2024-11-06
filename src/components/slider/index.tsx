@@ -1,0 +1,55 @@
+import { createContext, useContext } from 'react';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/shared/carousel.tsx';
+import useSlider from '@/utils/hooks/useSlider.tsx';
+import { memo } from 'react';
+import clx from 'clsx';
+// interface IPropsSliderItems {
+//     imgs: string[];
+//     setApi?: (api: CarouselApi) => void;
+// }
+const sliderContext = createContext<any | undefined>(undefined);
+
+const useSliderContext = () => {
+    const context = useContext(sliderContext);
+    if (!context) {
+        throw new Error('useSliderContext must be used within a SliderProvider');
+    }
+    return context;
+};
+const SliderProviderComponent = ({ children, imgs, className }: any) => {
+    const { setApi, current, count } = useSlider();
+    return (
+        <sliderContext.Provider value={{ imgs, current, count }}>
+            <Carousel setApi={setApi} className={clx('relative font-jakarta', className)}>
+                <CarouselContent>
+                    {imgs.map((url: any, index: number) => (
+                        <CarouselItem key={index}>
+                            <img src={url} alt={`car ${index + 1}`} />
+                        </CarouselItem>
+                    ))}
+                </CarouselContent>
+                {children}
+            </Carousel>
+        </sliderContext.Provider>
+    )
+
+};
+
+const SliderBulletsComponent = () => {
+    const { current, count } = useSliderContext();
+    return (<>
+        <span className='absolute text-xs text-white bg-[rgba(23,35,53,.56)] p-1 rounded px-2  bottom-3 left-1/2 '> {current} / {count}</span>
+    </>)
+}
+const SliderArrowsComponent = () => {
+    return (
+        <>
+            <CarouselPrevious className='left-0' />
+            <CarouselNext className='right-0' />
+        </>
+    )
+}
+
+export const SliderGroup = memo(SliderProviderComponent);
+export const SliderBullets = memo(SliderBulletsComponent);
+export const SliderArrows = memo(SliderArrowsComponent);
