@@ -7,6 +7,8 @@ import { useEffect } from 'react';
 import Cars from '@/pages/cars/cars.tsx';
 import PrivateRoute from '@/private-route.tsx';
 import Profile from '@/pages/profile/profile.tsx';
+import Header from '@/widgets/header';
+import Footer from '@/widgets/footer';
 // import Container from '@/shared/container.tsx';
 // import {
 //     CardBrand,
@@ -52,6 +54,8 @@ const App = () => {
     return (
         <BrowserRouter>
             <div className="flex-col flex min-h-screen">
+                <Header />
+
                 <main className="flex-grow">
                     <Routes>
                         <Route path="auth/:type" element={<Auth />} />
@@ -65,6 +69,8 @@ const App = () => {
                         </Route>
                     </Routes>
                 </main>
+
+                <Footer />
             </div>
         </BrowserRouter>
     );

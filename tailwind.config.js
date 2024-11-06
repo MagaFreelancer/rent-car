@@ -20,8 +20,8 @@ export default {
                 darkBlack: '#000000',
                 lightOrange: '#FF6915',
                 darkOrange: '#FB5A00',
-                blue: '#3F71BC',
-                grey: '#90A3BF',
+                blue: '#307efd',
+                grey: '#f2f4f8',
 
                 card: {
                     DEFAULT: 'hsl(var(--card))',

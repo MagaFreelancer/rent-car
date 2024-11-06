@@ -25,7 +25,7 @@ const Auth = () => {
     const isRegistered = type === 'login';
 
     return (
-        <section className="mt-20 max-w-[500px] mx-auto mb-[120px] bg-white p-10 rounded-2xl shadow-xl">
+        <section className="mt-7 max-w-[500px] mx-auto mb-[120px] bg-white p-10 rounded-2xl shadow-xl">
             <Container>
                 <Title className="mb-12">{type === 'login' ? 'Авторизация' : 'Регистрация'}</Title>
 
