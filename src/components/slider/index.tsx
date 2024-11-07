@@ -1,6 +1,6 @@
 import { createContext, useContext } from 'react';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/shared/carousel.tsx';
-import useSlider from '@/utils/hooks/useSlider.tsx';
+import useSlider from '@/utils/hooks/useSlider.ts';
 import { memo } from 'react';
 import clx from 'clsx';
 // interface IPropsSliderItems {
@@ -24,7 +24,7 @@ const SliderProviderComponent = ({ children, imgs, className }: any) => {
                 <CarouselContent>
                     {imgs.map((url: any, index: number) => (
                         <CarouselItem key={index}>
-                            <img src={url} alt={`car ${index + 1}`} />
+                            <img className='w-full' src={url} alt={`car ${index + 1}`} />
                         </CarouselItem>
                     ))}
                 </CarouselContent>
@@ -44,8 +44,8 @@ const SliderBulletsComponent = () => {
 const SliderArrowsComponent = () => {
     return (
         <>
-            <CarouselPrevious className='left-0' />
-            <CarouselNext className='right-0' />
+            <CarouselPrevious className='left-2' />
+            <CarouselNext className='right-2' />
         </>
     )
 }

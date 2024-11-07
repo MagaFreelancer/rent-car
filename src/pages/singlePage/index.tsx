@@ -1,29 +1,26 @@
 import { SliderGroup, SliderBullets, SliderArrows } from '@/components/slider'
-import { useAppDispatch } from '@/redux/store'
-import { useEffect } from 'react'
-import { getCarsFetch } from '@/redux/thunk/cars-fetch'
 import Rating from '@mui/material/Rating';
 import StarIcon from '@mui/icons-material/Star';
-
+import useGetCar from './hooks/useGetCar'
 const SinglePage = () => {
-    const imgs = [
-        'https://i.pinimg.com/736x/a6/ec/45/a6ec456777ffb4d783c357b210e360da.jpg',
-        'https://img.freepik.com/free-photo/side-view-anime-girl-hugging-cat_23-2150970941.jpg'
-    ]
-    const dispatch = useAppDispatch()
+    const { car, statusCar } = useGetCar()
 
-
-    useEffect(() => {
-        getCarsFetch()
-    })
+    if (!statusCar) {
+        return <h1>Loading</h1>
+    }
     return (
         <div className='font-inter'>
-            <SliderGroup imgs={imgs}  >
+           <div className='relative'>
+            <span className='absolute left-2 top-2 text-xs z-10 bg-[#3F71BC] text-white p-1 rounded px-2'>
+                Новинка
+            </span>
+           <SliderGroup imgs={car.imgs}  >
                 <SliderBullets />
                 <SliderArrows />
             </SliderGroup>
-            <div>
-                <h2 className="mb-12">Lamborghini Aventador, 2013</h2>
+           </div>
+            <div className='bg-white py-6 px-4'>
+                <h2 className="mb-3">{car.brand} {car.title}, {car.year}</h2>
                 <Rating
                     name="text-feedback"
                     value={0}
