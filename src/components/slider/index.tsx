@@ -1,5 +1,11 @@
 import { createContext, useContext } from 'react';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/shared/carousel.tsx';
+import {
+    Carousel,
+    CarouselContent,
+    CarouselItem,
+    CarouselNext,
+    CarouselPrevious,
+} from '@/shared/carousel.tsx';
 import useSlider from '@/utils/hooks/useSlider.ts';
 import { memo } from 'react';
 import clx from 'clsx';
@@ -24,31 +30,35 @@ const SliderProviderComponent = ({ children, imgs, className }: any) => {
                 <CarouselContent>
                     {imgs.map((url: any, index: number) => (
                         <CarouselItem key={index}>
-                            <img className='w-full' src={url} alt={`car ${index + 1}`} />
+                            <img className="rounded-lg w-full" src={url} alt={`car ${index + 1}`} />
                         </CarouselItem>
                     ))}
                 </CarouselContent>
                 {children}
             </Carousel>
         </sliderContext.Provider>
-    )
-
+    );
 };
 
 const SliderBulletsComponent = () => {
     const { current, count } = useSliderContext();
-    return (<>
-        <span className='absolute text-xs text-white bg-[rgba(23,35,53,.56)] p-1 rounded px-2  bottom-3 left-1/2 '> {current} / {count}</span>
-    </>)
-}
+    return (
+        <>
+            <span className="absolute text-xs text-white bg-[rgba(23,35,53,.56)] p-1 rounded px-2  bottom-3 left-1/2 ">
+                {' '}
+                {current} / {count}
+            </span>
+        </>
+    );
+};
 const SliderArrowsComponent = () => {
     return (
         <>
-            <CarouselPrevious className='left-2' />
-            <CarouselNext className='right-2' />
+            <CarouselPrevious className="left-2" />
+            <CarouselNext className="right-2" />
         </>
-    )
-}
+    );
+};
 
 export const SliderGroup = memo(SliderProviderComponent);
 export const SliderBullets = memo(SliderBulletsComponent);
