@@ -2,11 +2,8 @@ import { SliderGroup, SliderBullets, SliderArrows } from '@/components/slider'
 import Rating from '@mui/material/Rating';
 import StarIcon from '@mui/icons-material/Star';
 import useGetCar from './hooks/useGetCar'
-import CarForm from './components/carForm';
 import useCarForm from './hooks/useForm';
-
-
-
+import CarForm from './components/carForm/carForm';
 
 const SinglePage = () => {
     const { car, statusCar } = useGetCar()
