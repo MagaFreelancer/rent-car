@@ -43,14 +43,15 @@ const InputTextComponent = ({ className, value, onChange, placeholder, register,
 };
 
 // Компонент для отображения Textarea (получает prop напрямую)
-const InputTextAreaComponent = ({ value, onChange, register, name }: any) => {
+const InputTextAreaComponent = ({ value, placeholder, onChange, register, name, className }: any) => {
     const { error } = useInputContext(); // Берем только error из контекста
 
     return (
         <Textarea
-            className={clsx(error ? 'border-red-500 ' : '', 'resize-none')}
+            className={clsx(error ? 'border-red-500 ' : '', 'resize-none', className)}
             value={value}
             onChange={onChange}
+            placeholder={placeholder}
             {...(register ? register(name) : {})} // Привязываем register напрямую
         />
     );
