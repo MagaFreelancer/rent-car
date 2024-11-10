@@ -22,6 +22,7 @@ export default {
                 darkOrange: '#FB5A00',
                 blue: '#307efd',
                 grey: '#f2f4f8',
+                placeholder: 'rgba(23, 35, 53, 0.44)',
 
                 card: {
                     DEFAULT: 'hsl(var(--card))',
