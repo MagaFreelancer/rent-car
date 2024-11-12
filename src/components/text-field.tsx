@@ -32,7 +32,7 @@ const InputTextComponent = ({ className, value, onChange, placeholder, register,
 
     return (
         <Input
-            className={clsx(error ? 'border-red-500' : '', className)}
+            className={clsx(error ? 'border-solid border-2 border-red-500' : '', className)}
             type={type}
             value={value}
             onChange={onChange}
@@ -41,7 +41,13 @@ const InputTextComponent = ({ className, value, onChange, placeholder, register,
         />
     );
 };
-
+const InputLeftIcon = ({ icon }: { icon: any }) => {
+    return (
+        <div className="absolute top-1/2 left-3 -translate-y-1/2">
+            {icon}
+        </div>
+    );
+}
 // Компонент для отображения Textarea (получает prop напрямую)
 const InputTextAreaComponent = ({ value, placeholder, onChange, register, name, className }: any) => {
     const { error } = useInputContext(); // Берем только error из контекста
@@ -91,3 +97,4 @@ export const TextFieldTextArea = memo(InputTextAreaComponent);
 export const TextFieldLabel = memo(InputLabelComponent);
 export const TextFieldError = memo(InputErrorComponent);
 export const TextFieldShow = memo(InputToggleComponent);
+export const TextFieldLeftIcon = memo(InputLeftIcon);

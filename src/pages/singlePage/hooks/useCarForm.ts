@@ -6,6 +6,10 @@ import { DateRange } from "react-day-picker"
 import { useState } from 'react';
 
 interface CarFormData {
+    name: string;
+    email: string;
+    tel: string;
+    dateOfBirth: string;
     deliveryOption: string;
     additionalInfo?: string;
 }
@@ -39,7 +43,7 @@ const useCarForm = () => {
         control,
         watch,
         setValue,
-        formState: { errors },
+        errors,
         deliveryOption,
         onSelectChange,
         onSubmit,

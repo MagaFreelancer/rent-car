@@ -1,21 +1,24 @@
-import { SliderGroup, SliderBullets, SliderArrows } from '@/components/slider'
 import Rating from '@mui/material/Rating';
 import StarIcon from '@mui/icons-material/Star';
 import useGetCar from './hooks/useGetCar'
-import useCarForm from './hooks/useForm';
+import useCarForm from './hooks/useCarForm';
 import CarForm from './components/carForm/carForm';
+import CarSlider from './components/carSlider';
 
 const SinglePage = () => {
     const { car, statusCar } = useGetCar()
     const {
-         register,
+        register,
         handleSubmit,
         control,
         watch,
         setValue,
+        onSubmit,
         onSelectChange,
+        date,
+        setDate,
         deliveryOption,
-        formState: { errors } 
+        errors
     } = useCarForm()
 
     if (!statusCar) {
@@ -23,19 +26,18 @@ const SinglePage = () => {
     }
     return (
         <div className='font-inter'>
-            <div className='relative'>
-                <span className='absolute left-2 top-2 text-xs z-10 bg-[#3F71BC] text-white p-1 rounded px-2'>
-                    Новинка
-                </span>
-                <SliderGroup imgs={car.imgs}>
-                    <SliderBullets />
-                    <SliderArrows />
-                </SliderGroup>
-            </div>
-            <div className='bg-white py-6 px-4'>
-                <h3 className='mb-3'>оформление</h3>
-                <CarForm onSelectChange={onSelectChange} register={register} deliveryOption={deliveryOption} />
-            </div>
+            <CarSlider car={car} />
+            <CarForm
+                date={date}
+                setDate={setDate}
+                errors={errors}
+                onSelectChange={onSelectChange}
+                register={register}
+                handleSubmit={handleSubmit}
+                onSubmit={onSubmit}
+                deliveryOption={deliveryOption}
+            />
+
             <div className='bg-white py-6 px-4'>
                 <h2 className="mb-3">{car.brand} {car.title}, {car.year}</h2>
                 <Rating
