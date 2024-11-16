@@ -6,9 +6,10 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/shared/select";
-import { TextFieldGroup, TextFieldInput } from '@/components/text-field';
+import { TextFieldError, TextFieldGroup, TextFieldInput } from '@/components/text-field';
 
-const CarAddressForm = ({ onSelectChange, deliveryOption }: any) => {
+const CarAddressForm = ({ onSelectChange, deliveryOption, register, errors }: any) => {
+    
     return (
         <>
             <Select onValueChange={onSelectChange} >
@@ -23,9 +24,19 @@ const CarAddressForm = ({ onSelectChange, deliveryOption }: any) => {
                 </SelectContent>
             </Select>
             {
-                deliveryOption === "delivery" && <TextFieldGroup className="mb-3">
-                    <TextFieldInput placeholder="Адрес" className="bg-[#f2f4f8] font-medium   border-none placeholder:text-placeholder" />
-                </TextFieldGroup>
+                deliveryOption === "delivery" && (
+                    <TextFieldGroup className="mb-3"
+                        error={!!errors.additionalInfo}
+                        errorText={errors.additionalInfo?.message}
+                    >
+                        <TextFieldInput
+                            placeholder="Адрес"
+                            register={register}
+                            name="additionalInfo"
+                            className="bg-[#f2f4f8] font-medium  placeholder:text-placeholder" />
+                        <TextFieldError />
+                    </TextFieldGroup>
+                )
             }</>
     )
 }

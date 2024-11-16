@@ -7,7 +7,6 @@ interface ICarDriverFormProps {
 }
 
 const carDriverForm = ({ errors, register }: ICarDriverFormProps) => {
-    console.log(!!errors.email);
 
     return (
         <>
@@ -28,30 +27,39 @@ const carDriverForm = ({ errors, register }: ICarDriverFormProps) => {
                 errorText={errors.dateOfBirth?.message}
                 className="mb-3">
                 <TextFieldInput
+                    register={register}
                     placeholder="Дата рождения"
                     type="date"
                     name="dateOfBirth"
-                    className="bg-[#f2f4f8] font-medium border-none placeholder:text-placeholder" />
+                    className="bg-[#f2f4f8] font-medium  placeholder:text-placeholder" />
+                <TextFieldError />
+
             </TextFieldGroup>
             <TextFieldGroup
                 error={!!errors.email}
                 errorText={errors.email?.message}
                 className="mb-3">
                 <TextFieldInput
+                    register={register}
                     placeholder="Почта"
                     name="email"
                     type="email"
-                    className="bg-[#f2f4f8] font-medium border-none placeholder:text-placeholder" />
+                    className="bg-[#f2f4f8] font-medium  placeholder:text-placeholder" />
+                <TextFieldError />
+
             </TextFieldGroup>
             <TextFieldGroup
-                error={!!errors.phone}
-                errorText={errors.phone?.message}
+                error={!!errors.tel}
+                errorText={errors.tel?.message}
                 className="mb-3">
                 <TextFieldInput
+                    register={register}
                     placeholder="Номер телефона"
                     name="tel"
                     type="tel"
-                    className="bg-[#f2f4f8] font-medium border-none placeholder:text-placeholder" />
+                    className="bg-[#f2f4f8] font-medium  placeholder:text-placeholder" />
+                <TextFieldError />
+
             </TextFieldGroup>
             <TextFieldGroup
                 className="mb-3">

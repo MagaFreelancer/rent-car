@@ -43,7 +43,7 @@ const InputTextComponent = ({ className, value, onChange, placeholder, register,
 };
 const InputLeftIcon = ({ icon }: { icon: any }) => {
     return (
-        <div className="absolute top-1/2 left-3 -translate-y-1/2">
+        <div className="absolute top-1/2 left-3 -translate-y-1/2 hidden">
             {icon}
         </div>
     );
@@ -76,7 +76,7 @@ const InputLabelComponent = () => {
 const InputErrorComponent = () => {
     const { errorText, error } = useInputContext();
 
-    return error ? <span className="text-red-500">{errorText}</span> : null;
+    return error ? <span className="text-xs text-red-500">{errorText}</span> : null;
 };
 const InputToggleComponent = ({ onToggle }: { onToggle: () => void }) => {
     const { type } = useInputContext();
