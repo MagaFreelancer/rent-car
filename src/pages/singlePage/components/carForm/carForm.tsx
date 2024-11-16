@@ -3,9 +3,22 @@ import { Button } from "@/shared/button"
 import CarAddressForm from './components/carAddressForm';
 import CarDateForm from './components/carDateForm';
 import CarDriverForm from './components/carDriverForm';
+import useCarForm from "../../hooks/useCarForm";
 
-const CarForm = ({ onSelectChange, handleSubmit, onSubmit, deliveryOption, date, setDate, errors, register }: any) => {
-    console.log(errors)
+const CarForm = () => {
+    const {
+        register,
+        handleSubmit,
+        control,
+        watch,
+        setValue,
+        onSubmit,
+        onSelectChange,
+        date,
+        setDate,
+        deliveryOption,
+        errors
+    } = useCarForm()
     return (
         <div className='bg-white py-6 px-4 rounded-lg'>
             <h3 className='mb-3'>оформление</h3>
