@@ -1,4 +1,4 @@
-// import Filters from '@/components/filters/filters.tsx';
+import Filters from '@/components/filters/filters.tsx';
 // import Car from '@/components/car.tsx';
 
 import {
@@ -37,7 +37,7 @@ const Cars = () => {
     return (
         <div>
             <Container>
-                {/*<Filters />*/}
+                <Filters />
                 {/*<Car/>*/}
                 <CardCarGroup car={car}>
                     <CardCarTitle />
