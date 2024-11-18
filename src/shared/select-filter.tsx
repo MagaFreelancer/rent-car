@@ -3,6 +3,8 @@ import { createContext, memo, ReactNode, useContext, useRef, useState } from 're
 import { TypeBrands } from '@/redux/slice/filters/filters-slice.ts';
 import { clsx } from 'clsx';
 import useClickOutside from '@/components/filters/hook/useClickOutside.tsx';
+import { RadioGroup, RadioGroupItem } from './radio-group';
+import { Label } from '@/shared/label.tsx';
 
 interface ISelectGroupProps {
     className?: string;
@@ -28,7 +30,7 @@ const useSelectContext = () => {
 
 const SelectGroupComponent = ({ className, children, items, ...props }: ISelectGroupProps) => {
     const findStatus = items?.find(item => item.status);
-    const [isOpen, setIsOpen] = useState(true);
+    const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
     useClickOutside(dropdownRef, () => setIsOpen(false));
@@ -49,32 +51,45 @@ const SelectGroupComponent = ({ className, children, items, ...props }: ISelectG
                     {children}
                 </div>
 
-                {isOpen && <SelectRadioComponent />}
+                {isOpen && <SelectRadioComponent findStatus={findStatus} />}
             </div>
         </SelectContext.Provider>
     );
 };
 
-const SelectRadioItem = ({ title }: { title: string }) => {
-    return <li>{title}</li>;
+const SelectRadioItem = ({ title, value }: { title: string; value: string }) => {
+    return (
+        <div className="flex items-center space-x-2">
+            <RadioGroupItem value={value} id={value} />
+            <Label htmlFor={value}>{title}</Label>
+        </div>
+    );
 };
 
-const SelectRadioComponent = ({ className }: { className?: string }) => {
+const SelectRadioComponent = ({
+    className,
+    findStatus,
+}: {
+    className?: string;
+    findStatus: any;
+}) => {
     const { items, isOpen } = useSelectContext();
 
     return (
         <>
             {isOpen && (
-                <ul
+                <RadioGroup
+                    onValueChange={item => console.log(item)}
                     className={cn(
                         'absolute list-none w-[280px] max-h-[400px] custom-scrollbar top-14 left-0 bg-white p-2 z-10 rounded-xl shadow',
                         className
                     )}
+                    defaultValue={findStatus.value}
                 >
                     {items?.map((item, index) => (
-                        <SelectRadioItem key={index} title={item.label} />
+                        <SelectRadioItem key={index} value={item.value} title={item.label} />
                     ))}
-                </ul>
+                </RadioGroup>
             )}
         </>
     );
