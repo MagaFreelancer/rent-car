@@ -4,7 +4,7 @@ const carDetails = {
   rentalRules: {
     deposit: {
       text: "10 000 ₽",
-      supp: null
+      supp: "Депозит замораживается за 3 дня до аренды и возвращается через 7 дней после ее окончания.",
     },
     minimumExperience: {
       text: "3 года",
@@ -16,7 +16,7 @@ const carDetails = {
     },
     insurance: {
       text: "ОСАГО мультидрайв",
-      supp: null
+      supp: "Полис распространяется на всех водителей автомобиля"
     },
   },
   carSpecifications: {

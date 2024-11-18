@@ -18,8 +18,9 @@ const SinglePage = () => {
             <div className='font-inter'>
                 <CarSlider car={car} />
                 <div className='bg-white py-6 px-4 mb-4 rounded-lg'>
-                    <h2 className="mb-3">{car.brand} {car.title}, {car.year}</h2>
+                    <h2 className="mb-2">{car.brand} {car.title}, {car.year}</h2>
                     <Rating
+                        size='small'
                         name="text-feedback"
                         value={0}
                         readOnly
@@ -27,8 +28,8 @@ const SinglePage = () => {
                         emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
                     />
                 </div>
-                <CarInfo />
                 <CarForm />
+                <CarInfo />
             </div>
         </Container>
     )

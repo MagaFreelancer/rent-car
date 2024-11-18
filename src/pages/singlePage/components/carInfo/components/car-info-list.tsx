@@ -20,15 +20,11 @@ const getLabel = (key: string): string => {
 };
 
 const CarInfoList = ({ carDetails }: { carDetails: any }) => {
-    // Object.entries(carDetails).map(([key, value]) => (
-    //     console.log(key, value)
-
-    // ))
 
     return (
         <ul>
             {Object.entries(carDetails).map(([key, value]: any) => (
-                <CarInfoItem key={key} properties={getLabel(key)} text={value.text} />
+                <CarInfoItem key={key} properties={getLabel(key)} supp={value.supp} text={value.text} />
             ))}
         </ul>
     )
