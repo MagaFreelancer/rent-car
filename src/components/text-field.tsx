@@ -32,7 +32,7 @@ const InputTextComponent = ({ className, value, onChange, placeholder, register,
 
     return (
         <Input
-            className={clsx(error ? 'border-red-500' : '', className)}
+            className={clsx(error ? 'border-solid border-2 border-red-500' : '', className)}
             type={type}
             value={value}
             onChange={onChange}
@@ -41,16 +41,23 @@ const InputTextComponent = ({ className, value, onChange, placeholder, register,
         />
     );
 };
-
+const InputLeftIcon = ({ icon }: { icon: any }) => {
+    return (
+        <div className="absolute top-1/2 left-3 -translate-y-1/2 hidden">
+            {icon}
+        </div>
+    );
+}
 // Компонент для отображения Textarea (получает prop напрямую)
-const InputTextAreaComponent = ({ value, onChange, register, name }: any) => {
+const InputTextAreaComponent = ({ value, placeholder, onChange, register, name, className }: any) => {
     const { error } = useInputContext(); // Берем только error из контекста
 
     return (
         <Textarea
-            className={clsx(error ? 'border-red-500 ' : '', 'resize-none')}
+            className={clsx(error ? 'border-red-500 ' : '', 'resize-none', className)}
             value={value}
             onChange={onChange}
+            placeholder={placeholder}
             {...(register ? register(name) : {})} // Привязываем register напрямую
         />
     );
@@ -69,7 +76,7 @@ const InputLabelComponent = () => {
 const InputErrorComponent = () => {
     const { errorText, error } = useInputContext();
 
-    return error ? <span className="text-red-500">{errorText}</span> : null;
+    return error ? <span className="text-xs text-red-500">{errorText}</span> : null;
 };
 const InputToggleComponent = ({ onToggle }: { onToggle: () => void }) => {
     const { type } = useInputContext();
@@ -90,3 +97,4 @@ export const TextFieldTextArea = memo(InputTextAreaComponent);
 export const TextFieldLabel = memo(InputLabelComponent);
 export const TextFieldError = memo(InputErrorComponent);
 export const TextFieldShow = memo(InputToggleComponent);
+export const TextFieldLeftIcon = memo(InputLeftIcon);

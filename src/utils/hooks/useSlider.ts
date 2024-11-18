@@ -10,7 +10,6 @@ const useSlider = () => {
         if (!api) {
             return;
         }
-        console.log(current, count);
 
         setCount(api.scrollSnapList().length);
         setCurrent(api.selectedScrollSnap() + 1);

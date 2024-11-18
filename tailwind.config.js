@@ -23,6 +23,9 @@ export default {
                 blue: '#307efd',
                 blackGray: '#858585',
                 grey: '#f2f4f8',
+                placeholder: 'rgba(23, 35, 53, 0.44)',
+                placeholder600: 'rgba(23, 35, 53, 0.6)',
+                red600: 'rgb(241, 75, 60)',
 
                 card: {
                     DEFAULT: 'hsl(var(--card))',

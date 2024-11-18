@@ -1,6 +1,5 @@
 import * as yup from 'yup';
 import { AppErrors } from '@/common/errors.ts';
-import { differenceInDays } from 'date-fns';
 
 export const loginSchema = yup.object().shape({
     email: yup.string().email(AppErrors.InvalidEmail).required(AppErrors.RequiredField),
@@ -26,7 +25,12 @@ export const registerSchema = yup.object().shape({
 export const carRegistrationSchema = yup.object().shape({
     name: yup.string().min(5, AppErrors.minLength).required(AppErrors.RequiredField),
     email: yup.string().email(AppErrors.InvalidEmail).required(AppErrors.RequiredField),
-    phone: yup.string().min(10, AppErrors.minLength).required(AppErrors.RequiredField),
-    address: yup.string().min(8, AppErrors.minLength).required(AppErrors.RequiredField),
+    tel: yup.string().min(10, AppErrors.minLength).required(AppErrors.RequiredField),
     dateOfBirth: yup.string().required(AppErrors.RequiredField),
+    deliveryOption: yup.string().required("Выберите опцию доставки"),
+    additionalInfo: yup.string().when("deliveryOption", {
+        is: "delivery",
+        then: (schema) => schema.required("Поле обязательно для заполнения").min(10, "Минимум 10 символов"),
+        otherwise: (schema) => schema.notRequired(),
+    }),
 });
