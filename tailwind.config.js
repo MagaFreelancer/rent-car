@@ -22,6 +22,7 @@ export default {
                 lightOrange: '#FF6915',
                 darkOrange: '#FB5A00',
                 blue: '#307efd',
+                blackGray: '#858585',
                 grey: '#f2f4f8',
                 placeholder: 'rgba(23, 35, 53, 0.44)',
                 placeholder600: 'rgba(23, 35, 53, 0.6)',

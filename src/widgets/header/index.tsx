@@ -3,6 +3,7 @@ import Container from '@/shared/container.tsx';
 import { Button } from '@/shared/button.tsx';
 import useAuth from '@/utils/hooks/useAuth.ts';
 import { Avatar, AvatarFallback } from '@/shared/avatar.tsx';
+import { Navigation } from 'lucide-react';
 
 const Header = () => {
     const { status, storage } = useAuth();
@@ -39,22 +40,33 @@ const Header = () => {
                                 О нас
                             </NavLink>
                         </li>
+                        <li>
+                            <NavLink
+                                className="flex gap-1 transition hover:text-blackGray text-[15px] font-medium"
+                                to="/about"
+                            >
+                                <Navigation className="transition hover:text-blackGray text-blue" />
+                                Стамбул
+                            </NavLink>
+                        </li>
                     </ul>
 
-                    {status ? (
-                        <Avatar className="ml-6 w-12 h-12">
-                            <AvatarFallback className="bg-[#e5e5e5]">
-                                {storage.name.slice(0, 2)}
-                            </AvatarFallback>
-                        </Avatar>
-                    ) : (
-                        <div className="flex items-center">
-                            <p>+7 999 999-99-99</p>
+                    <div className="flex items-center">
+                        <p>+7 999 999-99-99</p>
+                        {status ? (
+                            <Avatar className="ml-6 w-10 h-10">
+                                <AvatarFallback className="bg-[#e5e5e5]">
+                                    {storage.name.slice(0, 2)}
+                                </AvatarFallback>
+                            </Avatar>
+                        ) : (
                             <NavLink to="auth/login">
-                                <Button className="ml-5">Войти</Button>
+                                <Button variant="gray" className="ml-5">
+                                    Войти
+                                </Button>
                             </NavLink>
-                        </div>
-                    )}
+                        )}
+                    </div>
                 </nav>
             </Container>
         </header>

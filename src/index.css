@@ -3,6 +3,34 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.custom-scrollbar {
+    scrollbar-width: thin; /* Для Firefox */
+    scrollbar-color: #6b7280 #f3f4f6; /* Цвет ползунка и трека */
+    overflow-y: auto; /* Включение вертикальной прокрутки */
+    overflow-x: hidden; /* Отключение горизонтальной прокрутки */
+}
+
+/* Стилизация для браузеров на основе WebKit (например, Chrome, Safari) */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 4px; /* Ширина вертикального скроллбара */
+    height: 4px; /* Высота горизонтального скроллбара */
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: #f3f4f6; /* Цвет трека (фон) */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #6b7280; /* Цвет ползунка */
+    border-radius: 9999px; /* Закругленные края */
+    border: 2px solid #f3f4f6; /* Промежуток между ползунком и треком */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: #4b5563; /* Цвет ползунка при наведении */
+}
+
 @layer base {
     :root {
         --background: 0 0% 100%;
@@ -65,7 +93,7 @@
     body {
         @apply bg-background text-foreground;
         background-color: #f6f7f9;
-        font-family: 'Inter';
+        font-family: 'Inter', serif;
     }
     input[type='date']::-webkit-calendar-picker-indicator {
         display: none;
