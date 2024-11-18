@@ -32,7 +32,7 @@ const InputTextComponent = ({ className, value, onChange, placeholder, register,
 
     return (
         <Input
-            className={clsx(error ? 'border-solid border-2 border-red-500' : '', className)}
+            className={clsx(className, error ? 'border-solid border-2 border-red-500' : '')}
             type={type}
             value={value}
             onChange={onChange}

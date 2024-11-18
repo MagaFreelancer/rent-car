@@ -18,6 +18,7 @@ export default {
                 foreground: 'hsl(var(--foreground))',
                 lightBlack: '#1E1E1E',
                 darkBlack: '#000000',
+                blackBlue: '#172335',
                 lightOrange: '#FF6915',
                 darkOrange: '#FB5A00',
                 blue: '#307efd',

@@ -21,9 +21,9 @@ const CarForm = ({ price }: any) => {
         errors
     } = useCarForm()
     return (
-        <div className='bg-white rounded-lg mb-4'>
-            <h3 className='mb-3'>оформление</h3>
-            <form className="py-6 px-4 " onSubmit={handleSubmit(onSubmit)} >
+        <div className='bg-white rounded-lg py-6 px-4 mb-4'>
+            <h3 className='mb-5  font-semibold '>Оформление</h3>
+            <form className=" mb-4" onSubmit={handleSubmit(onSubmit)} >
                 <CarAddressForm onSelectChange={onSelectChange} register={register} errors={errors} deliveryOption={deliveryOption} />
                 <CarDateForm date={date} setDate={setDate} />
                 <CarDriverForm register={register} errors={errors} />

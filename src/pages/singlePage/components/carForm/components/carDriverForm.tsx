@@ -18,7 +18,7 @@ const carDriverForm = ({ errors, register }: ICarDriverFormProps) => {
                     register={register}
                     name="name"
                     placeholder="Имя и Фамилия"
-                    className="bg-[#f2f4f8] font-medium  placeholder:text-placeholder" />
+                    className="bg-[#f2f4f8] font-medium border-[#f2f4f8] placeholder:text-placeholder" />
                 <TextFieldLeftIcon icon={<Camera size={48} />} />
                 <TextFieldError />
             </TextFieldGroup>
@@ -31,7 +31,7 @@ const carDriverForm = ({ errors, register }: ICarDriverFormProps) => {
                     placeholder="Дата рождения"
                     type="date"
                     name="dateOfBirth"
-                    className="bg-[#f2f4f8] font-medium  placeholder:text-placeholder" />
+                    className="bg-[#f2f4f8]  border-[#f2f4f8] font-medium  placeholder:text-placeholder" />
                 <TextFieldError />
 
             </TextFieldGroup>
@@ -44,7 +44,7 @@ const carDriverForm = ({ errors, register }: ICarDriverFormProps) => {
                     placeholder="Почта"
                     name="email"
                     type="email"
-                    className="bg-[#f2f4f8] font-medium  placeholder:text-placeholder" />
+                    className="bg-[#f2f4f8] border-[#f2f4f8] font-medium  placeholder:text-placeholder" />
                 <TextFieldError />
 
             </TextFieldGroup>
@@ -57,7 +57,7 @@ const carDriverForm = ({ errors, register }: ICarDriverFormProps) => {
                     placeholder="Номер телефона"
                     name="tel"
                     type="tel"
-                    className="bg-[#f2f4f8] font-medium  placeholder:text-placeholder" />
+                    className="bg-[#f2f4f8] border-[#f2f4f8] font-medium  placeholder:text-placeholder" />
                 <TextFieldError />
 
             </TextFieldGroup>

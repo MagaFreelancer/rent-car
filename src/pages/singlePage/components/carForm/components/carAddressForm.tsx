@@ -14,7 +14,7 @@ const CarAddressForm = ({ onSelectChange, deliveryOption, register, errors }: an
         <>
             <Select onValueChange={onSelectChange} >
                 <SelectTrigger className="w-full mb-3  bg-[#f2f4f8] font-medium   border-none text-placeholder  hover:text-placeholder">
-                    <SelectValue placeholder="Select a fruit" />
+                    <SelectValue placeholder="Взять из офиса" />
                 </SelectTrigger>
                 <SelectContent>
                     <SelectGroup>
