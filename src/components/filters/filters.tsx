@@ -14,8 +14,7 @@ const Filters = () => {
 
     const brandsItemStatus = brands.find(item => item.status);
     const drivesItemStatus = drives.filter(item => item.status);
-
-    console.log(brandsItemStatus);
+    console.log(drivesItemStatus);
 
     const handleChangeRadio = (value: string) => {
         dispatch(setChangeBrands(value));
@@ -79,58 +78,57 @@ const Filters = () => {
                     </PopoverContent>
                 </Popover>
 
-                <Popover>
-                    <PopoverTrigger
-                        className={clsx(
-                            'gap-1 shadow items-center py-2 px-4 flex rounded-xl bg-white',
-                            drivesItemStatus[0].value !== 'all' && '!bg-[#5394fd] text-white'
-                        )}
-                    >
-                        Привод
-                        {drivesItemStatus[0].value !== 'all' &&
-                            `: ${drivesItemStatus.find(item => item.value !== 'all' && item.status)?.label}`}
-                        {drivesItemStatus[0].value !== 'all' ? (
-                            <CircleX
-                                onClick={e => {
-                                    e.stopPropagation();
-                                    handleChangeCheckbox('all');
-                                }}
-                                className=" z-50 w-4 z-55 h-4"
-                            />
-                        ) : (
-                            <ChevronUp className="w-5 h-5" />
-                        )}
-                    </PopoverTrigger>
-
-                    <PopoverContent align="start" className="p-0 rounded-2xl">
-                        <RadioGroup
-                            className="block"
-                            onValueChange={item => handleChangeRadio(item)}
-                            defaultValue={brandsItemStatus?.value}
+                {drivesItemStatus.map((item, index) => (
+                    <Popover key={index}>
+                        <PopoverTrigger
+                            className={clsx(
+                                'gap-1 shadow items-center py-2 px-4 flex rounded-xl bg-white',
+                                drivesItemStatus[0].value !== 'all' && '!bg-[#5394fd] text-white'
+                            )}
                         >
-                            {drives?.map((item, index) => (
-                                <li className="list-none flex" key={index}>
-                                    <Label
-                                        className={clsx(
-                                            'flex py-2 px-4 gap-2 items-center w-full text-[16px]',
-                                            brandsItemStatus?.value === 'all' && ''
-                                        )}
-                                        htmlFor={item.value}
-                                    >
-                                        <Checkbox
-                                            onClick={() => handleChangeCheckbox(item.value)}
-                                            checked={item.status}
-                                            className="h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300"
-                                            value={item.value}
-                                            id={item.value}
-                                        />
-                                        {item.label}
-                                    </Label>
-                                </li>
-                            ))}
-                        </RadioGroup>
-                    </PopoverContent>
-                </Popover>
+                            Привод {drivesItemStatus[0].value !== 'all' && `: ${item.label}`}
+                            {drivesItemStatus[0].value !== 'all' ? (
+                                <CircleX
+                                    onClick={e => {
+                                        e.stopPropagation();
+                                        handleChangeCheckbox(item.value);
+                                    }}
+                                    className=" z-50 w-4 z-55 h-4"
+                                />
+                            ) : (
+                                <ChevronUp className="w-5 h-5" />
+                            )}
+                        </PopoverTrigger>
+                        <PopoverContent align="start" className="p-0 rounded-2xl">
+                            <RadioGroup
+                                className="block"
+                                onValueChange={item => handleChangeRadio(item)}
+                                defaultValue={brandsItemStatus?.value}
+                            >
+                                {drives?.map((item, index) => (
+                                    <li className="list-none flex" key={index}>
+                                        <Label
+                                            className={clsx(
+                                                'flex py-2 px-4 gap-2 items-center w-full text-[16px]',
+                                                brandsItemStatus?.value === 'all' && ''
+                                            )}
+                                            htmlFor={item.value}
+                                        >
+                                            <Checkbox
+                                                onClick={() => handleChangeCheckbox(item.value)}
+                                                checked={item.status}
+                                                className="h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300"
+                                                value={item.value}
+                                                id={item.value}
+                                            />
+                                            {item.label}
+                                        </Label>
+                                    </li>
+                                ))}
+                            </RadioGroup>
+                        </PopoverContent>
+                    </Popover>
+                ))}
             </div>
         </div>
     );
