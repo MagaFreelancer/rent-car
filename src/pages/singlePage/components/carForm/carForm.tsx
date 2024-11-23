@@ -5,22 +5,11 @@ import CarDriverForm from './components/carDriverForm';
 import useCarForm from '../../hooks/useCarForm';
 import CarTotal from './components/carTotal';
 import useDateRange from '@/utils/hooks/useDateRange';
-import { DateRange } from 'react-day-picker';
-import { useState } from 'react';
-import { addDays } from 'date-fns';
-
 const CarForm = ({ price }: any) => {
-    const {
-        register,
-        handleSubmit,
-
-        onSubmit,
-        onSelectChange,
-        deliveryOption,
-        errors,
-    } = useCarForm();
-
+    const { register, handleSubmit, onSubmit, onSelectChange, deliveryOption, errors } =
+        useCarForm();
     const { dateRange, onChangeDateRange } = useDateRange();
+
     return (
         <div className="bg-white rounded-lg py-6 px-4 mb-4">
             <h3 className="mb-5  font-semibold ">Оформление</h3>

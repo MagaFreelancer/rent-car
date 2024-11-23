@@ -1,9 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { carRegistrationSchema } from '@/utils/yup';
-import { addDays, format } from 'date-fns';
-import { DateRange } from 'react-day-picker';
-import { useState } from 'react';
 
 interface CarFormData {
     name: string;
@@ -27,6 +24,7 @@ const useCarForm = () => {
     const deliveryOption = watch('deliveryOption');
     const onSelectChange = (value: string) => {
         setValue('deliveryOption', value);
+        console.log(value);
     };
 
     const onSubmit = (data: CarFormData) => {
