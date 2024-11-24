@@ -1,9 +1,18 @@
 import { RootState } from '@/redux/store.ts';
+import { createSelector } from '@reduxjs/toolkit';
 
-export const getFilters = (state: RootState) => state.filters;
-export const getBrandActiveItem = (state: RootState) =>
-    state.filters.brands.find(item => item.status);
-export const getDrivesActiveItems = (state: RootState) =>
-    state.filters.drives.filter(item => item.status);
-export const getBrands = (state: RootState) => state.filters.brands;
-export const getDrives = (state: RootState) => state.filters.drives;
+export const getFilteredItems = (state: RootState) => state.filters;
+
+export const getBrandActiveItem = createSelector(
+    (state: RootState) => state.filters.brands,
+    brands => brands.find(item => item.status)
+);
+
+export const getDrivesActiveItems = createSelector(
+    (state: RootState) => state.filters.drives,
+    drives => drives.filter(item => item.status)
+);
+
+export const getBrands = createSelector(getFilteredItems, filters => filters.brands);
+
+export const getDrives = createSelector(getFilteredItems, filters => filters.drives);
