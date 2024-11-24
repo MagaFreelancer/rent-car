@@ -50,8 +50,6 @@ const filtersSlice = createSlice({
                         return { ...drive, status: drive.value === 'all' };
                     } else if (drive.value === action.payload) {
                         return { ...drive, status: !drive.status };
-                    } else if (drive.value === 'all') {
-                        return { ...drive, status: false };
                     }
 
                     return drive;

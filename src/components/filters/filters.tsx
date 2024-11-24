@@ -1,5 +1,10 @@
 import { useAppDispatch, useAppSelector } from '@/redux/store.ts';
-import { getFilters } from '@/redux/slice/filters/filters-selectors.ts';
+import {
+    getBrands,
+    getBrandActiveItem,
+    getDrives,
+    getDrivesActiveItems,
+} from '@/redux/slice/filters/filters-selectors.ts';
 import { Popover, PopoverContent, PopoverTrigger } from '@/shared/popover.tsx';
 import { RadioGroup, RadioGroupItem } from '@/shared/radio-group.tsx';
 import { Label } from '@/shared/label.tsx';
@@ -9,12 +14,11 @@ import { ChevronUp, CircleX } from 'lucide-react';
 import { Checkbox } from '@/shared/checkbox.tsx';
 
 const Filters = () => {
-    const { brands, drives } = useAppSelector(getFilters);
+    const brandsActiveItem = useAppSelector(getBrandActiveItem);
+    const drivesActiveItems = useAppSelector(getDrivesActiveItems);
+    const brands = useAppSelector(getBrands);
+    const drives = useAppSelector(getDrives);
     const dispatch = useAppDispatch();
-
-    const brandsItemStatus = brands.find(item => item.status);
-    const drivesItemStatus = drives.filter(item => item.status);
-    console.log(drivesItemStatus);
 
     const handleChangeRadio = (value: string) => {
         dispatch(setChangeBrands(value));
@@ -31,12 +35,12 @@ const Filters = () => {
                     <PopoverTrigger
                         className={clsx(
                             'gap-1 shadow items-center py-2 px-4 flex rounded-xl bg-white',
-                            brandsItemStatus?.value !== 'all' && '!bg-[#5394fd] text-white'
+                            brandsActiveItem?.value !== 'all' && '!bg-[#5394fd] text-white'
                         )}
                     >
                         Марка
-                        {brandsItemStatus?.value !== 'all' && `: ${brandsItemStatus?.label}`}
-                        {brandsItemStatus?.value !== 'all' ? (
+                        {brandsActiveItem?.value !== 'all' && `: ${brandsActiveItem?.label}`}
+                        {brandsActiveItem?.value !== 'all' ? (
                             <CircleX
                                 onClick={e => {
                                     e.stopPropagation();
@@ -53,14 +57,14 @@ const Filters = () => {
                         <RadioGroup
                             className="block"
                             onValueChange={item => handleChangeRadio(item)}
-                            defaultValue={brandsItemStatus?.value}
+                            defaultValue={brandsActiveItem?.value}
                         >
                             {brands?.map((item, index) => (
                                 <li className="list-none flex" key={index}>
                                     <Label
                                         className={clsx(
                                             'flex py-2 px-4 gap-2 items-center w-full text-[16px]',
-                                            brandsItemStatus?.value === 'all' && ''
+                                            brandsActiveItem?.value === 'all' && ''
                                         )}
                                         htmlFor={item.value}
                                     >
@@ -78,16 +82,16 @@ const Filters = () => {
                     </PopoverContent>
                 </Popover>
 
-                {drivesItemStatus.map((item, index) => (
+                {drivesActiveItems.map((item, index) => (
                     <Popover key={index}>
                         <PopoverTrigger
                             className={clsx(
                                 'gap-1 shadow items-center py-2 px-4 flex rounded-xl bg-white',
-                                drivesItemStatus[0].value !== 'all' && '!bg-[#5394fd] text-white'
+                                item.value !== 'all' && '!bg-[#5394fd] text-white'
                             )}
                         >
-                            Привод {drivesItemStatus[0].value !== 'all' && `: ${item.label}`}
-                            {drivesItemStatus[0].value !== 'all' ? (
+                            Привод {item.value !== 'all' && `: ${item.label}`}
+                            {item.value !== 'all' ? (
                                 <CircleX
                                     onClick={e => {
                                         e.stopPropagation();
@@ -103,14 +107,14 @@ const Filters = () => {
                             <RadioGroup
                                 className="block"
                                 onValueChange={item => handleChangeRadio(item)}
-                                defaultValue={brandsItemStatus?.value}
+                                defaultValue={item?.value}
                             >
                                 {drives?.map((item, index) => (
                                     <li className="list-none flex" key={index}>
                                         <Label
                                             className={clsx(
                                                 'flex py-2 px-4 gap-2 items-center w-full text-[16px]',
-                                                brandsItemStatus?.value === 'all' && ''
+                                                item?.value === 'all' && ''
                                             )}
                                             htmlFor={item.value}
                                         >
