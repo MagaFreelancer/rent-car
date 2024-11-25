@@ -1,24 +1,37 @@
+import React from 'react';
 import { useAppDispatch, useAppSelector } from '@/redux/store.ts';
 import {
     getBrands,
     getBrandActiveItem,
     getDrives,
     getDrivesActiveItems,
+    getPriceFrom,
+    getPriceTo,
 } from '@/redux/slice/filters/filters-selectors.ts';
 import { Popover, PopoverContent, PopoverTrigger } from '@/shared/popover.tsx';
 import { RadioGroup, RadioGroupItem } from '@/shared/radio-group.tsx';
 import { Label } from '@/shared/label.tsx';
-import { setChangeBrands, setToggleDrives } from '@/redux/slice/filters/filters-slice.ts';
+import {
+    setChangeBrands,
+    setChangePriceFrom,
+    setChangePriceTo,
+    setToggleDrives,
+} from '@/redux/slice/filters/filters-slice.ts';
 import { clsx } from 'clsx';
 import { ChevronUp, CircleX } from 'lucide-react';
 import { Checkbox } from '@/shared/checkbox.tsx';
+import { Input } from '@/shared/input.tsx';
 
 const Filters = () => {
     const brandsActiveItem = useAppSelector(getBrandActiveItem);
     const drivesActiveItems = useAppSelector(getDrivesActiveItems);
+    const priceFrom = useAppSelector(getPriceFrom);
+    const priceTo = useAppSelector(getPriceTo);
     const brands = useAppSelector(getBrands);
     const drives = useAppSelector(getDrives);
     const dispatch = useAppDispatch();
+
+    console.log(priceFrom);
 
     const handleChangeRadio = (value: string) => {
         dispatch(setChangeBrands(value));
@@ -26,6 +39,18 @@ const Filters = () => {
 
     const handleChangeCheckbox = (value: string) => {
         dispatch(setToggleDrives(value));
+    };
+
+    const handleSubmitPriceFrom = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter') {
+            dispatch(setChangePriceFrom(Number(event.currentTarget.value)));
+        }
+    };
+
+    const handleSubmitPriceTo = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter') {
+            dispatch(setChangePriceTo(Number(event.currentTarget.value)));
+        }
     };
 
     return (
@@ -53,7 +78,7 @@ const Filters = () => {
                         )}
                     </PopoverTrigger>
 
-                    <PopoverContent align="start" className="p-0 rounded-2xl">
+                    <PopoverContent align="start" className="p-0 rounded-xl">
                         <RadioGroup
                             className="block"
                             onValueChange={item => handleChangeRadio(item)}
@@ -103,7 +128,7 @@ const Filters = () => {
                                 <ChevronUp className="w-5 h-5" />
                             )}
                         </PopoverTrigger>
-                        <PopoverContent align="start" className="p-0 rounded-2xl">
+                        <PopoverContent align="start" className="p-0 rounded-xl">
                             <RadioGroup
                                 className="block"
                                 onValueChange={item => handleChangeRadio(item)}
@@ -133,6 +158,43 @@ const Filters = () => {
                         </PopoverContent>
                     </Popover>
                 ))}
+
+                <Popover>
+                    <PopoverTrigger
+                        className={clsx(
+                            'gap-1 shadow items-center py-2 px-4 flex rounded-xl bg-white',
+                            priceFrom && '!bg-[#5394fd] text-white'
+                        )}
+                    >
+                        Цена, ₽
+                        {brandsActiveItem?.value !== 'all' ? (
+                            <CircleX
+                                onClick={e => {
+                                    e.stopPropagation();
+                                    handleChangeRadio('all');
+                                }}
+                                className=" z-50 w-4 z-55 h-4"
+                            />
+                        ) : (
+                            <ChevronUp className="w-5 h-5" />
+                        )}
+                    </PopoverTrigger>
+
+                    <PopoverContent align="start" className="flex p-4 rounded-xl gap-4">
+                        <Input
+                            onKeyDown={event => handleSubmitPriceFrom(event)}
+                            className="h-12 bg-[#f2f4f8] text-[16px]"
+                            type="number"
+                            placeholder="500 ₽"
+                        />
+                        <Input
+                            onKeyDown={event => handleSubmitPriceTo(event)}
+                            className="h-12 bg-[#f2f4f8] text-[16px]"
+                            type="number"
+                            placeholder="1000 ₽"
+                        />
+                    </PopoverContent>
+                </Popover>
             </div>
         </div>
     );

@@ -105,4 +105,12 @@
     h3 {
         @apply text-xl font-bold;
     }
+    input[type='number']::-webkit-inner-spin-button,
+    input[type='number']::-webkit-outer-spin-button {
+        @apply appearance-none;
+    }
+
+    input[type='number'] {
+        @apply [moz-appearance:textfield];
+    }
 }

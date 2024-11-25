@@ -10,8 +10,8 @@ interface IInitialState {
     brands: TypeBrands[];
     drives: TypeBrands[];
     price: {
-        to: number;
-        from: number;
+        to: number | null;
+        from: number | null;
     };
 }
 
@@ -29,8 +29,8 @@ const initialState: IInitialState = {
         { value: 'full', status: false, label: 'Полный' },
     ],
     price: {
-        to: 100,
-        from: 500,
+        to: null,
+        from: null,
     },
 };
 
@@ -63,8 +63,15 @@ const filtersSlice = createSlice({
                     return drive;
                 });
         },
+        setChangePriceTo(state, action: PayloadAction<number>) {
+            state.price.to = action.payload;
+        },
+        setChangePriceFrom(state, action: PayloadAction<number>) {
+            state.price.from = action.payload;
+        },
     },
 });
 
-export const { setChangeBrands, setToggleDrives } = filtersSlice.actions;
+export const { setChangeBrands, setToggleDrives, setChangePriceTo, setChangePriceFrom } =
+    filtersSlice.actions;
 export default filtersSlice.reducer;
