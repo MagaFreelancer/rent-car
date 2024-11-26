@@ -8,10 +8,9 @@ import { Calendar } from '@/shared/calendar';
 
 // Функция для блокировки дат
 
-const CarFormDate = ({ date, setDate }: any) => {
+const CarFormDate = ({ date, setDate, days }: any) => {
     const today = subDays(new Date(), 1);
     const isDateDisabled = (date: Date) => isBefore(date, today);
-    const days = differenceInDays(date.to, date.from);
     return (
         <div className={cn('grid gap-2 mb-3')}>
             <Popover>

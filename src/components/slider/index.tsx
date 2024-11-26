@@ -44,8 +44,7 @@ const SliderBulletsComponent = () => {
     const { current, count } = useSliderContext();
     return (
         <>
-            <span className="absolute text-xs text-white bg-[rgba(23,35,53,.56)] p-1 rounded px-2  bottom-3 left-1/2 ">
-                {' '}
+            <span className="absolute text-xs text-white bg-[rgba(23,35,53,.56)] p-1 rounded px-2  bottom-3 left-1/2 translate-x-[-50%] ">
                 {current} / {count}
             </span>
         </>

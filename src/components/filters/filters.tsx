@@ -18,6 +18,7 @@ const Filters = () => {
     const drivesActiveItems = useAppSelector(getDrivesActiveItems);
     const brands = useAppSelector(getBrands);
     const drives = useAppSelector(getDrives);
+
     const dispatch = useAppDispatch();
 
     const handleChangeRadio = (value: string) => {

@@ -5,10 +5,32 @@ import CarDriverForm from './components/carDriverForm';
 import useCarForm from '../../hooks/useCarForm';
 import CarTotal from './components/carTotal';
 import useDateRange from '@/utils/hooks/useDateRange';
-const CarForm = ({ price }: any) => {
-    const { register, handleSubmit, onSubmit, onSelectChange, deliveryOption, errors } =
-        useCarForm();
-    const { dateRange, onChangeDateRange } = useDateRange();
+import { createContext, useContext } from 'react';
+import { Provider } from 'react-redux';
+
+// const TotalContext = createContext({
+
+// });
+// const useCarFormContext = () => {
+//     const context = useContext(TotalContext);
+//     if (!context) {
+//         throw new Error('useCarFormContext must be used within a CarFormProvider');
+//     }
+//     return context;
+// };
+
+const CarForm = ({ price = 3000 }: any) => {
+    const {
+        register,
+        handleSubmit,
+        onSubmit,
+        onSelectChange,
+        deliveryOption,
+        errors,
+        onChangeRentDate,
+        RentDate,
+        registrationObj,
+    } = useCarForm(price);
 
     return (
         <div className="bg-white rounded-lg py-6 px-4 mb-4">
@@ -20,13 +42,17 @@ const CarForm = ({ price }: any) => {
                     errors={errors}
                     deliveryOption={deliveryOption}
                 />
-                <CarDateForm date={dateRange} setDate={onChangeDateRange} />
+                <CarDateForm
+                    date={RentDate}
+                    setDate={onChangeRentDate}
+                    days={registrationObj.days}
+                />
                 <CarDriverForm register={register} errors={errors} />
                 <Button type="submit" className="w-full py-6 bg-blue hover:bg-blue/90">
                     Забронировать
                 </Button>
             </form>
-            <CarTotal />
+            <CarTotal sum={registrationObj.price} days={registrationObj.days} />
         </div>
     );
 };
