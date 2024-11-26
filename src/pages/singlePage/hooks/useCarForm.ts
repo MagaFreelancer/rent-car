@@ -1,10 +1,10 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { carRegistrationSchema } from '@/utils/yup';
-import useDateRange from '@/utils/hooks/useDateRange';
-import { addDays, differenceInDays, set } from 'date-fns';
+import { addDays, differenceInDays } from 'date-fns';
 import { useState } from 'react';
 import { DateRange } from 'react-day-picker';
+
 interface CarFormData {
     name: string;
     email: string;
@@ -15,6 +15,11 @@ interface CarFormData {
 }
 const today = new Date();
 const useCarForm = (price: number) => {
+    const [registrationObj, setRegistrationObj] = useState({
+        days: 3,
+        price: price,
+        deliveryOption: 0,
+    });
     const {
         register,
         handleSubmit,
@@ -29,11 +34,7 @@ const useCarForm = (price: number) => {
         from: today,
         to: addDays(today, 3),
     });
-    const [registrationObj, setRegistrationObj] = useState({
-        days: 3,
-        price: price,
-        deliveryOption: 0,
-    });
+
     const onChangeRentDate = (newDate: DateRange | undefined) => {
         if (!newDate?.from) {
             setDateRange(undefined);
@@ -72,7 +73,10 @@ const useCarForm = (price: number) => {
         });
     };
     const onSubmit = (data: CarFormData) => {
-        console.log('Form Data:', data);
+        console.log('Form Data:', {
+            ...registrationObj,
+            ...data,
+        });
     };
 
     return {

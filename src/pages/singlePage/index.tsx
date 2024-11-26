@@ -30,7 +30,7 @@ const SinglePage = () => {
                         emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
                     />
                 </div>
-                <CarForm />
+                <CarForm price={car.price} />
                 <CarInfo />
                 <CarsLike />
             </div>

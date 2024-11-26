@@ -4,20 +4,6 @@ import CarDateForm from './components/carDateForm';
 import CarDriverForm from './components/carDriverForm';
 import useCarForm from '../../hooks/useCarForm';
 import CarTotal from './components/carTotal';
-import useDateRange from '@/utils/hooks/useDateRange';
-import { createContext, useContext } from 'react';
-import { Provider } from 'react-redux';
-
-// const TotalContext = createContext({
-
-// });
-// const useCarFormContext = () => {
-//     const context = useContext(TotalContext);
-//     if (!context) {
-//         throw new Error('useCarFormContext must be used within a CarFormProvider');
-//     }
-//     return context;
-// };
 
 const CarForm = ({ price = 3000 }: any) => {
     const {
@@ -52,7 +38,11 @@ const CarForm = ({ price = 3000 }: any) => {
                     Забронировать
                 </Button>
             </form>
-            <CarTotal sum={registrationObj.price} days={registrationObj.days} />
+            <CarTotal
+                price={registrationObj.price}
+                days={registrationObj.days}
+                deliveryOption={registrationObj.deliveryOption}
+            />
         </div>
     );
 };
