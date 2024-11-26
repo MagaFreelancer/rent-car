@@ -16,3 +16,5 @@ export const getDrivesActiveItems = createSelector(
 export const getBrands = createSelector(getFilteredItems, filters => filters.brands);
 
 export const getDrives = createSelector(getFilteredItems, filters => filters.drives);
+export const getPriceFrom = (state: RootState) => state.filters.price.from;
+export const getPriceTo = (state: RootState) => state.filters.price.to;

@@ -1,21 +1,30 @@
+import React from 'react';
 import { useAppDispatch, useAppSelector } from '@/redux/store.ts';
 import {
     getBrands,
     getBrandActiveItem,
     getDrives,
     getDrivesActiveItems,
+    getPriceFrom,
 } from '@/redux/slice/filters/filters-selectors.ts';
 import { Popover, PopoverContent, PopoverTrigger } from '@/shared/popover.tsx';
 import { RadioGroup, RadioGroupItem } from '@/shared/radio-group.tsx';
 import { Label } from '@/shared/label.tsx';
-import { setChangeBrands, setToggleDrives } from '@/redux/slice/filters/filters-slice.ts';
+import {
+    setChangeBrands,
+    setChangePriceFrom,
+    setChangePriceTo,
+    setToggleDrives,
+} from '@/redux/slice/filters/filters-slice.ts';
 import { clsx } from 'clsx';
 import { ChevronUp, CircleX } from 'lucide-react';
 import { Checkbox } from '@/shared/checkbox.tsx';
+import { Input } from '@/shared/input.tsx';
 
 const Filters = () => {
     const brandsActiveItem = useAppSelector(getBrandActiveItem);
     const drivesActiveItems = useAppSelector(getDrivesActiveItems);
+    const priceFrom = useAppSelector(getPriceFrom);
     const brands = useAppSelector(getBrands);
     const drives = useAppSelector(getDrives);
 
@@ -27,6 +36,18 @@ const Filters = () => {
 
     const handleChangeCheckbox = (value: string) => {
         dispatch(setToggleDrives(value));
+    };
+
+    const handleSubmitPriceFrom = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter') {
+            dispatch(setChangePriceFrom(Number(event.currentTarget.value)));
+        }
+    };
+
+    const handleSubmitPriceTo = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter') {
+            dispatch(setChangePriceTo(Number(event.currentTarget.value)));
+        }
     };
 
     return (
@@ -54,7 +75,7 @@ const Filters = () => {
                         )}
                     </PopoverTrigger>
 
-                    <PopoverContent align="start" className="p-0 rounded-2xl">
+                    <PopoverContent align="start" className="p-0 rounded-xl">
                         <RadioGroup
                             className="block"
                             onValueChange={item => handleChangeRadio(item)}
@@ -104,7 +125,7 @@ const Filters = () => {
                                 <ChevronUp className="w-5 h-5" />
                             )}
                         </PopoverTrigger>
-                        <PopoverContent align="start" className="p-0 rounded-2xl">
+                        <PopoverContent align="start" className="p-0 rounded-xl">
                             <RadioGroup
                                 className="block"
                                 onValueChange={item => handleChangeRadio(item)}
@@ -134,64 +155,46 @@ const Filters = () => {
                         </PopoverContent>
                     </Popover>
                 ))}
+
+                <Popover>
+                    <PopoverTrigger
+                        className={clsx(
+                            'gap-1 shadow items-center py-2 px-4 flex rounded-xl bg-white',
+                            priceFrom && '!bg-[#5394fd] text-white'
+                        )}
+                    >
+                        Цена, ₽
+                        {brandsActiveItem?.value !== 'all' ? (
+                            <CircleX
+                                onClick={e => {
+                                    e.stopPropagation();
+                                    handleChangeRadio('all');
+                                }}
+                                className=" z-50 w-4 z-55 h-4"
+                            />
+                        ) : (
+                            <ChevronUp className="w-5 h-5" />
+                        )}
+                    </PopoverTrigger>
+
+                    <PopoverContent align="start" className="flex p-4 rounded-xl gap-4">
+                        <Input
+                            onKeyDown={event => handleSubmitPriceFrom(event)}
+                            className="h-12 bg-[#f2f4f8] text-[16px] focus:bg-white"
+                            type="number"
+                            placeholder="500 ₽"
+                        />
+                        <Input
+                            onKeyDown={event => handleSubmitPriceTo(event)}
+                            className="h-12 bg-[#f2f4f8] text-[16px] focus:bg-white"
+                            type="number"
+                            placeholder="1000 ₽"
+                        />
+                    </PopoverContent>
+                </Popover>
             </div>
         </div>
     );
 };
 
 export default Filters;
-
-// import { useAppDispatch, useAppSelector } from '@/redux/store.ts';
-// import { getFilters } from '@/redux/slice/filters/filters-selectors.ts';
-// import { Popover, PopoverContent, PopoverTrigger } from '@/shared/popover.tsx';
-// import { RadioGroup, RadioGroupItem } from '@/shared/radio-group.tsx';
-// import { Label } from '@/shared/label.tsx';
-// import { setChangeBrands } from '@/redux/slice/filters/filters-slice.ts';
-// import { clsx } from 'clsx';
-// import { ChevronUp, CircleX } from 'lucide-react';
-//
-// const Filters = () => {
-//     const { brands } = useAppSelector(getFilters);
-//     const dispatch = useAppDispatch();
-//
-//     const searchItem = brands.find((item) => item.status);
-//
-//     const handleChangeRadio = (value: string) => {
-//         dispatch(setChangeBrands(value));
-//     }
-//
-//     return (
-//         <div className="py-5">
-//             <div>
-//                 <Popover>
-//                     <div className={clsx('items-center gap-2 py-2 px-4 rounded-xl shadow bg-white inline-flex', searchItem?.value !== 'all' && '!bg-[#5394fd] text-white')}>
-//                         <PopoverTrigger>
-//                             Марка
-//                             {searchItem?.value !== 'all' && `: ${searchItem?.label}`}
-//                         </PopoverTrigger>
-//                         {searchItem?.value !== 'all' ? (
-//                             <CircleX onClick={() => handleChangeRadio('all')} className="z-50 w-4 z-55 h-4" />
-//                         ) : (
-//                             <ChevronUp className="w-5 h-5" />
-//                         )}
-//                     </div>
-//
-//                     <PopoverContent sideOffset={15} align="start" className="absolute left-[-15px] p-0">
-//                         <RadioGroup onValueChange={(item) => handleChangeRadio(item)} defaultValue={searchItem?.value}>
-//                             {brands?.map((item, index) => (
-//                                 <li className="list-none flex py-2 px-4 " key={index}>
-//                                     <Label className={clsx('flex gap-2 items-center w-full text-[16px]', searchItem?.value === 'all' && '')} htmlFor={item.value}>
-//                                         <RadioGroupItem className="h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300" value={item.value} id={item.value} />
-//                                         {item.label}
-//                                     </Label>
-//                                 </li>
-//                             ))}
-//                         </RadioGroup >
-//                     </PopoverContent>
-//                 </Popover>
-//             </div>
-//         </div>
-//     );
-// };
-//
-// export default Filters;
