@@ -9,10 +9,7 @@ export type TypeBrands = {
 interface IInitialState {
     brands: TypeBrands[];
     drives: TypeBrands[];
-    price: {
-        to: number | null;
-        from: number | null;
-    };
+    price: { from: number | undefined; to: number | undefined };
 }
 
 const initialState: IInitialState = {
@@ -29,8 +26,8 @@ const initialState: IInitialState = {
         { value: 'full', status: false, label: 'Полный' },
     ],
     price: {
-        to: null,
-        from: null,
+        from: undefined,
+        to: undefined,
     },
 };
 
@@ -63,15 +60,14 @@ const filtersSlice = createSlice({
                     return drive;
                 });
         },
-        setChangePriceTo(state, action: PayloadAction<number>) {
-            state.price.to = action.payload;
-        },
-        setChangePriceFrom(state, action: PayloadAction<number>) {
-            state.price.from = action.payload;
+        setChangePrice(
+            state,
+            action: PayloadAction<{ from: number | undefined; to: number | undefined }>
+        ) {
+            state.price = action.payload;
         },
     },
 });
 
-export const { setChangeBrands, setToggleDrives, setChangePriceTo, setChangePriceFrom } =
-    filtersSlice.actions;
+export const { setChangeBrands, setToggleDrives, setChangePrice } = filtersSlice.actions;
 export default filtersSlice.reducer;

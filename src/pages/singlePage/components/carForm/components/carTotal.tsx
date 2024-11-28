@@ -1,7 +1,7 @@
 import useCarSale from '@/utils/hooks/useCarSale';
 
 const CarTotal = ({ days, deliveryOption, price }: any) => {
-    const { decrementSum, totalSum, proc } = useCarSale(price, days);
+    const { decrementSum, totalSum } = useCarSale(price, days);
 
     return (
         <div className="border-t-[1px] border-grey pt-4">

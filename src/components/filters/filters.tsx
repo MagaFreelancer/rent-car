@@ -5,15 +5,14 @@ import {
     getBrandActiveItem,
     getDrives,
     getDrivesActiveItems,
-    getPriceFrom,
+    getPrice,
 } from '@/redux/slice/filters/filters-selectors.ts';
 import { Popover, PopoverContent, PopoverTrigger } from '@/shared/popover.tsx';
 import { RadioGroup, RadioGroupItem } from '@/shared/radio-group.tsx';
 import { Label } from '@/shared/label.tsx';
 import {
     setChangeBrands,
-    setChangePriceFrom,
-    setChangePriceTo,
+    setChangePrice,
     setToggleDrives,
 } from '@/redux/slice/filters/filters-slice.ts';
 import { clsx } from 'clsx';
@@ -24,9 +23,10 @@ import { Input } from '@/shared/input.tsx';
 const Filters = () => {
     const brandsActiveItem = useAppSelector(getBrandActiveItem);
     const drivesActiveItems = useAppSelector(getDrivesActiveItems);
-    const priceFrom = useAppSelector(getPriceFrom);
+    const price = useAppSelector(getPrice);
     const brands = useAppSelector(getBrands);
     const drives = useAppSelector(getDrives);
+    const [priceValue, setPriceValue] = React.useState([price.from, price.to]);
 
     const dispatch = useAppDispatch();
 
@@ -38,17 +38,22 @@ const Filters = () => {
         dispatch(setToggleDrives(value));
     };
 
-    const handleSubmitPriceFrom = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    const handleSubmitPrice = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {
-            dispatch(setChangePriceFrom(Number(event.currentTarget.value)));
+            dispatch(
+                setChangePrice({
+                    from: priceValue[0] === 0 ? undefined : priceValue[0],
+                    to: priceValue[1] === 0 ? undefined : priceValue[1],
+                })
+            );
         }
     };
 
-    const handleSubmitPriceTo = (event: React.KeyboardEvent<HTMLInputElement>) => {
-        if (event.key === 'Enter') {
-            dispatch(setChangePriceTo(Number(event.currentTarget.value)));
-        }
-    };
+    // const handleSubmitPriceTo = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    //     if (event.key === 'Enter') {
+    //         dispatch(setChangePriceTo(Number(event.currentTarget.value)));
+    //     }
+    // };
 
     return (
         <div className="py-5">
@@ -160,15 +165,15 @@ const Filters = () => {
                     <PopoverTrigger
                         className={clsx(
                             'gap-1 shadow items-center py-2 px-4 flex rounded-xl bg-white',
-                            priceFrom && '!bg-[#5394fd] text-white'
+                            price.from && '!bg-[#5394fd] text-white'
                         )}
                     >
-                        Цена, ₽
-                        {brandsActiveItem?.value !== 'all' ? (
+                        {price.from ? `от ${price.from} ₽` : 'Цена, ₽'}
+                        {price.from !== undefined ? (
                             <CircleX
                                 onClick={e => {
-                                    e.stopPropagation();
-                                    handleChangeRadio('all');
+                                    // e.stopPropagation();
+                                    // handleChangeRadio('all');
                                 }}
                                 className=" z-50 w-4 z-55 h-4"
                             />
@@ -179,19 +184,73 @@ const Filters = () => {
 
                     <PopoverContent align="start" className="flex p-4 rounded-xl gap-4">
                         <Input
-                            onKeyDown={event => handleSubmitPriceFrom(event)}
+                            onKeyDown={event => handleSubmitPrice(event)}
                             className="h-12 bg-[#f2f4f8] text-[16px] focus:bg-white"
                             type="number"
                             placeholder="500 ₽"
+                            value={priceValue[0] || ''}
+                            onInput={e => {
+                                setPriceValue([Number(e.currentTarget.value), priceValue[1]]);
+                            }}
                         />
                         <Input
-                            onKeyDown={event => handleSubmitPriceTo(event)}
+                            onKeyDown={event => handleSubmitPrice(event)}
                             className="h-12 bg-[#f2f4f8] text-[16px] focus:bg-white"
                             type="number"
                             placeholder="1000 ₽"
+                            value={priceValue[1] || ''}
+                            onInput={e => {
+                                setPriceValue([priceValue[0], Number(e.currentTarget.value)]);
+                            }}
                         />
                     </PopoverContent>
                 </Popover>
+                {price.to !== undefined && (
+                    <Popover>
+                        <PopoverTrigger
+                            className={clsx(
+                                'gap-1 shadow items-center py-2 px-4 flex rounded-xl bg-white',
+                                price.to && '!bg-[#5394fd] text-white'
+                            )}
+                        >
+                            {`До ${price.to} ₽`}
+                            {price.to !== undefined ? (
+                                <CircleX
+                                    onClick={e => {
+                                        // e.stopPropagation();
+                                        // handleChangeRadio('all');
+                                    }}
+                                    className=" z-50 w-4 z-55 h-4"
+                                />
+                            ) : (
+                                <ChevronUp className="w-5 h-5" />
+                            )}
+                        </PopoverTrigger>
+
+                        <PopoverContent align="start" className="flex p-4 rounded-xl gap-4">
+                            <Input
+                                onKeyDown={event => handleSubmitPrice(event)}
+                                className="h-12 bg-[#f2f4f8] text-[16px] focus:bg-white"
+                                type="number"
+                                placeholder="500 ₽"
+                                value={priceValue[0] || ''}
+                                onInput={e => {
+                                    setPriceValue([Number(e.currentTarget.value), priceValue[1]]);
+                                }}
+                            />
+                            <Input
+                                onKeyDown={event => handleSubmitPrice(event)}
+                                className="h-12 bg-[#f2f4f8] text-[16px] focus:bg-white"
+                                type="number"
+                                placeholder="1000 ₽"
+                                value={priceValue[1] || ''}
+                                onInput={e => {
+                                    setPriceValue([priceValue[0], Number(e.currentTarget.value)]);
+                                }}
+                            />
+                        </PopoverContent>
+                    </Popover>
+                )}
             </div>
         </div>
     );
