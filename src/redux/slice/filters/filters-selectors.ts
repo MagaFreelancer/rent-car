@@ -8,6 +8,11 @@ export const getBrandActiveItem = createSelector(
     brands => brands.find(item => item.status)
 );
 
+export const getSortActiveItem = createSelector(
+    (state: RootState) => state.filters.sort,
+    sortItem => sortItem.find(item => item.status)
+);
+
 export const getDrivesActiveItems = createSelector(
     (state: RootState) => state.filters.drives,
     drives => drives.filter(item => item.status)
@@ -17,3 +22,4 @@ export const getBrands = createSelector(getFilteredItems, filters => filters.bra
 
 export const getDrives = createSelector(getFilteredItems, filters => filters.drives);
 export const getPrice = (state: RootState) => state.filters.price;
+export const getSort = (state: RootState) => state.filters.sort;

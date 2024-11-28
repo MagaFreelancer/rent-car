@@ -1,5 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+export type TypeSort = {
+    status: boolean;
+    value: string;
+    label: string;
+};
+
 export type TypeBrands = {
     value: string;
     status: boolean;
@@ -10,6 +16,7 @@ interface IInitialState {
     brands: TypeBrands[];
     drives: TypeBrands[];
     price: { from: number | undefined; to: number | undefined };
+    sort: TypeSort[];
 }
 
 const initialState: IInitialState = {
@@ -25,6 +32,11 @@ const initialState: IInitialState = {
         { value: 'rear', status: false, label: 'Задний' },
         { value: 'full', status: false, label: 'Полный' },
     ],
+    sort: [
+        { value: 'all', status: true, label: 'По умолчанию' },
+        { value: 'cheap', status: false, label: 'По цене (сначала дешевле)' },
+        { value: 'expensive', status: false, label: 'По цене (сначала дороже)' },
+    ],
     price: {
         from: undefined,
         to: undefined,
@@ -38,6 +50,11 @@ const filtersSlice = createSlice({
         setChangeBrands(state, action: PayloadAction<string>) {
             state.brands.forEach(brand => {
                 brand.status = brand.value === action.payload;
+            });
+        },
+        setChangeSort(state, action: PayloadAction<string>) {
+            state.sort.forEach(sortItem => {
+                sortItem.status = sortItem.value === action.payload;
             });
         },
         setToggleDrives(state, action: PayloadAction<string>) {
@@ -69,5 +86,6 @@ const filtersSlice = createSlice({
     },
 });
 
-export const { setChangeBrands, setToggleDrives, setChangePrice } = filtersSlice.actions;
+export const { setChangeBrands, setToggleDrives, setChangePrice, setChangeSort } =
+    filtersSlice.actions;
 export default filtersSlice.reducer;

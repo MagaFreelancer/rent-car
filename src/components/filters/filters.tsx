@@ -1,4 +1,3 @@
-import React from 'react';
 import { useAppDispatch, useAppSelector } from '@/redux/store.ts';
 import {
     getBrands,
@@ -6,28 +5,31 @@ import {
     getDrives,
     getDrivesActiveItems,
     getPrice,
+    getSort,
+    getSortActiveItem,
 } from '@/redux/slice/filters/filters-selectors.ts';
 import { Popover, PopoverContent, PopoverTrigger } from '@/shared/popover.tsx';
 import { RadioGroup, RadioGroupItem } from '@/shared/radio-group.tsx';
 import { Label } from '@/shared/label.tsx';
 import {
     setChangeBrands,
-    setChangePrice,
+    setChangeSort,
     setToggleDrives,
 } from '@/redux/slice/filters/filters-slice.ts';
 import { clsx } from 'clsx';
 import { ChevronUp, CircleX } from 'lucide-react';
 import { Checkbox } from '@/shared/checkbox.tsx';
-import { Input } from '@/shared/input.tsx';
+import FilterPrice from '@/components/filters/components/filter-price.tsx';
+import Sort from '@/components/filters/components/sort/sort.tsx';
 
 const Filters = () => {
     const brandsActiveItem = useAppSelector(getBrandActiveItem);
     const drivesActiveItems = useAppSelector(getDrivesActiveItems);
+    const sortActive = useAppSelector(getSortActiveItem);
+    const sort = useAppSelector(getSort);
     const price = useAppSelector(getPrice);
     const brands = useAppSelector(getBrands);
     const drives = useAppSelector(getDrives);
-    const [priceValue, setPriceValue] = React.useState([price.from, price.to]);
-
     const dispatch = useAppDispatch();
 
     const handleChangeRadio = (value: string) => {
@@ -37,46 +39,14 @@ const Filters = () => {
     const handleChangeCheckbox = (value: string) => {
         dispatch(setToggleDrives(value));
     };
-    const changePrice = () => {
-        let from = priceValue[0] === 0 ? undefined : priceValue[0];
-        let to = priceValue[1] === 0 ? undefined : priceValue[1];
-
-        if (from !== undefined && to !== undefined) {
-            if (from > to) {
-                return false; //временное решение
-            }
-            dispatch(
-                setChangePrice({
-                    from: from,
-                    to: to,
-                })
-            );
-        }
-    };
-    const handleSubmitPrice = (event: React.KeyboardEvent<HTMLInputElement>) => {
-        if (event.key === 'Enter') {
-            changePrice();
-        }
-    };
-    const clearPrice = (key: 'from' | 'to') => {
-        let keyNum = key === 'from' ? 0 : 1;
-        priceValue[keyNum] = undefined;
-        changePrice();
-    };
-
-    // const handleSubmitPriceTo = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    //     if (event.key === 'Enter') {
-    //         dispatch(setChangePriceTo(Number(event.currentTarget.value)));
-    //     }
-    // };
 
     return (
-        <div className="py-5">
+        <div className="flex justify-between py-5">
             <div className="flex gap-3">
                 <Popover>
                     <PopoverTrigger
                         className={clsx(
-                            'gap-1 shadow items-center py-2 px-4 flex rounded-xl bg-white',
+                            'gap-1 shadow transition items-center py-2 px-4 flex rounded-xl bg-white hover:shadow-md',
                             brandsActiveItem?.value !== 'all' && '!bg-[#5394fd] text-white'
                         )}
                     >
@@ -99,7 +69,6 @@ const Filters = () => {
                         <RadioGroup
                             className="block"
                             onValueChange={item => handleChangeRadio(item)}
-                            defaultValue={brandsActiveItem?.value}
                         >
                             {brands?.map((item, index) => (
                                 <li className="list-none flex" key={index}>
@@ -128,7 +97,7 @@ const Filters = () => {
                     <Popover key={index}>
                         <PopoverTrigger
                             className={clsx(
-                                'gap-1 shadow items-center py-2 px-4 flex rounded-xl bg-white',
+                                'gap-1 shadow transition items-center py-2 px-4 flex rounded-xl bg-white hover:shadow-md',
                                 item.value !== 'all' && '!bg-[#5394fd] text-white'
                             )}
                         >
@@ -149,7 +118,6 @@ const Filters = () => {
                             <RadioGroup
                                 className="block"
                                 onValueChange={item => handleChangeRadio(item)}
-                                defaultValue={item?.value}
                             >
                                 {drives?.map((item, index) => (
                                     <li className="list-none flex" key={index}>
@@ -175,94 +143,15 @@ const Filters = () => {
                         </PopoverContent>
                     </Popover>
                 ))}
-                {price.from === undefined && price.to !== undefined ? null : (
-                    <Popover>
-                        <PopoverTrigger
-                            className={clsx(
-                                'gap-1 shadow items-center py-2 px-4 flex rounded-xl bg-white',
-                                price.from && '!bg-[#5394fd] text-white'
-                            )}
-                        >
-                            {price.from ? `от ${price.from} ₽` : 'Цена, ₽'}
-                            {price.from !== undefined ? (
-                                <CircleX
-                                    onClick={() => clearPrice('from')}
-                                    className=" z-50 w-4 z-55 h-4"
-                                />
-                            ) : (
-                                <ChevronUp className="w-5 h-5" />
-                            )}
-                        </PopoverTrigger>
 
-                        <PopoverContent align="start" className="flex p-4 rounded-xl gap-4">
-                            <Input
-                                onKeyDown={event => handleSubmitPrice(event)}
-                                className="h-12 bg-[#f2f4f8] text-[16px] focus:bg-white"
-                                type="number"
-                                placeholder="500 ₽"
-                                value={priceValue[0] || ''}
-                                onInput={e => {
-                                    setPriceValue([Number(e.currentTarget.value), priceValue[1]]);
-                                }}
-                            />
-                            <Input
-                                onKeyDown={event => handleSubmitPrice(event)}
-                                className="h-12 bg-[#f2f4f8] text-[16px] focus:bg-white"
-                                type="number"
-                                placeholder="1000 ₽"
-                                value={priceValue[1] || ''}
-                                onInput={e => {
-                                    setPriceValue([priceValue[0], Number(e.currentTarget.value)]);
-                                }}
-                            />
-                        </PopoverContent>
-                    </Popover>
-                )}
-
-                {price.to !== undefined && (
-                    <Popover>
-                        <PopoverTrigger
-                            className={clsx(
-                                'gap-1 shadow items-center py-2 px-4 flex rounded-xl bg-white',
-                                price.to && '!bg-[#5394fd] text-white'
-                            )}
-                        >
-                            {`До ${price.to} ₽`}
-                            {price.to !== undefined ? (
-                                <CircleX
-                                    onClick={() => clearPrice('to')}
-                                    className=" z-50 w-4 z-55 h-4"
-                                />
-                            ) : (
-                                <ChevronUp className="w-5 h-5" />
-                            )}
-                        </PopoverTrigger>
-
-                        <PopoverContent align="start" className="flex p-4 rounded-xl gap-4">
-                            <Input
-                                onKeyDown={event => handleSubmitPrice(event)}
-                                className="h-12 bg-[#f2f4f8] text-[16px] focus:bg-white"
-                                type="number"
-                                placeholder="500 ₽"
-                                value={priceValue[0] || ''}
-                                onInput={e => {
-                                    setPriceValue([Number(e.currentTarget.value), priceValue[1]]);
-                                }}
-                            />
-                            <Input
-                                onKeyDown={event => handleSubmitPrice(event)}
-                                className="h-12 bg-[#f2f4f8] text-[16px] focus:bg-white"
-                                type="number"
-                                placeholder="1000 ₽"
-                                value={priceValue[1] || ''}
-                                onInput={e => {
-                                    setPriceValue([priceValue[0], Number(e.currentTarget.value)]);
-                                }}
-                            />
-                        </PopoverContent>
-                    </Popover>
-                )}
+                <FilterPrice price={price} />
             </div>
+
+            <Sort
+                onChange={value => dispatch(setChangeSort(value))}
+                title={sortActive?.label}
+                list={sort}
+            />
         </div>
     );
 };
