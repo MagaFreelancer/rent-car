@@ -12,9 +12,15 @@ export type TypeBrands = {
     label: string;
 };
 
+export type TypeDrives = {
+    value: string;
+    status: boolean;
+    label: string;
+};
+
 interface IInitialState {
     brands: TypeBrands[];
-    drives: TypeBrands[];
+    drives: TypeDrives[];
     price: { from: number | undefined; to: number | undefined };
     sort: TypeSort[];
 }
