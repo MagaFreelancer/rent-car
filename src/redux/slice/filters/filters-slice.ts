@@ -18,7 +18,18 @@ export type TypeDrives = {
     label: string;
 };
 
+type CarModel = {
+    value: string;
+    status: boolean;
+    label: string;
+};
+
+type Cars = {
+    [brand: string]: CarModel[] | string | null;
+};
+
 interface IInitialState {
+    model: Cars;
     brands: TypeBrands[];
     drives: TypeDrives[];
     price: { from: number | undefined; to: number | undefined };
@@ -26,6 +37,23 @@ interface IInitialState {
 }
 
 const initialState: IInitialState = {
+    model: {
+        all: null,
+        bmv: [
+            { value: 'x1', status: false, label: 'X1' },
+            { value: 'x2', status: false, label: 'X2' },
+            { value: 'x3', status: false, label: 'X3' },
+            { value: 'x4', status: false, label: 'X4' },
+            { value: 'x5', status: false, label: 'X5' },
+        ],
+        mercedes: [
+            { value: 'x1', status: false, label: 'X1' },
+            { value: 'x2', status: false, label: 'X2' },
+            { value: 'x3', status: false, label: 'X3' },
+            { value: 'x4', status: false, label: 'X4' },
+            { value: 'x5', status: false, label: 'X5' },
+        ],
+    },
     brands: [
         { value: 'all', status: true, label: 'Любая' },
         { value: 'bmv', status: false, label: 'BMV' },
