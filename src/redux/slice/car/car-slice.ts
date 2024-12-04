@@ -1,8 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { getCarFetch } from '@/redux/thunk/car-fetch.ts';
-
-const initialState = {
-    car: {},
+import { ICar } from '@/common/car';
+interface IInitialState {
+    car: ICar;
+    status: boolean;
+    error: string;
+}
+const initialState: IInitialState = {
+    car: {} as ICar,
     status: false,
     error: '',
 };
@@ -25,7 +30,5 @@ const carSlice = createSlice({
         });
     },
 });
-
-// export const { resetError } = usersSlice.actions;
 
 export default carSlice.reducer;

@@ -4,8 +4,16 @@ interface ICarTotalProps {
     price: number;
     decrementSum: number;
     totalSum: number;
+    priceDays: number;
 }
-const CarTotal = ({ days, deliveryOption, price, decrementSum, totalSum }: ICarTotalProps) => {
+const CarTotal = ({
+    days,
+    deliveryOption,
+    price,
+    decrementSum,
+    totalSum,
+    priceDays,
+}: ICarTotalProps) => {
     return (
         <div className="border-t-[1px] border-grey pt-4">
             <div className="mb-4 text-lg font-semibold text-blackBlue">
@@ -14,7 +22,7 @@ const CarTotal = ({ days, deliveryOption, price, decrementSum, totalSum }: ICarT
             <div>
                 <div className="flex justify-between text-sm font-semibold mb-2">
                     <div>Аренда {days} сут</div>
-                    <div className="text-placeholder600">{price * days} ₽</div>
+                    <div className="text-placeholder600">{priceDays} ₽</div>
                 </div>
                 {deliveryOption !== 0 && (
                     <div className="flex justify-between text-sm font-semibold mb-2">

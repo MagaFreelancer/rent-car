@@ -44,6 +44,7 @@ const CarRegistration = ({ price = 3000 }: { price: number }) => {
                 deliveryOption={registrationObj.deliveryOption}
                 decrementSum={registrationObj.decrementSum}
                 totalSum={registrationObj.totalSum}
+                priceDays={registrationObj.price * registrationObj.days}
             />
         </div>
     );

@@ -19,7 +19,7 @@ const SinglePage = () => {
                 <CarSlider car={car} />
                 <div className="bg-white py-6 px-4 mb-4 rounded-lg">
                     <h2 className="mb-2">
-                        {car.brand} {car.title}, {car.year}
+                        {car.brand} {car.model}, {car.year}
                     </h2>
                     <Rating
                         size="small"
@@ -31,7 +31,10 @@ const SinglePage = () => {
                     />
                 </div>
                 <CarRegistration price={car.price} />
-                <CarInfo />
+                <CarInfo
+                    rentalRules={car.carDetails.rentalRules}
+                    carSpecifications={car.carDetails.carSpecifications}
+                />
                 <CarsLike />
             </div>
         </Container>
