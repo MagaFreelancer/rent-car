@@ -2,11 +2,11 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { carRegistrationSchema } from '@/utils/yup';
 import { ICarFormData } from './useCarForm';
+
 const useFormLogic = () => {
     const {
         register,
         handleSubmit,
-        control,
         watch,
         setValue,
         formState: { errors },
@@ -17,7 +17,6 @@ const useFormLogic = () => {
     return {
         register,
         handleSubmit,
-        control,
         watch,
         setValue,
         errors,

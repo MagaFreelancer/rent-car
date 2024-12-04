@@ -22,7 +22,7 @@ const CarTotal = ({ days, deliveryOption, price, decrementSum, totalSum }: ICarT
                         <div className="text-placeholder600">{deliveryOption} ₽</div>
                     </div>
                 )}
-                {decrementSum && (
+                {decrementSum !== 0 && (
                     <div className="flex justify-between text-sm font-semibold mb-5 text-red600">
                         <div>Скидка на аренду от 7 суток</div> <div>-{decrementSum} ₽</div>
                     </div>

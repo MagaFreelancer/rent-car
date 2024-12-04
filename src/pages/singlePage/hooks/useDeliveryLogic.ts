@@ -1,30 +1,25 @@
-interface IuseDeliveryLogic {
-    registrationObj: any;
-    setRegistrationObj: any;
-    watch: any;
-    setValue: any;
+import { IRegistrationObj } from './useCarForm';
+
+interface IUseDeliveryLogic {
+    deliveryOption: string;
+    setDeliveryOption: (value: string) => void;
+    registrationObj: {
+        deliveryOption: number;
+    };
+    setRegistrationObj: React.Dispatch<React.SetStateAction<IRegistrationObj>>;
 }
-const useDeliveryLogic = ({
-    watch,
-    setValue,
-    setRegistrationObj,
-    registrationObj,
-}: IuseDeliveryLogic) => {
-    const deliveryOption = watch('deliveryOption');
+
+const useDeliveryLogic = ({ setDeliveryOption, setRegistrationObj }: IUseDeliveryLogic) => {
     const onSelectChange = (value: string) => {
-        let sum = 0;
-        setValue('deliveryOption', value);
-        if (value === 'delivery') {
-            sum = 100;
-        }
-        setRegistrationObj({
-            ...registrationObj,
-            deliveryOption: sum,
-        });
+        setDeliveryOption(value);
+        const deliveryPrice = value === 'delivery' ? 100 : 0;
+        setRegistrationObj((prev: IRegistrationObj) => ({
+            ...prev,
+            deliveryOption: deliveryPrice,
+        }));
     };
 
     return {
-        deliveryOption,
         onSelectChange,
     };
 };

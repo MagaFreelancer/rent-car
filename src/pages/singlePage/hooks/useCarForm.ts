@@ -1,11 +1,15 @@
 import { useState } from 'react';
-
 import useFormLogic from './useFormLogic';
 import useRentCalculator from './useRentCalculator';
 import useDeliveryLogic from './useDeliveryLogic';
-//usedelivery
-//usedate
-//usetotal
+
+export interface IRegistrationObj {
+    days: number;
+    totalSum: number;
+    deliveryOption: number;
+    price: number;
+    decrementSum: number;
+}
 export interface ICarFormData {
     name: string;
     email: string;
@@ -14,35 +18,41 @@ export interface ICarFormData {
     deliveryOption: string;
     additionalInfo?: string;
 }
+
 const useCarForm = (price: number) => {
     const formLogic = useFormLogic();
-    const [registrationObj, setRegistrationObj] = useState<any>({
+
+    const [registrationObj, setRegistrationObj] = useState({
         days: 3,
-        price,
         totalSum: price * 3,
         deliveryOption: 0,
+        price,
+        decrementSum: 0,
     });
-    const rentCalculator = useRentCalculator({ setRegistrationObj, price, registrationObj });
-    const deliveryLogic = useDeliveryLogic({
-        watch: formLogic.watch,
-        setValue: formLogic.setValue,
+
+    const rentCalculator = useRentCalculator({
         setRegistrationObj,
+        price,
+    });
+    const deliveryOption = formLogic.watch('deliveryOption');
+    const deliveryLogic = useDeliveryLogic({
+        deliveryOption,
+        setDeliveryOption: value => formLogic.setValue('deliveryOption', value),
         registrationObj,
+        setRegistrationObj,
     });
 
     const onSubmit = (data: ICarFormData) => {
-        console.log('Form Data:', {
-            ...registrationObj,
-            ...data,
-        });
+        console.log('Form Data:', { ...registrationObj, ...data });
     };
 
     return {
         ...formLogic,
         ...rentCalculator,
         ...deliveryLogic,
-        onSubmit,
+        deliveryOption,
         registrationObj,
+        onSubmit,
     };
 };
 
