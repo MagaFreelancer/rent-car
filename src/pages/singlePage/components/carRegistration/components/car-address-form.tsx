@@ -45,7 +45,7 @@ const CarAddressForm = ({
                         placeholder="Адрес"
                         register={register}
                         name="additionalInfo"
-                        className="bg-[#f2f4f8] font-medium  placeholder:text-placeholder"
+                        className="bg-[#f2f4f8] font-medium border-[#f2f4f8] placeholder:text-placeholder"
                     />
                     <TextFieldError />
                 </TextFieldGroup>

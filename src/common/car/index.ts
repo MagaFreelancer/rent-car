@@ -17,6 +17,7 @@ export interface ICar {
     id: number;
     brand: string;
     model: string;
+    rating: number;
     price: number;
     imgs: string[];
     year: number;

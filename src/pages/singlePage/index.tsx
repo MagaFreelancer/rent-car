@@ -24,7 +24,7 @@ const SinglePage = () => {
                     <Rating
                         size="small"
                         name="text-feedback"
-                        value={0}
+                        value={car.rating}
                         readOnly
                         precision={0.5}
                         emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
