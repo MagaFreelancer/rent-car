@@ -43,15 +43,17 @@ const Filters = () => {
 
         if (from !== undefined && to !== undefined) {
             if (from > to) {
-                return false; //временное решение
+                // to = from;
+                // setPriceValue([from, from]);
+                return false;
             }
-            dispatch(
-                setChangePrice({
-                    from: from,
-                    to: to,
-                })
-            );
         }
+        dispatch(
+            setChangePrice({
+                from: from,
+                to: to,
+            })
+        );
     };
     const handleSubmitPrice = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {
@@ -175,6 +177,7 @@ const Filters = () => {
                         </PopoverContent>
                     </Popover>
                 ))}
+
                 {price.from === undefined && price.to !== undefined ? null : (
                     <Popover>
                         <PopoverTrigger
@@ -183,7 +186,7 @@ const Filters = () => {
                                 price.from && '!bg-[#5394fd] text-white'
                             )}
                         >
-                            {price.from ? `от ${price.from} ₽` : 'Цена, ₽'}
+                            {price.from ? `Цена от ${price.from} ₽` : 'Цена, ₽'}
                             {price.from !== undefined ? (
                                 <CircleX
                                     onClick={() => clearPrice('from')}
@@ -227,7 +230,7 @@ const Filters = () => {
                                 price.to && '!bg-[#5394fd] text-white'
                             )}
                         >
-                            {`До ${price.to} ₽`}
+                            {`Цена До ${price.to} ₽`}
                             {price.to !== undefined ? (
                                 <CircleX
                                     onClick={() => clearPrice('to')}

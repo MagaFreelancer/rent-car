@@ -1,7 +1,7 @@
 import Rating from '@mui/material/Rating';
 import StarIcon from '@mui/icons-material/Star';
 import useGetCar from './hooks/useGetCar';
-import CarForm from './components/carForm/carForm';
+import CarRegistration from './components/carRegistration';
 import CarSlider from './components/car-slider';
 import Container from '@/shared/container';
 import CarInfo from './components/carInfo';
@@ -30,7 +30,7 @@ const SinglePage = () => {
                         emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
                     />
                 </div>
-                <CarForm price={car.price} />
+                <CarRegistration price={car.price} />
                 <CarInfo />
                 <CarsLike />
             </div>

@@ -1,11 +1,12 @@
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { carRegistrationSchema } from '@/utils/yup';
-import { addDays, differenceInDays } from 'date-fns';
 import { useState } from 'react';
-import { DateRange } from 'react-day-picker';
 
-interface CarFormData {
+import useFormLogic from './useFormLogic';
+import useRentCalculator from './useRentCalculator';
+import useDeliveryLogic from './useDeliveryLogic';
+//usedelivery
+//usedate
+//usetotal
+export interface ICarFormData {
     name: string;
     email: string;
     tel: string;
@@ -13,66 +14,23 @@ interface CarFormData {
     deliveryOption: string;
     additionalInfo?: string;
 }
-const today = new Date();
 const useCarForm = (price: number) => {
-    const [registrationObj, setRegistrationObj] = useState({
+    const formLogic = useFormLogic();
+    const [registrationObj, setRegistrationObj] = useState<any>({
         days: 3,
-        price: price,
+        price,
+        totalSum: price * 3,
         deliveryOption: 0,
     });
-    const {
-        register,
-        handleSubmit,
-        control,
-        watch,
-        setValue,
-        formState: { errors },
-    } = useForm<CarFormData>({
-        resolver: yupResolver(carRegistrationSchema),
-    });
-    const [dateRange, setDateRange] = useState<DateRange | undefined>({
-        from: today,
-        to: addDays(today, 3),
+    const rentCalculator = useRentCalculator({ setRegistrationObj, price, registrationObj });
+    const deliveryLogic = useDeliveryLogic({
+        watch: formLogic.watch,
+        setValue: formLogic.setValue,
+        setRegistrationObj,
+        registrationObj,
     });
 
-    const onChangeRentDate = (newDate: DateRange | undefined) => {
-        if (!newDate?.from) {
-            setDateRange(undefined);
-            return;
-        }
-
-        if (!newDate.to) {
-            setDateRange({ from: newDate.from, to: undefined });
-            return;
-        }
-
-        const selectedDays = differenceInDays(newDate.to, newDate.from);
-        if (selectedDays < 3) {
-            alert('Минимальный период между датами должен быть 3 дня.');
-            setDateRange({ from: newDate.from, to: undefined });
-            return;
-        }
-
-        setRegistrationObj({
-            ...registrationObj,
-            days: selectedDays,
-        });
-        setDateRange(newDate);
-    };
-
-    const deliveryOption = watch('deliveryOption');
-    const onSelectChange = (value: string) => {
-        let sum = 0;
-        setValue('deliveryOption', value);
-        if (value === 'delivery') {
-            sum = 100;
-        }
-        setRegistrationObj({
-            ...registrationObj,
-            deliveryOption: sum,
-        });
-    };
-    const onSubmit = (data: CarFormData) => {
+    const onSubmit = (data: ICarFormData) => {
         console.log('Form Data:', {
             ...registrationObj,
             ...data,
@@ -80,17 +38,10 @@ const useCarForm = (price: number) => {
     };
 
     return {
-        register,
-        handleSubmit,
-        control,
-        watch,
-        setValue,
-        errors,
-        deliveryOption,
-        onSelectChange,
+        ...formLogic,
+        ...rentCalculator,
+        ...deliveryLogic,
         onSubmit,
-        onChangeRentDate,
-        RentDate: dateRange,
         registrationObj,
     };
 };

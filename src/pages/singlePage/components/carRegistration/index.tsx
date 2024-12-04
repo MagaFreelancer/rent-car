@@ -1,11 +1,11 @@
 import { Button } from '@/shared/button';
-import CarAddressForm from './components/carAddressForm';
-import CarDateForm from './components/carDateForm';
-import CarDriverForm from './components/carDriverForm';
+import CarAddressForm from './components/car-address-form';
+import CarDateForm from './components/car-date-form';
+import CarDriverForm from './components/car-driver-form';
 import useCarForm from '../../hooks/useCarForm';
-import CarTotal from './components/carTotal';
+import CarTotal from './components/car-total';
 
-const CarForm = ({ price = 3000 }: any) => {
+const CarRegistration = ({ price = 3000 }: { price: number }) => {
     const {
         register,
         handleSubmit,
@@ -14,7 +14,7 @@ const CarForm = ({ price = 3000 }: any) => {
         deliveryOption,
         errors,
         onChangeRentDate,
-        RentDate,
+        dateRange,
         registrationObj,
     } = useCarForm(price);
 
@@ -29,7 +29,7 @@ const CarForm = ({ price = 3000 }: any) => {
                     deliveryOption={deliveryOption}
                 />
                 <CarDateForm
-                    date={RentDate}
+                    date={dateRange}
                     setDate={onChangeRentDate}
                     days={registrationObj.days}
                 />
@@ -42,9 +42,11 @@ const CarForm = ({ price = 3000 }: any) => {
                 price={registrationObj.price}
                 days={registrationObj.days}
                 deliveryOption={registrationObj.deliveryOption}
+                decrementSum={registrationObj.decrementSum}
+                totalSum={registrationObj.totalSum}
             />
         </div>
     );
 };
 
-export default CarForm;
+export default CarRegistration;

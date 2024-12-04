@@ -52,7 +52,7 @@ const Header = () => {
                     </ul>
 
                     <div className="flex items-center">
-                        <p>+7 999 999-99-99</p>
+                        <p>+7 495 120-80-70</p>
                         {status ? (
                             <Avatar className="ml-6 w-10 h-10">
                                 <AvatarFallback className="bg-[#e5e5e5]">

@@ -17,7 +17,7 @@ const useCarSale = (sum: number, days: number) => {
     return {
         decrementSum: saleSum,
         proc: saleProc,
-        totalSum: sum - saleSum,
+        totalSum: sum * days - saleSum,
     };
 };
 
