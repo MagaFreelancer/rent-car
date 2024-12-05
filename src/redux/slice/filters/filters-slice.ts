@@ -1,4 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, current, PayloadAction } from '@reduxjs/toolkit';
+import { connect } from 'react-redux';
 
 export type TypeSort = {
     status: boolean;
@@ -24,12 +25,12 @@ type CarModel = {
     label: string;
 };
 
-type Cars = {
+export type TypeCarsModel = {
     [brand: string]: CarModel[] | string | null;
 };
 
 interface IInitialState {
-    model: Cars;
+    model: TypeCarsModel;
     brands: TypeBrands[];
     drives: TypeDrives[];
     price: { from: number | undefined; to: number | undefined };
@@ -38,16 +39,16 @@ interface IInitialState {
 
 const initialState: IInitialState = {
     model: {
-        all: null,
+        all: { value: 'all', status: true, label: 'Выбрать всё' },
         bmv: [
-            { value: 'x1', status: false, label: 'X1' },
+            { value: 'bmv', status: false, label: 'bmv' },
             { value: 'x2', status: false, label: 'X2' },
             { value: 'x3', status: false, label: 'X3' },
             { value: 'x4', status: false, label: 'X4' },
             { value: 'x5', status: false, label: 'X5' },
         ],
         mercedes: [
-            { value: 'x1', status: false, label: 'X1' },
+            { value: 'mersce', status: false, label: 'mersce' },
             { value: 'x2', status: false, label: 'X2' },
             { value: 'x3', status: false, label: 'X3' },
             { value: 'x4', status: false, label: 'X4' },
@@ -111,6 +112,7 @@ const filtersSlice = createSlice({
                     return drive;
                 });
         },
+        setModelsChange(state, action: PayloadAction<string>) {},
         setChangePrice(
             state,
             action: PayloadAction<{ from: number | undefined; to: number | undefined }>
@@ -120,6 +122,6 @@ const filtersSlice = createSlice({
     },
 });
 
-export const { setChangeBrands, setToggleDrives, setChangePrice, setChangeSort } =
+export const { setChangeBrands, setToggleDrives, setChangePrice, setChangeSort, setModelsChange } =
     filtersSlice.actions;
 export default filtersSlice.reducer;

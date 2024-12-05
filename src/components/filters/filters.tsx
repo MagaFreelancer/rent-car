@@ -6,11 +6,11 @@ import {
     getDrivesActiveItems,
     getPrice,
     getSort,
-    getSortActiveItem,
+    getSortActiveItem /*getModels,*/,
 } from '@/redux/slice/filters/filters-selectors.ts';
 import {
     setChangeBrands,
-    setChangeSort,
+    setChangeSort /*setModelsChange,*/,
     setToggleDrives,
 } from '@/redux/slice/filters/filters-slice.ts';
 import FilterPrice from '@/components/filters/components/filter-price.tsx';
@@ -18,7 +18,7 @@ import Sort from '@/components/filters/components/sort/sort.tsx';
 import BrandsSort from '@/components/filters/components/brands-sort/brands-sort.tsx';
 import FilterDrives from '@/components/filters/components/filter-drives/filter-drives.tsx';
 import FiltersAll from '@/components/filters/components/filters-all/filters-all.tsx';
-import FilterModel from '@/components/filters/components/filter-model/filter-model.tsx';
+// import FilterModel from '@/components/filters/components/filter-model/filter-model.tsx';
 
 const Filters = () => {
     const brandsActiveItem = useAppSelector(getBrandActiveItem);
@@ -28,7 +28,11 @@ const Filters = () => {
     const price = useAppSelector(getPrice);
     const brands = useAppSelector(getBrands);
     const drives = useAppSelector(getDrives);
+    // const models = useAppSelector(getModels);
+    // const modelAllItem = useAppSelector((state) => state.filters.model.all);
     const dispatch = useAppDispatch();
+
+    // const newList = brandsActiveItem?.value === 'all' ? [] : models[brandsActiveItem?.value];
 
     return (
         <div className="flex justify-between py-5">
@@ -39,7 +43,11 @@ const Filters = () => {
                     activeItem={brandsActiveItem}
                 />
 
-                <FilterModel />
+                {/*<FilterModel*/}
+                {/*    onChange={(value: string) => dispatch(setModelsChange(value))}*/}
+                {/*    modelAllItem={modelAllItem}*/}
+                {/*    list={newList}*/}
+                {/*/>*/}
 
                 <FilterDrives
                     onChange={value => dispatch(setToggleDrives(value))}

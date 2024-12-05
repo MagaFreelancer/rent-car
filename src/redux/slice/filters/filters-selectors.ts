@@ -23,3 +23,4 @@ export const getBrands = createSelector(getFilteredItems, filters => filters.bra
 export const getDrives = createSelector(getFilteredItems, filters => filters.drives);
 export const getPrice = (state: RootState) => state.filters.price;
 export const getSort = (state: RootState) => state.filters.sort;
+export const getModels = (state: RootState) => state.filters.model;
