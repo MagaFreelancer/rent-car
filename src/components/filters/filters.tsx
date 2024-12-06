@@ -6,11 +6,11 @@ import {
     getDrivesActiveItems,
     getPrice,
     getSort,
-    getSortActiveItem /*getModels,*/,
+    getSortActiveItem,
 } from '@/redux/slice/filters/filters-selectors.ts';
 import {
     setChangeBrands,
-    setChangeSort /*setModelsChange,*/,
+    setChangeSort,
     setToggleDrives,
 } from '@/redux/slice/filters/filters-slice.ts';
 import FilterPrice from '@/components/filters/components/filter-price.tsx';
@@ -57,7 +57,7 @@ const Filters = () => {
 
                 <FilterPrice price={price} />
 
-                <FiltersAll />
+                <FiltersAll brands={brands} />
             </div>
 
             <Sort

@@ -1,8 +1,15 @@
-import { Popover } from '@radix-ui/react-popover';
-import { PopoverContent, PopoverTrigger } from '@/shared/popover.tsx';
+import { PopoverContent, PopoverTrigger, Popover } from '@/shared/popover.tsx';
 import { ChevronUp } from 'lucide-react';
+import { Input } from '@/shared/input.tsx';
+import { TypeBrands } from '@/redux/slice/filters/filters-slice.ts';
 
-const FiltersAll = () => {
+interface IFiltersAllProps {
+    brands: TypeBrands[];
+}
+
+const FiltersAll = ({ brands }: IFiltersAllProps) => {
+    console.log(brands);
+
     return (
         <Popover>
             <PopoverTrigger className="gap-1 shadow transition items-center py-2 px-4 flex rounded-xl bg-white hover:shadow-md">
@@ -10,8 +17,13 @@ const FiltersAll = () => {
                 <ChevronUp className="w-5 h-5" />
             </PopoverTrigger>
 
-            <PopoverContent align="start" className="p-0 rounded-xl">
-                all filters
+            <PopoverContent
+                onOpenAutoFocus={e => e.preventDefault()}
+                align="start"
+                className="p-4 rounded-xl"
+            >
+                <p className="mb-2 text-[14px] text-[#172335]">Марка и модель</p>
+                <Input placeholder="Марка" />
             </PopoverContent>
         </Popover>
     );

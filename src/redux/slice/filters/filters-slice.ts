@@ -1,5 +1,4 @@
-import { createSlice, current, PayloadAction } from '@reduxjs/toolkit';
-import { connect } from 'react-redux';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export type TypeSort = {
     status: boolean;
@@ -39,7 +38,7 @@ interface IInitialState {
 
 const initialState: IInitialState = {
     model: {
-        all: { value: 'all', status: true, label: 'Выбрать всё' },
+        // all: { value: 'all', status: true, label: 'Выбрать всё' },
         bmv: [
             { value: 'bmv', status: false, label: 'bmv' },
             { value: 'x2', status: false, label: 'X2' },
@@ -112,7 +111,6 @@ const filtersSlice = createSlice({
                     return drive;
                 });
         },
-        setModelsChange(state, action: PayloadAction<string>) {},
         setChangePrice(
             state,
             action: PayloadAction<{ from: number | undefined; to: number | undefined }>
@@ -122,6 +120,6 @@ const filtersSlice = createSlice({
     },
 });
 
-export const { setChangeBrands, setToggleDrives, setChangePrice, setChangeSort, setModelsChange } =
+export const { setChangeBrands, setToggleDrives, setChangePrice, setChangeSort } =
     filtersSlice.actions;
 export default filtersSlice.reducer;
