@@ -30,7 +30,11 @@ const SinglePage = () => {
                         emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
                     />
                 </div>
-                <CarRegistration price={car.price} />
+                <CarRegistration
+                    price={car.price}
+                    mileageMax={car.carDetails.rentalRules.mileageMax.text}
+                    surcharge={car.carDetails.rentalRules.surcharge.text}
+                />
                 <CarInfo
                     rentalRules={car.carDetails.rentalRules}
                     carSpecifications={car.carDetails.carSpecifications}

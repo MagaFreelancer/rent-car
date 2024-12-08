@@ -4,8 +4,17 @@ import CarDateForm from './components/car-date-form';
 import CarDriverForm from './components/car-driver-form';
 import useCarForm from '../../hooks/useCarForm';
 import CarTotal from './components/car-total';
+import CarMoreInfo from './components/car-more-info';
 
-const CarRegistration = ({ price = 3000 }: { price: number }) => {
+const CarRegistration = ({
+    price,
+    mileageMax,
+    surcharge,
+}: {
+    price: number;
+    mileageMax: string;
+    surcharge: string;
+}) => {
     const {
         register,
         handleSubmit,
@@ -21,7 +30,7 @@ const CarRegistration = ({ price = 3000 }: { price: number }) => {
     return (
         <div className="bg-white rounded-lg py-6 px-4 mb-4">
             <h3 className="mb-5  font-semibold ">Оформление</h3>
-            <form className=" mb-4" onSubmit={handleSubmit(onSubmit)}>
+            <form className="mb-4" onSubmit={handleSubmit(onSubmit)}>
                 <CarAddressForm
                     onSelectChange={onSelectChange}
                     register={register}
@@ -34,6 +43,7 @@ const CarRegistration = ({ price = 3000 }: { price: number }) => {
                     days={registrationObj.days}
                 />
                 <CarDriverForm register={register} errors={errors} />
+                <CarMoreInfo mileageMax={mileageMax} surcharge={surcharge} />
                 <Button type="submit" className="w-full py-6 bg-blue hover:bg-blue/90">
                     Забронировать
                 </Button>
