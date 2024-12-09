@@ -1,11 +1,11 @@
 import { PopoverContent, PopoverTrigger, Popover } from '@/shared/popover.tsx';
 import { ChevronUp } from 'lucide-react';
-import { Input } from '@/shared/input.tsx';
 import { setChangeBrands, TypeBrands } from '@/redux/slice/filters/filters-slice.ts';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/redux/store.ts';
 import { getBrandActiveItem } from '@/redux/slice/filters/filters-selectors.ts';
 import FiltersList from '@/components/filters/components/filters-all/components/filters-list.tsx';
+import FiltersBrands from '@/components/filters/components/filters-all/components/filters-brands.tsx';
 
 interface IFiltersAllProps {
     brands: TypeBrands[];
@@ -22,6 +22,10 @@ const FiltersAll = ({ brands }: IFiltersAllProps) => {
         return item.label.toLowerCase().includes(inputValue.toLowerCase());
     });
 
+    useEffect(() => {
+        setInputValue(brandActiveItem?.value === 'all' ? '' : brandActiveItem?.label);
+    }, [brandActiveItem]);
+
     const handleChangeList = (value: string, label: string) => {
         dispatch(setChangeBrands(value));
         if (value === 'all') {
@@ -31,6 +35,15 @@ const FiltersAll = ({ brands }: IFiltersAllProps) => {
         }
         setToggle(false);
         inputRef.current?.blur();
+    };
+
+    const inputOnFocus = () => {
+        setToggle(true);
+        setInputValue('');
+    };
+
+    const inputOnBlur = () => {
+        setToggle(false);
     };
 
     return (
@@ -48,24 +61,19 @@ const FiltersAll = ({ brands }: IFiltersAllProps) => {
                 >
                     <p className="mb-2 text-[14px] text-[#172335]">Марка и модель</p>
                     <div className="relative">
-                        <Input
-                            onChange={e => setInputValue(e.currentTarget.value)}
+                        <FiltersBrands
+                            onChange={value => setInputValue(value)}
+                            onFocus={inputOnFocus}
+                            onBlur={inputOnBlur}
                             value={inputValue}
-                            ref={inputRef}
-                            onBlur={() => {
-                                setToggle(false);
-                            }}
-                            onFocus={() => {
-                                setToggle(true);
-                                setInputValue('');
-                            }}
-                            className="h-12 bg-[#f2f4f8] text-[16px] border-none"
+                            inputRef={inputRef}
                             placeholder={
                                 brandActiveItem?.value === 'all' ? 'Марка' : brandActiveItem?.label
                             }
                         />
+
                         <FiltersList
-                            onChange={handleChangeList}
+                            onChange={(value, label) => handleChangeList(value, label)}
                             list={searchInput}
                             toggle={toggle}
                         />
