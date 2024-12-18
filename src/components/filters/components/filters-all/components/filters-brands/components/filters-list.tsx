@@ -1,21 +1,16 @@
-import { clsx } from 'clsx';
 import { TypeBrands } from '@/redux/slice/filters/filters-slice.ts';
-import FiltersItem from '@/components/filters/components/filters-all/components/filters-item.tsx';
+import FiltersItem from '@/components/filters/components/filters-all/components/filters-brands/components/filters-item';
 
 interface IFiltersListProps {
     onChange: (value: string, label: string) => void;
     list: TypeBrands[];
-    toggle: boolean;
 }
 
-const FiltersList = ({ toggle, list, onChange }: IFiltersListProps) => {
+const FiltersList = ({ list, onChange }: IFiltersListProps) => {
     return (
         <ul
             onMouseDown={e => e.preventDefault()}
-            className={clsx(
-                'absolute w-full max-h- bg-white overflow-hidden shadow opacity-0 rounded-xl top-14 pointer-events-none transition-opacity duration-150',
-                toggle && 'opacity-100 pointer-events-auto'
-            )}
+            className="absolute w-full max-h- bg-white overflow-hidden shadow rounded-xl top-14 transition-opacity duration-150"
         >
             {list.map((item, index) => (
                 <FiltersItem
