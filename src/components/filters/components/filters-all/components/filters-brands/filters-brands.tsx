@@ -1,45 +1,19 @@
 import { Input } from '@/shared/input.tsx';
-import { useRef, useState } from 'react';
 import FiltersList from '@/components/filters/components/filters-all/components/filters-brands/components/filters-list';
-import { useAppDispatch, useAppSelector } from '@/redux/store';
-import { getBrandActiveItem, getBrands } from '@/redux/slice/filters/filters-selectors';
-import { setChangeBrands } from '@/redux/slice/filters/filters-slice';
+import useFiltersBrands from '@/components/filters/components/filters-all/components/filters-brands/hooks/useFiltersBrands.ts';
 
 const FiltersBrands = () => {
-    const [toggle, setToggle] = useState<boolean>(false);
-    const brands = useAppSelector(getBrands);
-    const brandActiveItem = useAppSelector(getBrandActiveItem);
-    const inputRef = useRef<HTMLInputElement | null>(null);
-    const [inputValue, setInputValue] = useState<string>('');
-    const dispatch = useAppDispatch();
-
-    const searchInput = brands.filter(item => {
-        return item.label.toLowerCase().includes(inputValue.toLowerCase());
-    });
-
-    // useEffect(() => {
-    //     setInputValue(brandActiveItem?.value === 'all' ? '' : brandActiveItem?.label);
-    // }, [brandActiveItem]);
-
-    const handleChangeList = (value: string, label: string) => {
-        dispatch(setChangeBrands(value));
-        if (value === 'all') {
-            setInputValue('');
-        } else {
-            setInputValue(label);
-        }
-        setToggle(false);
-        inputRef.current?.blur();
-    };
-
-    const inputOnFocus = () => {
-        setToggle(true);
-        setInputValue('');
-    };
-
-    const inputOnBlur = () => {
-        setToggle(false);
-    };
+    const {
+        setInputValue,
+        inputOnFocus,
+        inputOnBlur,
+        inputValue,
+        inputRef,
+        brandActiveItem,
+        toggle,
+        searchInput,
+        handleChangeList,
+    } = useFiltersBrands();
 
     return (
         <div className="relative">

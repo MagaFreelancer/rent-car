@@ -4,13 +4,11 @@ import { ChevronUp, CircleX } from 'lucide-react';
 import { Input } from '@/shared/input.tsx';
 import React, { useState } from 'react';
 import { setChangePrice } from '@/redux/slice/filters/filters-slice.ts';
-import { useAppDispatch } from '@/redux/store.ts';
+import { useAppDispatch, useAppSelector } from '@/redux/store.ts';
+import { getPrice } from '@/redux/slice/filters/filters-selectors.ts';
 
-const FilterPrice = ({
-    price,
-}: {
-    price: { from: number | undefined; to: number | undefined };
-}) => {
+const FilterPrice = () => {
+    const price = useAppSelector(getPrice);
     const [priceValue, setPriceValue] = useState([price.from, price.to]);
     const dispatch = useAppDispatch();
 

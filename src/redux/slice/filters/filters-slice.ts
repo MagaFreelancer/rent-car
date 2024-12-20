@@ -92,7 +92,6 @@ const filtersSlice = createSlice({
             });
         },
         setToggleDrives(state, action: PayloadAction<string>) {
-            console.log(true);
             state.drives = state.drives
                 .map(drive => {
                     if (action.payload === 'all') {

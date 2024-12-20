@@ -4,7 +4,6 @@ import {
     getBrandActiveItem,
     getDrives,
     getDrivesActiveItems,
-    getPrice,
     getSort,
     getSortActiveItem,
 } from '@/redux/slice/filters/filters-selectors.ts';
@@ -24,7 +23,6 @@ const Filters = () => {
     const drivesActiveItems = useAppSelector(getDrivesActiveItems);
     const sortActive = useAppSelector(getSortActiveItem);
     const sort = useAppSelector(getSort);
-    const price = useAppSelector(getPrice);
     const brands = useAppSelector(getBrands);
     const drives = useAppSelector(getDrives);
     const dispatch = useAppDispatch();
@@ -44,7 +42,7 @@ const Filters = () => {
                     activeItems={drivesActiveItems}
                 />
 
-                <FilterPrice price={price} />
+                <FilterPrice />
 
                 <FiltersAll />
             </div>
