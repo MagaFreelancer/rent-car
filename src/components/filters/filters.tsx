@@ -16,7 +16,6 @@ import FilterPrice from '@/components/filters/components/filter-price.tsx';
 import Sort from '@/components/filters/components/sort/sort.tsx';
 import BrandsSort from '@/components/filters/components/brands-sort/brands-sort.tsx';
 import FilterDrives from '@/components/filters/components/filter-drives/filter-drives.tsx';
-import FiltersAll from '@/components/filters/components/filters-all/filters-all.tsx';
 
 const Filters = () => {
     const brandsActiveItem = useAppSelector(getBrandActiveItem);
@@ -44,7 +43,7 @@ const Filters = () => {
 
                 <FilterPrice />
 
-                <FiltersAll />
+                {/*<FiltersAll />*/}
             </div>
 
             <Sort
