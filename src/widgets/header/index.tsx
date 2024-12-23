@@ -13,7 +13,7 @@ const Header = () => {
             <Container>
                 <nav className="flex justify-between items-center">
                     <NavLink className="transition hover:text-blue text-[25px] font-medium" to="/">
-                        Rent-Car
+                        Rent-Care
                     </NavLink>
                     <ul className="flex gap-6">
                         <li>
