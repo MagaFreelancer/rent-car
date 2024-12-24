@@ -1,4 +1,4 @@
 import { RootState } from '@/redux/store.ts';
 
-export const getCars = (state: RootState) => state.cars.cars;
-export const getCarsStatus = (state: RootState) => state.cars.status;
+export const getCarsSelector = (state: RootState) => state.cars.cars;
+export const getCarsStatusSelector = (state: RootState) => state.cars.status;
