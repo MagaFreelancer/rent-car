@@ -7,6 +7,8 @@ export default {
             fontFamily: {
                 sans: ['Poppins', 'sans-serif'],
                 jakarta: ['"Plus Jakarta Sans"', 'sans-serif'], // Добавляем кастомный шрифт
+                inter: ['Inter', 'sans-serif'],
+                montserrat: ['Montserrat', 'sans-serif'],
             },
             borderRadius: {
                 lg: 'var(--radius)',

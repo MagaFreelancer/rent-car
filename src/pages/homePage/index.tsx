@@ -3,6 +3,7 @@ import { cn } from '@/lib/utils';
 import Container from '@/shared/container';
 import { CategoryCarsSlider } from '@/components/categoryCars';
 import useGetCars from './hooks/useGetCars';
+import { About } from './components/about';
 
 interface Props {
     className?: string;
@@ -16,6 +17,7 @@ export const HomePage: React.FC<Props> = ({ className }: Props) => {
         <div className={cn('', className)}>
             <Container>
                 <CategoryCarsSlider objs={cars} title="Cars" beforeTitle="New" />
+                <About />
             </Container>
         </div>
     );
