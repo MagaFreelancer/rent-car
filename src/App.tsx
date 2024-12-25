@@ -59,7 +59,6 @@ const App = () => {
 
                 <main className="flex-grow">
                     <Routes>
-                        <Route path="auth/:type" element={<Auth />} />
                         <Route path="/cars" element={<Cars />} />
                         <Route path="/cars/:id" element={<SinglePage />} />
                         <Route element={<PrivateRoute restrictedToAuth={false} />}>
