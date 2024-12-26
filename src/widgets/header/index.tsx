@@ -84,7 +84,7 @@ const Header = () => {
                                             <NavLink
                                                 onClick={() => setIsOpenPopover(false)}
                                                 className="flex transition hover:bg-[#EFF6FF] p-3 text-[16px] text-[#172335] gap-3"
-                                                to="/"
+                                                to="profile/applications"
                                             >
                                                 <List className="text-[#C7CACF] h-6 w-6 " />
                                                 Мои заказы
