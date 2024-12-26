@@ -15,31 +15,38 @@ const SinglePage = () => {
     }
     return (
         <Container>
-            <div className="font-inter">
-                <CarSlider car={car} />
-                <div className="bg-white py-6 px-4 mb-4 rounded-lg">
-                    <h2 className="mb-2">
-                        {car.brand} {car.model}, {car.year}
-                    </h2>
-                    <Rating
-                        size="small"
-                        name="text-feedback"
-                        value={car.rating}
-                        readOnly
-                        precision={0.5}
-                        emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
+            <div className="font-inter my-[30px]">
+                <div className="grid grid-cols-3 gap-[24px]">
+                    <div className="col-span-2">
+                        <CarSlider className="max-w-full" car={car} />
+                        <div className="bg-white py-6 px-4 mb-4 rounded-lg">
+                            <h2 className="mb-2">
+                                {car.brand} {car.model}, {car.year}
+                            </h2>
+                            <Rating
+                                size="small"
+                                name="text-feedback"
+                                value={car.rating}
+                                readOnly
+                                precision={0.5}
+                                emptyIcon={
+                                    <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
+                                }
+                            />
+                        </div>
+                        <CarInfo
+                            rentalRules={car.carDetails.rentalRules}
+                            carSpecifications={car.carDetails.carSpecifications}
+                        />
+                        {/* <CarsLike /> */}
+                    </div>
+                    <CarRegistration
+                        className="self-start"
+                        price={car.price}
+                        mileageMax={car.carDetails.rentalRules.mileageMax.text}
+                        surcharge={car.carDetails.rentalRules.surcharge.text}
                     />
                 </div>
-                <CarRegistration
-                    price={car.price}
-                    mileageMax={car.carDetails.rentalRules.mileageMax.text}
-                    surcharge={car.carDetails.rentalRules.surcharge.text}
-                />
-                <CarInfo
-                    rentalRules={car.carDetails.rentalRules}
-                    carSpecifications={car.carDetails.carSpecifications}
-                />
-                <CarsLike />
             </div>
         </Container>
     );

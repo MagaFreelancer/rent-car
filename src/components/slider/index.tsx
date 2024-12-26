@@ -30,7 +30,11 @@ const SliderProviderComponent = ({ children, imgs, className }: any) => {
                 <CarouselContent>
                     {imgs.map((url: any, index: number) => (
                         <CarouselItem key={index}>
-                            <img className="rounded-lg w-full" src={url} alt={`car ${index + 1}`} />
+                            <img
+                                className="rounded-lg w-full h-[100%]"
+                                src={url}
+                                alt={`car ${index + 1}`}
+                            />
                         </CarouselItem>
                     ))}
                 </CarouselContent>

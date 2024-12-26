@@ -5,15 +5,18 @@ import CarDriverForm from './components/car-driver-form';
 import useCarForm from '../../hooks/useCarForm';
 import CarTotal from './components/car-total';
 import CarMoreInfo from './components/car-more-info';
+import { cn } from '@/lib/utils';
 
 const CarRegistration = ({
     price,
     mileageMax,
     surcharge,
+    className,
 }: {
     price: number;
     mileageMax: string;
     surcharge: string;
+    className?: string;
 }) => {
     const {
         register,
@@ -28,7 +31,7 @@ const CarRegistration = ({
     } = useCarForm(price);
 
     return (
-        <div className="bg-white rounded-lg py-6 px-4 mb-4">
+        <div className={cn('bg-white py-6 px-4 mb-4 rounded-lg', className)}>
             <h3 className="mb-5  font-semibold ">Оформление</h3>
             <form className="mb-4" onSubmit={handleSubmit(onSubmit)}>
                 <CarAddressForm
