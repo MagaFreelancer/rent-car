@@ -6,6 +6,7 @@ import CarSlider from './components/car-slider';
 import Container from '@/shared/container';
 import CarInfo from './components/carInfo';
 import CarsLike from '@/components/cars-like';
+import Title from '@/shared/Title';
 
 const SinglePage = () => {
     const { car, statusCar } = useGetCar();
@@ -16,13 +17,13 @@ const SinglePage = () => {
     return (
         <Container>
             <div className="font-inter my-[30px]">
-                <div className="grid grid-cols-3 gap-[24px]">
+                <div className="grid grid-cols-3 max-md:grid-cols-1 gap-[24px]">
                     <div className="col-span-2">
                         <CarSlider className="max-w-full" car={car} />
                         <div className="bg-white py-6 px-4 mb-4 rounded-lg">
-                            <h2 className="mb-2">
+                            <Title className="mb-2 font-bold ">
                                 {car.brand} {car.model}, {car.year}
-                            </h2>
+                            </Title>
                             <Rating
                                 size="small"
                                 name="text-feedback"
@@ -34,6 +35,12 @@ const SinglePage = () => {
                                 }
                             />
                         </div>
+                        <CarRegistration
+                            className="self-start hidden max-md:block"
+                            price={car.price}
+                            mileageMax={car.carDetails.rentalRules.mileageMax.text}
+                            surcharge={car.carDetails.rentalRules.surcharge.text}
+                        />
                         <CarInfo
                             rentalRules={car.carDetails.rentalRules}
                             carSpecifications={car.carDetails.carSpecifications}
@@ -41,7 +48,7 @@ const SinglePage = () => {
                         {/* <CarsLike /> */}
                     </div>
                     <CarRegistration
-                        className="self-start"
+                        className="self-start max-md:hidden"
                         price={car.price}
                         mileageMax={car.carDetails.rentalRules.mileageMax.text}
                         surcharge={car.carDetails.rentalRules.surcharge.text}

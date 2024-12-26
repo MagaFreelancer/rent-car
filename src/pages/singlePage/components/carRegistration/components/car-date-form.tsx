@@ -23,7 +23,7 @@ const CarFormDate = ({ date, setDate, days }: any) => {
                             !date && 'text-muted-foreground'
                         )}
                     >
-                        <span className="flex">
+                        <span className="flex text-[13px]">
                             <CalendarIcon className="w-5 h-5 mr-2 text-placeholder" />
                             {date?.from ? (
                                 date.to ? (
@@ -38,7 +38,7 @@ const CarFormDate = ({ date, setDate, days }: any) => {
                                 <span>Pick a date</span>
                             )}
                         </span>
-                        <span>{days} days</span>
+                        <span className="text-[10px]">{days} days</span>
                     </Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-auto p-0" align="start">
