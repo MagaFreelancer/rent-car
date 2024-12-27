@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils.ts';
 
 const NavMenu = () => {
     return (
-        <ul className="bg-white rounded-md">
+        <ul className="bg-white rounded-md self-start">
             <li className="group transition">
                 <NavLink
                     to="/profile"
