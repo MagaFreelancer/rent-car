@@ -5,15 +5,25 @@ export default {
     theme: {
         extend: {
             screens: {
-                'max-xl': { max: '11399px' },
-                'max-lg': { max: '1200px' },
-                'max-md': { max: '992px' },
-                'max-sm': { max: '768px' },
-                'max-xs': { max: '480px' },
+                'max-xl': {
+                    max: '11399px',
+                },
+                'max-lg': {
+                    max: '1200px',
+                },
+                'max-md': {
+                    max: '992px',
+                },
+                'max-sm': {
+                    max: '768px',
+                },
+                'max-xs': {
+                    max: '480px',
+                },
             },
             fontFamily: {
                 sans: ['Poppins', 'sans-serif'],
-                jakarta: ['"Plus Jakarta Sans"', 'sans-serif'], // Добавляем кастомный шрифт
+                jakarta: ['Plus Jakarta Sans"', 'sans-serif'],
                 inter: ['Inter', 'sans-serif'],
                 montserrat: ['Montserrat', 'sans-serif'],
             },
@@ -36,7 +46,6 @@ export default {
                 placeholder: 'rgba(23, 35, 53, 0.44)',
                 placeholder600: 'rgba(23, 35, 53, 0.6)',
                 red600: 'rgb(241, 75, 60)',
-
                 card: {
                     DEFAULT: 'hsl(var(--card))',
                     foreground: 'hsl(var(--card-foreground))',
@@ -75,6 +84,28 @@ export default {
                     4: 'hsl(var(--chart-4))',
                     5: 'hsl(var(--chart-5))',
                 },
+            },
+            keyframes: {
+                'accordion-down': {
+                    from: {
+                        height: '0',
+                    },
+                    to: {
+                        height: 'var(--radix-accordion-content-height)',
+                    },
+                },
+                'accordion-up': {
+                    from: {
+                        height: 'var(--radix-accordion-content-height)',
+                    },
+                    to: {
+                        height: '0',
+                    },
+                },
+            },
+            animation: {
+                'accordion-down': 'accordion-down 0.2s ease-out',
+                'accordion-up': 'accordion-up 0.2s ease-out',
             },
         },
     },
