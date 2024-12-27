@@ -48,8 +48,11 @@ export const CategoryCarsSlider: React.FC<Props> = ({
             <Carousel setApi={setApi} className={clsx('relative font-jakarta', className)}>
                 <CarouselContent>
                     {objs.map((obj: any, index: number) => (
-                        <CarouselItem className="basis-1/4" key={index}>
-                            <CardCarGroup car={obj} type="card">
+                        <CarouselItem
+                            className="basis-1/4  max-md:basis-1/2 max-sm:basis-full "
+                            key={index}
+                        >
+                            <CardCarGroup className="max-md:max-w-full" car={obj} type="card">
                                 <CardCarTitle />
 
                                 <CardCarCol>
@@ -63,8 +66,8 @@ export const CategoryCarsSlider: React.FC<Props> = ({
                         </CarouselItem>
                     ))}
                 </CarouselContent>
-                <CarouselPrevious className="left-0 h-[56px] w-[56px] rounded-[50%]" />
-                <CarouselNext className="right-0 h-[56px] w-[56px] rounded-[50%] " />
+                <CarouselPrevious className="left-0 h-[56px] w-[56px] rounded-[50%]  max-md:hidden " />
+                <CarouselNext className="right-0 h-[56px] w-[56px] rounded-[50%] max-md:hidden  " />
             </Carousel>
         </div>
     );

@@ -30,7 +30,7 @@ const useCarContext = () => {
 
 const CardCarProviderComponent = ({ children, className, car, type }: IProviderCar) => (
     <ContextCar.Provider value={{ ...car, type }}>
-        <div className={cn('w-[365px] p-[6px] bg-white rounded-lg', className)}>
+        <div className={cn('max-w-[365px]  bg-white rounded-lg', className)}>
             <CardCarSlider />
 
             <div className="p-[10px]">{children}</div>

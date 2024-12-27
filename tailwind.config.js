@@ -5,11 +5,11 @@ export default {
     theme: {
         extend: {
             screens: {
-                'max-xs': { max: '480px' },
-                'max-sm': { max: '768px' },
-                'max-md': { max: '992px' },
-                'max-lg': { max: '1200px' },
                 'max-xl': { max: '11399px' },
+                'max-lg': { max: '1200px' },
+                'max-md': { max: '992px' },
+                'max-sm': { max: '768px' },
+                'max-xs': { max: '480px' },
             },
             fontFamily: {
                 sans: ['Poppins', 'sans-serif'],
