@@ -49,7 +49,7 @@ export const CategoryCarsSlider: React.FC<Props> = ({
                 <CarouselContent>
                     {objs.map((obj: any, index: number) => (
                         <CarouselItem className="basis-1/4" key={index}>
-                            <CardCarGroup car={obj}>
+                            <CardCarGroup car={obj} type="card">
                                 <CardCarTitle />
 
                                 <CardCarCol>

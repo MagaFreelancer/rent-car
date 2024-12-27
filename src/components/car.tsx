@@ -8,12 +8,14 @@ interface IContextCar {
     model: string;
     brand: string;
     imgs: string;
+    type?: 'normal' | 'card';
 }
 
 interface IProviderCar {
     car: any;
     children: ReactNode;
     className?: string;
+    type?: 'normal' | 'card';
 }
 
 const ContextCar = createContext<IContextCar | undefined>(undefined);
@@ -26,8 +28,8 @@ const useCarContext = () => {
     return context;
 };
 
-const CardCarProviderComponent = ({ children, className, car }: IProviderCar) => (
-    <ContextCar.Provider value={car}>
+const CardCarProviderComponent = ({ children, className, car, type }: IProviderCar) => (
+    <ContextCar.Provider value={{ ...car, type }}>
         <div className={cn('w-[365px] p-[6px] bg-white rounded-lg', className)}>
             <CardCarSlider />
 
@@ -37,9 +39,9 @@ const CardCarProviderComponent = ({ children, className, car }: IProviderCar) =>
 );
 
 const CardCarSlider = () => {
-    const { imgs } = useCarContext();
+    const { imgs, type } = useCarContext();
     return (
-        <SliderGroup imgs={imgs}>
+        <SliderGroup imgs={imgs} type={type}>
             <SliderBullets />
             <SliderArrows />
         </SliderGroup>

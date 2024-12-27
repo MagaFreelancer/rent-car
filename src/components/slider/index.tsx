@@ -22,7 +22,7 @@ const useSliderContext = () => {
     }
     return context;
 };
-const SliderProviderComponent = ({ children, imgs, className }: any) => {
+const SliderProviderComponent = ({ children, imgs, className, type = 'normal' }: any) => {
     const { setApi, current, count } = useSlider();
     return (
         <sliderContext.Provider value={{ imgs, current, count }}>
@@ -31,7 +31,10 @@ const SliderProviderComponent = ({ children, imgs, className }: any) => {
                     {imgs.map((url: any, index: number) => (
                         <CarouselItem key={index}>
                             <img
-                                className="rounded-lg w-full h-[100%]"
+                                className={clx(
+                                    'rounded-lg w-full h-full object-cover',
+                                    type === 'card' && 'max-h-[220px]'
+                                )}
                                 src={url}
                                 alt={`car ${index + 1}`}
                             />
