@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { authUser, fetchRegister } from '@/redux/thunk/auth-fetch.ts';
+import { authUser, fetchRegister, userAuthMe } from '@/redux/thunk/auth-fetch.ts';
 
 type TypeUser = {
     id: number;
@@ -68,6 +68,21 @@ const usersSlice = createSlice({
             state.isLogged = true;
         });
         builder.addCase(authUser.rejected, (state, action: PayloadAction<unknown>) => {
+            state.status = false;
+            state.isLogged = false;
+            state.error = (action.payload as string) || 'Ошибка авторизации';
+        });
+
+        builder.addCase(userAuthMe.pending, state => {
+            state.status = true;
+            state.isLogged = false;
+        });
+        builder.addCase(userAuthMe.fulfilled, (state, action) => {
+            state.data = action.payload;
+            state.status = true;
+            state.isLogged = true;
+        });
+        builder.addCase(userAuthMe.rejected, (state, action: PayloadAction<unknown>) => {
             state.status = false;
             state.isLogged = false;
             state.error = (action.payload as string) || 'Ошибка авторизации';

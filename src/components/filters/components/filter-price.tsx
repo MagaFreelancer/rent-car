@@ -12,8 +12,6 @@ const FilterPrice = () => {
     const [inputPriceFrom, setInputPriceFrom] = useState<number | string>('');
     const [inputPriceTo, setInputPriceTo] = useState<number | string>('');
 
-    console.log('from', inputPriceFrom, 'to', inputPriceTo);
-
     return (
         <Popover>
             <PopoverTrigger className="gap-1 shadow transition items-center py-2 px-4 flex rounded-xl bg-white hover:shadow-md">
