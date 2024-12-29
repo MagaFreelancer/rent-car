@@ -33,7 +33,7 @@ const SliderProviderComponent = ({ children, imgs, className, type = 'normal' }:
                             <img
                                 className={clx(
                                     'rounded-lg w-full object-cover',
-                                    type === 'card' && 'max-h-[220px] h-[220px] rounded-b-none '
+                                    type === 'card' && 'max-h-[220px] h-[220px] rounded-b-none'
                                 )}
                                 src={url}
                                 alt={`car ${index + 1}`}
