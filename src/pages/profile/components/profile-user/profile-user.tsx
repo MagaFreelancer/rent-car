@@ -3,20 +3,37 @@ import { Input } from '@/shared/input.tsx';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Button } from '@/shared/button.tsx';
 import InputMask from '@/shared/input-mask.tsx';
+import { TypeUser } from '@/redux/slice/auth/auth-slice.ts';
 
 type Inputs = {
+    name: string;
     fullName: string;
     date: string;
     phone: string;
+    password: string;
+    repeatPassword: string;
+    email: string;
 };
 
-const ProfileUser = () => {
+interface IProfileUser {
+    userData: TypeUser;
+    isLogged: boolean;
+}
+
+const ProfileUser = ({ userData, isLogged }: IProfileUser) => {
     const {
         register,
         handleSubmit,
         setValue,
         // formState: { errors },
-    } = useForm<Inputs>();
+    } = useForm<Inputs>({
+        defaultValues: {
+            fullName: userData.name,
+            email: userData.email,
+            phone: userData.phone,
+            date: userData.date,
+        },
+    });
 
     const onSubmit: SubmitHandler<Inputs> = data => {
         console.log(data);
@@ -33,23 +50,26 @@ const ProfileUser = () => {
                     {...register('fullName')}
                     className="transition rounded py-6 px-5 mb-2"
                     placeholder="Имя и фамилия"
+                    type="text"
                 />
-                <InputMask
-                    type="date"
-                    onChange={(value: string) => setValue('date', value)}
+                <Input
+                    {...register('date')}
                     className="transition rounded py-6 px-5 mb-2"
+                    placeholder="Дата рождения"
+                    type="date"
                 />
             </div>
 
             <div className="mb-10">
                 <p className="text-[13px] mb-4 font-bold">дополнительная информация</p>
-                <InputMask
-                    type="phone"
-                    onChange={(value: string) => setValue('phone', value)}
+                <Input
+                    {...register('phone')}
                     className="transition rounded py-6 px-5 mb-2"
+                    placeholder="Телефон"
+                    type="number"
                 />
                 <Input
-                    {...register('fullName')}
+                    {...register('email')}
                     className="transition rounded py-6 px-5 mb-2"
                     placeholder="Почта"
                     type="email"
@@ -59,13 +79,13 @@ const ProfileUser = () => {
             <div className="mb-10">
                 <p className="text-[13px] mb-4 font-bold">изменение пароля</p>
                 <Input
-                    {...register('fullName')}
+                    {...register('password')}
                     className="transition rounded py-6 px-5 mb-2"
                     placeholder="Новый пароль"
                     type="password"
                 />
                 <Input
-                    {...register('fullName')}
+                    {...register('repeatPassword')}
                     className="transition rounded py-6 px-5 mb-2"
                     placeholder="Повторите новый пароль"
                     type="password"

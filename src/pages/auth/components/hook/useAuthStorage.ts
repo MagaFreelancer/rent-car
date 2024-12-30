@@ -1,6 +1,6 @@
 import { useLocalStorage, useSessionStorage } from 'usehooks-ts';
 
-type IUserStorage = {
+export type IUserStorage = {
     token: string;
     name: string;
 };

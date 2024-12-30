@@ -7,9 +7,11 @@ interface IInputMask {
     onChange: (value: string) => void;
     className?: string;
     type: 'date' | 'phone';
+    placeholder?: string;
+    value?: string;
 }
 
-export const InputMask = ({ onChange, className, type }: IInputMask) => {
+export const InputMask = ({ onChange, className, type, placeholder, value }: IInputMask) => {
     const CFormInputWithMask = IMaskMixin(
         ({ inputRef, ...props }: { inputRef: Ref<HTMLInputElement> }) => (
             <CFormInput {...props} ref={inputRef} />
@@ -18,7 +20,7 @@ export const InputMask = ({ onChange, className, type }: IInputMask) => {
 
     const typeFormat: Record<IInputMask['type'], string | DateConstructor> = {
         date: Date,
-        phone: '+{7}(000)000-00-00',
+        phone: '+{0}(000)000-00-00',
     };
 
     return (
@@ -30,8 +32,10 @@ export const InputMask = ({ onChange, className, type }: IInputMask) => {
             mask={typeFormat[type]}
             min={new Date(1990, 0, 1)}
             max={new Date(2020, 0, 1)}
-            lazy={false}
+            lazy={!!placeholder}
+            placeholder={placeholder}
             onAccept={onChange}
+            value={value}
         />
     );
 };
