@@ -27,10 +27,26 @@ export const carRegistrationSchema = yup.object().shape({
     email: yup.string().email(AppErrors.InvalidEmail).required(AppErrors.RequiredField),
     tel: yup.string().min(10, AppErrors.minLength).required(AppErrors.RequiredField),
     dateOfBirth: yup.string().required(AppErrors.RequiredField),
-    deliveryOption: yup.string().required("Выберите опцию доставки"),
-    additionalInfo: yup.string().when("deliveryOption", {
-        is: "delivery",
-        then: (schema) => schema.required("Поле обязательно для заполнения").min(10, "Минимум 10 символов"),
-        otherwise: (schema) => schema.notRequired(),
+    deliveryOption: yup.string().required('Выберите опцию доставки'),
+    additionalInfo: yup.string().when('deliveryOption', {
+        is: 'delivery',
+        then: schema =>
+            schema.required('Поле обязательно для заполнения').min(10, 'Минимум 10 символов'),
+        otherwise: schema => schema.notRequired(),
     }),
+});
+
+export const changeDataUserSchema = yup.object().shape({
+    fullName: yup.string().min(4, AppErrors.minLengthName),
+    date: yup.string(),
+    phone: yup.string().min(8, AppErrors.minLengthName),
+    email: yup.string().email(AppErrors.InvalidEmail),
+    password: yup
+        .string()
+        .min(8, AppErrors.minLength)
+        .matches(
+            /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[a-zA-Z!#$%&? "])[a-zA-Z0-9!@#$%&?]{6,20}$/,
+            AppErrors.InvalidPassword
+        ),
+    repeat: yup.string().oneOf([yup.ref('password')], 'Пароли не совпадают'), // Сравнение с полем password
 });

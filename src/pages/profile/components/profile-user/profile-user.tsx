@@ -3,6 +3,8 @@ import { Input } from '@/shared/input.tsx';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Button } from '@/shared/button.tsx';
 import { TypeUser } from '@/redux/slice/auth/auth-slice.ts';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { changeDataUserSchema } from '@/utils/yup.ts';
 
 type Inputs = {
     name: string;
@@ -22,7 +24,7 @@ const ProfileUser = ({ userData }: IProfileUser) => {
     const {
         register,
         handleSubmit,
-        // formState: { errors },
+        formState: { errors },
     } = useForm<Inputs>({
         defaultValues: {
             fullName: userData.name,
@@ -30,11 +32,15 @@ const ProfileUser = ({ userData }: IProfileUser) => {
             phone: userData.phone,
             date: userData.date,
         },
+        resolver: yupResolver(changeDataUserSchema),
     });
 
     const onSubmit: SubmitHandler<Inputs> = data => {
         console.log(data);
+        console.log(errors);
     };
+
+    console.log(errors);
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
