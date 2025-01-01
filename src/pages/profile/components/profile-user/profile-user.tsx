@@ -2,7 +2,6 @@ import Title from '@/shared/Title.tsx';
 import { Input } from '@/shared/input.tsx';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Button } from '@/shared/button.tsx';
-import InputMask from '@/shared/input-mask.tsx';
 import { TypeUser } from '@/redux/slice/auth/auth-slice.ts';
 
 type Inputs = {
@@ -17,14 +16,12 @@ type Inputs = {
 
 interface IProfileUser {
     userData: TypeUser;
-    isLogged: boolean;
 }
 
-const ProfileUser = ({ userData, isLogged }: IProfileUser) => {
+const ProfileUser = ({ userData }: IProfileUser) => {
     const {
         register,
         handleSubmit,
-        setValue,
         // formState: { errors },
     } = useForm<Inputs>({
         defaultValues: {

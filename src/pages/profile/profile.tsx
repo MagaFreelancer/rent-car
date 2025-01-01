@@ -17,11 +17,7 @@ const Profile = () => {
                     <Route
                         path="/*"
                         element={
-                            <Suspense>
-                                {isLogged && (
-                                    <ProfileUser userData={userData} isLogged={isLogged} />
-                                )}
-                            </Suspense>
+                            <Suspense>{isLogged && <ProfileUser userData={userData} />}</Suspense>
                         }
                     />
                     <Route path="/applications" element={'text'} />
