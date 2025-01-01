@@ -5,17 +5,16 @@ import { CategoryCarsSlider } from '@/components/categoryCars';
 import useGetCars from './hooks/useGetCars';
 import { About } from './components/about';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/shared/accordion';
-import faqImg from '@/assets/faq.png';
 import Title from '@/shared/Title';
 import { MessageCircle } from 'lucide-react';
 import { Button } from '@/shared/button';
+
 interface Props {
     className?: string;
 }
 
 export const HomePage: React.FC<Props> = ({ className }: Props) => {
-    const { statusCars, cars } = useGetCars();
-    console.log(statusCars, cars);
+    const { cars } = useGetCars();
 
     return (
         <div className={cn('', className)}>

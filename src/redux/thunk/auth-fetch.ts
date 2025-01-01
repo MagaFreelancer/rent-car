@@ -40,7 +40,7 @@ export const authUser = createAsyncThunk(
 );
 
 export const userAuthMe = createAsyncThunk(
-    'auth/authMe',
+    'user/authMe',
     async (token: string, { rejectWithValue }) => {
         try {
             const response = await instance.get('/auth_me', {

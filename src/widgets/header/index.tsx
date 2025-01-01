@@ -2,8 +2,8 @@ import { NavLink } from 'react-router-dom';
 import Container from '@/shared/container.tsx';
 import { Button } from '@/shared/button.tsx';
 import useAuth from '@/utils/hooks/useAuth.ts';
-import { Avatar, AvatarFallback } from '@/shared/avatar.tsx';
 import { Navigation } from 'lucide-react';
+import ProfilePopover from '@/widgets/header/compopnents/profile-popover.tsx';
 
 const Header = () => {
     const { status, storage } = useAuth();
@@ -13,7 +13,7 @@ const Header = () => {
             <Container>
                 <nav className="flex justify-between items-center">
                     <NavLink className="transition hover:text-blue text-[25px] font-medium" to="/">
-                        Rent-Car
+                        Rent-Care
                     </NavLink>
                     <ul className="flex gap-6">
                         <li>
@@ -54,11 +54,7 @@ const Header = () => {
                     <div className="flex items-center">
                         <p>+7 495 120-80-70</p>
                         {status ? (
-                            <Avatar className="ml-6 w-10 h-10">
-                                <AvatarFallback className="bg-[#e5e5e5]">
-                                    {storage.name.slice(0, 2)}
-                                </AvatarFallback>
-                            </Avatar>
+                            <ProfilePopover avatar={storage.name.slice(0, 2)} />
                         ) : (
                             <NavLink to="auth/login">
                                 <Button variant="gray" className="ml-5">

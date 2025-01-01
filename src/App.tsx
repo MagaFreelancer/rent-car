@@ -10,7 +10,6 @@ import Profile from '@/pages/profile/profile.tsx';
 import Header from '@/widgets/header';
 import Footer from '@/widgets/footer';
 import SinglePage from '@/pages/singlePage';
-import { HomePage } from './pages/homePage';
 // import Container from '@/shared/container.tsx';
 // import {
 //     CardBrand,
@@ -60,7 +59,6 @@ const App = () => {
 
                 <main className="flex-grow">
                     <Routes>
-                        <Route path="/" element={<HomePage />} />
                         <Route path="auth/:type" element={<Auth />} />
                         <Route path="/cars" element={<Cars />} />
                         <Route path="/cars/:id" element={<SinglePage />} />

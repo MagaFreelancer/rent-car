@@ -5,6 +5,7 @@ import useLogin from '@/pages/auth/components/hook/useLogin.ts';
 import useRegister from '@/pages/auth/components/hook/useRegister.ts';
 import { useDispatch } from 'react-redux';
 import { resetError } from '@/redux/slice/auth/auth-slice.ts';
+import { IUserStorage } from '@/pages/auth/components/hook/useAuthStorage.ts';
 
 export interface TypeLogin {
     email: string;
@@ -20,7 +21,10 @@ export interface TypeRegister {
     remember?: boolean;
 }
 
-export const useAuthForm = (isLogin: boolean, saveUser: any) => {
+export const useAuthForm = (
+    isLogin: boolean,
+    saveUser: (user: IUserStorage, remember: boolean) => void
+) => {
     const dispatch = useDispatch();
     const { authLogin } = useLogin();
     const { registerUser } = useRegister();
