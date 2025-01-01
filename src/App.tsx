@@ -66,7 +66,7 @@ const App = () => {
                             <Route path="auth/:type" element={<Auth />} />
                         </Route>
                         <Route element={<PrivateRoute restrictedToAuth={true} />}>
-                            <Route path="/profile" element={<Profile />} />
+                            <Route path="/profile/*" element={<Profile />} />
                         </Route>
                     </Routes>
                 </main>
