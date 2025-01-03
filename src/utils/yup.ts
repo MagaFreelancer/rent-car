@@ -37,16 +37,40 @@ export const carRegistrationSchema = yup.object().shape({
 });
 
 export const changeDataUserSchema = yup.object().shape({
-    fullName: yup.string().min(4, AppErrors.minLengthName),
-    date: yup.string(),
-    phone: yup.string().min(8, AppErrors.minLengthName),
-    email: yup.string().email(AppErrors.InvalidEmail),
+    fullName: yup
+        .string()
+        .optional() // Делаем поле необязательным
+        .test(
+            'is-valid-fullname',
+            AppErrors.minLengthName,
+            value => !value || value.length >= 4 // Валидируем только если есть данные
+        ),
+    email: yup
+        .string()
+        .optional()
+        .test(
+            'is-valid-email',
+            AppErrors.InvalidEmail,
+            value => !value || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) // Проверяем только если что-то введено
+        ),
     password: yup
         .string()
-        .min(8, AppErrors.minLength)
-        .matches(
-            /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[a-zA-Z!#$%&? "])[a-zA-Z0-9!@#$%&?]{6,20}$/,
-            AppErrors.InvalidPassword
+        .optional()
+        .test(
+            'is-valid-password',
+            AppErrors.InvalidPassword,
+            value =>
+                !value ||
+                /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[a-zA-Z!#$%&? "])[a-zA-Z0-9!@#$%&?]{6,20}$/.test(
+                    value
+                )
         ),
-    repeatPassword: yup.string().oneOf([yup.ref('password')], 'Пароли не совпадают'), // Сравнение с полем password
+    repeat: yup
+        .string()
+        .optional()
+        .test(
+            'is-valid-repeat',
+            'Пароли не совпадают',
+            (value, context) => value === context.parent.password // Проверка только если введены оба поля
+        ),
 });

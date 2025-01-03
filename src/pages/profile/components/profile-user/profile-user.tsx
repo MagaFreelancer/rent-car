@@ -11,7 +11,7 @@ type Inputs = {
     date: string;
     phone: string;
     password: string;
-    repeatPassword: string;
+    repeat: string;
     email: string;
 };
 
@@ -24,7 +24,7 @@ const ProfileUser = ({ userData }: IProfileUser) => {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm<Inputs>({
+    } = useForm<any>({
         defaultValues: {
             fullName: userData.name,
             email: userData.email,
@@ -85,7 +85,7 @@ const ProfileUser = ({ userData }: IProfileUser) => {
                     type="password"
                 />
                 <Input
-                    {...register('repeatPassword')}
+                    {...register('repeat')}
                     className="transition rounded py-6 px-5 mb-2"
                     placeholder="Повторите новый пароль"
                     type="password"
