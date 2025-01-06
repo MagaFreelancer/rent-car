@@ -10,6 +10,7 @@ import Profile from '@/pages/profile/profile.tsx';
 import Header from '@/widgets/header';
 import Footer from '@/widgets/footer';
 import SinglePage from '@/pages/singlePage';
+import { Toaster } from '@/shared/sonner.tsx';
 // import Container from '@/shared/container.tsx';
 // import {
 //     CardBrand,
@@ -69,6 +70,7 @@ const App = () => {
                             <Route path="/profile/*" element={<Profile />} />
                         </Route>
                     </Routes>
+                    <Toaster position="top-center" />
                 </main>
 
                 <Footer />

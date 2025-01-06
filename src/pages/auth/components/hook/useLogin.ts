@@ -7,7 +7,6 @@ const useLogin = () => {
     const navigate = useNavigate();
 
     const authLogin = async (data: any, saveUser: any) => {
-        // const { remember, ...loginData } = data;
         const loginData = {
             email: data.email,
             password: data.password,

@@ -19,5 +19,17 @@ export const useAuthStorage = () => {
         }
     };
 
-    return { localUser, sessionUser, saveUser, removeLocalUser, removeSessionUser };
+    const removeAllStorage = () => {
+        removeSessionUser();
+        removeLocalUser();
+    };
+
+    return {
+        localUser,
+        sessionUser,
+        saveUser,
+        removeAllStorage,
+        removeLocalUser,
+        removeSessionUser,
+    };
 };

@@ -19,7 +19,7 @@ export const registerSchema = yup.object().shape({
         ),
     repeat: yup
         .string()
-        .oneOf([yup.ref('password')], 'Пароли не совпадают') // Сравнение с полем password
+        .oneOf([yup.ref('password')], 'Пароли не совпадают')
         .required('Повторите пароль обязателен'),
 });
 export const carRegistrationSchema = yup.object().shape({
@@ -37,40 +37,54 @@ export const carRegistrationSchema = yup.object().shape({
 });
 
 export const changeDataUserSchema = yup.object().shape({
-    fullName: yup
+    name: yup
         .string()
-        .optional() // Делаем поле необязательным
-        .test(
-            'is-valid-fullname',
-            AppErrors.minLengthName,
-            value => !value || value.length >= 4 // Валидируем только если есть данные
-        ),
+        .optional()
+        .test('is-valid-fullName', AppErrors.minLengthName, value => !value || value.length >= 4),
     email: yup
+        .string()
+        .email(AppErrors.InvalidEmail)
+        .optional()
+        .required()
+        .test(
+            'is-valid-email',
+            AppErrors.InvalidEmail,
+            value => !value || /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value)
+        ),
+    date: yup
+        .string()
+        .optional()
+        .test('is-valid-date', AppErrors.minPhone, value => !value || value.length > 8),
+    phone: yup
         .string()
         .optional()
         .test(
             'is-valid-email',
-            AppErrors.InvalidEmail,
-            value => !value || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) // Проверяем только если что-то введено
-        ),
-    password: yup
-        .string()
-        .optional()
-        .test(
-            'is-valid-password',
-            AppErrors.InvalidPassword,
+            AppErrors.phone,
             value =>
                 !value ||
-                /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[a-zA-Z!#$%&? "])[a-zA-Z0-9!@#$%&?]{6,20}$/.test(
+                /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/.test(
                     value
-                )
+                ) // Проверяем только если что-то введено
         ),
-    repeat: yup
-        .string()
-        .optional()
-        .test(
-            'is-valid-repeat',
-            'Пароли не совпадают',
-            (value, context) => value === context.parent.password // Проверка только если введены оба поля
-        ),
+    // password: yup
+    //     .string()
+    //     .optional()
+    //     .test(
+    //         'is-valid-password',
+    //         AppErrors.InvalidPassword,
+    //         value =>
+    //             !value ||
+    //             /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[a-zA-Z!#$%&? "])[a-zA-Z0-9!@#$%&?]{6,20}$/.test(
+    //                 value
+    //             )
+    //     ),
+    // repeat: yup
+    //     .string()
+    //     .optional()
+    //     .test(
+    //         'is-valid-repeat',
+    //         'Пароли не совпадают',
+    //         (value, context) => value === context.parent.password
+    //     ),
 });

@@ -4,6 +4,8 @@ import { IUser } from '@/pages/auth/auth.tsx';
 import { TypeLogin } from '@/pages/auth/components/hook/useAuthForm.ts';
 import { AxiosError } from 'axios';
 import { AppErrorsFetch } from '@/common/errors.ts';
+import { Inputs } from '@/pages/profile/components/profile-user/profile-user.tsx';
+import { toast } from 'sonner';
 
 export const fetchRegister = createAsyncThunk(
     'user/register',
@@ -52,6 +54,26 @@ export const userAuthMe = createAsyncThunk(
             return response.data;
         } catch (error) {
             return rejectWithValue(AppErrorsFetch.Server);
+        }
+    }
+);
+
+export const fetchPatchProfile = createAsyncThunk(
+    'user/change',
+    async ({ id, changedData }: { id: number; changedData: Inputs }, { rejectWithValue }) => {
+        try {
+            const user = await instance.patch(`/users/${id}`, changedData);
+
+            toast.success('Данные успешно именены');
+
+            return user.data;
+        } catch (error: any) {
+            if (error.message && error.changedData.message) {
+                toast.error('Ошибка при изменении данных');
+                return rejectWithValue(error.response.changedData.message);
+            } else {
+                return rejectWithValue(error.message);
+            }
         }
     }
 );
