@@ -15,10 +15,10 @@ import { useAuthStorage } from '@/pages/auth/components/hook/useAuthStorage.ts';
 import { useAppDispatch } from '@/redux/store.ts';
 
 export type Inputs = {
-    name: string;
-    date: string;
-    phone: string;
-    email: string;
+    name?: string;
+    date?: string;
+    phone?: string;
+    email?: string;
 };
 
 interface IProfileUser {
