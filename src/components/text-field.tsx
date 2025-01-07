@@ -27,7 +27,15 @@ const InputProviderComponent = ({ children, label, error, errorText, type, class
 };
 
 // Компонент для отображения текстового input (получает prop напрямую)
-const InputTextComponent = ({ className, value, onChange, placeholder, register, name }: any) => {
+const InputTextComponent = ({
+    className,
+    disabled,
+    value,
+    onChange,
+    placeholder,
+    register,
+    name,
+}: any) => {
     const { error, type } = useInputContext(); // Берем только error из контекста
 
     return (
@@ -37,19 +45,23 @@ const InputTextComponent = ({ className, value, onChange, placeholder, register,
             value={value}
             onChange={onChange}
             placeholder={placeholder}
+            disabled={disabled}
             {...(register ? register(name) : {})} // Привязываем register напрямую
         />
     );
 };
 const InputLeftIcon = ({ icon }: { icon: any }) => {
-    return (
-        <div className="absolute top-1/2 left-3 -translate-y-1/2 hidden">
-            {icon}
-        </div>
-    );
-}
+    return <div className="absolute top-1/2 left-3 -translate-y-1/2 hidden">{icon}</div>;
+};
 // Компонент для отображения Textarea (получает prop напрямую)
-const InputTextAreaComponent = ({ value, placeholder, onChange, register, name, className }: any) => {
+const InputTextAreaComponent = ({
+    value,
+    placeholder,
+    onChange,
+    register,
+    name,
+    className,
+}: any) => {
     const { error } = useInputContext(); // Берем только error из контекста
 
     return (

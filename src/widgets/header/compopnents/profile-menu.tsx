@@ -1,11 +1,14 @@
 import { NavLink } from 'react-router-dom';
 import { CircleUser, List, LogOut } from 'lucide-react';
+import { useAuthStorage } from '@/pages/auth/components/hook/useAuthStorage.ts';
 
 interface IProfileMenu {
     onItemClick: (status: boolean) => void;
 }
 
 const ProfileMenu = ({ onItemClick }: IProfileMenu) => {
+    const { removeAllStorage } = useAuthStorage();
+
     return (
         <ul>
             <li>
@@ -30,7 +33,10 @@ const ProfileMenu = ({ onItemClick }: IProfileMenu) => {
             </li>
             <li>
                 <NavLink
-                    onClick={() => onItemClick(false)}
+                    onClick={() => {
+                        onItemClick(false);
+                        removeAllStorage();
+                    }}
                     className="flex transition hover:bg-[#EFF6FF] border-t-[1px] p-3 text-[16px] text-[#172335] gap-3"
                     to="/"
                 >

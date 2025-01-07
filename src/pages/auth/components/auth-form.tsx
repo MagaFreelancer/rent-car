@@ -30,9 +30,19 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLogin }) => {
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             {isLogin ? (
-                <Login register={register} errors={errors} reset={resetUseFormRedux} />
+                <Login
+                    disabled={status}
+                    register={register}
+                    errors={errors}
+                    reset={resetUseFormRedux}
+                />
             ) : (
-                <Register register={register} errors={errors} reset={resetUseFormRedux} />
+                <Register
+                    disabled={status}
+                    register={register}
+                    errors={errors}
+                    reset={resetUseFormRedux}
+                />
             )}
 
             <Button

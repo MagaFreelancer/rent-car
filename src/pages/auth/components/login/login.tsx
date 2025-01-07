@@ -12,18 +12,25 @@ interface IPropsLogin {
     register: UseFormRegister<TypeForm>;
     errors: FieldErrors<TypeForm>;
     reset: () => void;
+    disabled: boolean;
 }
 
-const Login = ({ register, errors, reset }: IPropsLogin) => {
+const Login = ({ register, errors, reset, disabled }: IPropsLogin) => {
     return (
         <>
-            <TextFieldGroup error={!!errors.email} errorText={errors.email?.message} label="Email">
+            <TextFieldGroup
+                className="mb-3"
+                error={!!errors.email}
+                errorText={errors.email?.message}
+                label="Email"
+            >
                 <TextFieldLabel />
                 <TextFieldInput
                     className="transition rounded py-6 px-5"
                     placeholder="Введите данные для авторизации"
                     register={register}
                     name="email"
+                    disabled={disabled}
                 />
                 <TextFieldError />
             </TextFieldGroup>
@@ -39,6 +46,7 @@ const Login = ({ register, errors, reset }: IPropsLogin) => {
                     placeholder="Введите пароль от аккаунта"
                     register={register}
                     name="password"
+                    disabled={disabled}
                 />
                 <TextFieldError />
             </TextFieldGroup>

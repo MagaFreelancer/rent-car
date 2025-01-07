@@ -4,7 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import ProfileUser from '@/pages/profile/components/profile-user/profile-user.tsx';
 import { useAppSelector } from '@/redux/store.ts';
 import { Suspense } from 'react';
-import ProfileSkeleton from '@/pages/profile/components/profile-user/profile-skeleton.tsx';
+import ProfileSkeleton from '@/pages/profile/components/profile-user/components/profile-skeleton.tsx';
 
 const Profile = () => {
     const isLogged = useAppSelector(state => state.user.isLogged);

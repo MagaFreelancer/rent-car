@@ -12,9 +12,10 @@ interface IPropsLogin {
     register: UseFormRegister<TypeRegister | TypeLogin>;
     errors: FieldErrors<TypeRegister>;
     reset: () => void;
+    disabled: boolean;
 }
 
-const Register = ({ register, errors, reset }: IPropsLogin) => {
+const Register = ({ register, errors, reset, disabled }: IPropsLogin) => {
     return (
         <>
             <TextFieldGroup
@@ -29,6 +30,7 @@ const Register = ({ register, errors, reset }: IPropsLogin) => {
                     placeholder="Ваше имя"
                     register={register}
                     name="name"
+                    disabled={disabled}
                 />
                 <TextFieldError />
             </TextFieldGroup>
@@ -45,6 +47,7 @@ const Register = ({ register, errors, reset }: IPropsLogin) => {
                     placeholder="Введите email адрес"
                     register={register}
                     name="email"
+                    disabled={disabled}
                 />
                 <TextFieldError />
             </TextFieldGroup>
@@ -61,6 +64,7 @@ const Register = ({ register, errors, reset }: IPropsLogin) => {
                     placeholder="Придумайте пароль"
                     register={register}
                     name="password"
+                    disabled={disabled}
                 />
                 <TextFieldError />
             </TextFieldGroup>
@@ -77,6 +81,7 @@ const Register = ({ register, errors, reset }: IPropsLogin) => {
                     placeholder="Придумайте пароль"
                     register={register}
                     name="repeat"
+                    disabled={disabled}
                 />
                 <TextFieldError />
             </TextFieldGroup>
