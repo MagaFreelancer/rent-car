@@ -4,8 +4,8 @@ import { IUser } from '@/pages/auth/auth.tsx';
 import { TypeLogin } from '@/pages/auth/components/hook/useAuthForm.ts';
 import { AxiosError } from 'axios';
 import { AppErrorsFetch } from '@/common/errors.ts';
-import { Inputs } from '@/pages/profile/components/profile-user/profile-user.tsx';
 import { toast } from 'sonner';
+import { InputsProfileChange } from '@/pages/profile/components/profile-user/hook/useProfileChange.tsx';
 
 export const fetchRegister = createAsyncThunk(
     'user/register',
@@ -60,11 +60,14 @@ export const userAuthMe = createAsyncThunk(
 
 export const fetchPatchProfile = createAsyncThunk(
     'user/change',
-    async ({ id, changedData }: { id: number; changedData: Inputs }, { rejectWithValue }) => {
+    async (
+        { id, changedData }: { id: number; changedData: InputsProfileChange },
+        { rejectWithValue }
+    ) => {
         try {
             const user = await instance.patch(`/users/${id}`, changedData);
 
-            toast.success('Данные успешно именены');
+            toast.success('Данные успешно изменены');
 
             return user.data;
         } catch (error: any) {

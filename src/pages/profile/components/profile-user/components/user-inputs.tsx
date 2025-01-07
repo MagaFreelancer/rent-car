@@ -5,7 +5,7 @@ import {
     TextFieldLabel,
 } from '@/components/text-field.tsx';
 import { FieldErrors, UseFormRegister } from 'react-hook-form';
-import { InputsProfileChange } from '@/pages/profile/components/profile-user/profile-user.tsx';
+import { InputsProfileChange } from '@/pages/profile/components/profile-user/hook/useProfileChange.tsx';
 
 interface IUserInputsProps {
     register: UseFormRegister<InputsProfileChange>;
